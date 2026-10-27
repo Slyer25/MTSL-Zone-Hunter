@@ -254,15 +254,10 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("SKILL: current level unavailable; required " .. tostring(needed))
     end
     if spec then
-        add((known and "SPECIALISATION: " or "LOCKED - SPECIALISATION: ") .. spec)
-        if not known then
-            local workflow = self:WorkflowLines(spec)
-            if workflow then
-                for _, line in ipairs(workflow) do add(line) end
-            else
-                add("  Unlock through relevant specialisation quest/trainer.")
-                add("  Workflow not verified; prerequisite steps may exist.")
-            end
+        if known then
+            add("SPECIALISATION: " .. spec .. " (learned)")
+        else
+            add("LOCKED - SPECIALISATION: " .. spec)
         end
     end
     add(" ")
@@ -321,6 +316,16 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                     end
                 end
             end
+        end
+    end
+    if spec and not known then
+        add(" ")
+        local workflow = self:WorkflowLines(spec)
+        if workflow then
+            for _, line in ipairs(workflow) do add(line) end
+        else
+            add("SPECIALISATION UNLOCK: Relevant specialization trainer or quest.")
+            add("  Workflow not verified; prerequisite steps may exist.")
         end
     end
     add(" ")
