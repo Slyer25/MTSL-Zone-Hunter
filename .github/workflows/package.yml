@@ -19,7 +19,7 @@ jobs:
       - name: Check out requested version
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag || github.ref }}
+          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || github.ref }}
       - name: Build install-ready ZIP and changelog notes
         run: |
           python3 scripts/package.py
