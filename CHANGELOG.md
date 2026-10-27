@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.4.1 — 2026-10-27
+- Fixed two unconditional `MTSL_PLAYERS = {}` initializers in the original addon code so existing SavedVariables are preserved.
+- Does not automatically scan unopened professions; open each profession once to populate learned recipes, then verify persistence after relogging.
+- This release requires in-game validation.
+
 ## V5.4 — 2026-10-27
 - Added faction-specific, documented Restorative Potion prerequisite quest chains (IDs 2501 and 2203).
 - Changed quest-workflow lookup to prefer quest ID over shared localized quest names.
