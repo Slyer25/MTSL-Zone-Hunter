@@ -42,7 +42,7 @@ jobs:
             echo "No matching changelog entry yet; leaving ZIP as Actions artifact."
             exit 0
           fi
-          version=$(sed -n 's/^## Version: 1\\.17\\.4-ZH//p' MissingTradeSkillsList/MissingTradeSkillsList.toc | tr -d '\\r')
+          version=$(awk -F'ZH' '/^## Version:/ {print $2}' MissingTradeSkillsList/MissingTradeSkillsList.toc)
           if [ -z "$version" ]; then
             echo "No Zone Hunter version found; not publishing."
             exit 0
