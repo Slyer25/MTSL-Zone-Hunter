@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.5.1 — 2026-10-27
+- Zone navigation now skips zones with no recipes in the active missing/all display mode.
+- When showing learned recipes, completed zones reappear; zones without any recipes remain hidden.
+- Clicking Current zone while in an empty zone navigates to the next zone containing matching recipes.
+- Group NPC, vendor, mob and object sources recorded in Blackrock Depths under Blackrock Mountain while preserving their dungeon location in details.
+- In-game verification is required for Blackrock Depths source mapping and navigation.
+
 ## V5.5 — 2026-10-27
 - Added source-specific reputation requirements for documented Thorium Brotherhood recipes sold by Lokhtos Darkbargainer.
 - Display requirement and reputation acquisition route within the existing acquisition details panel.
