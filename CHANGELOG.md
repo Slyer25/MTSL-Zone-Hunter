@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.6.1 — 2026-10-27
+- Added source-access instructions for Annora in Uldaman (clear scorpids in her room) under Badlands.
+- Added Dire Maul Athenaeum access notes for Pattern: Mooncloth Robe, without mislabeling it as quest-gated.
+- Added source-specific access rendering alongside trainers and vendors, retaining source references and explicitly separating access from learning requirements.
+- Both records are documented but not yet tested in the Vanilla 1.12 client.
+
 ## V5.6 — 2026-10-27
 - Group recorded dungeon NPC and object sources under their outdoor zones, including Dire Maul to Feralas and Uldaman to Badlands; preserve dungeon names in details.
 - Additional mapping for Scholomance, Stratholme, and other Vanilla dungeons based on zone names.
