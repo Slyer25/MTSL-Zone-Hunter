@@ -266,18 +266,33 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                 add("RECIPE ITEM: " .. self:Name(item))
                 if item.vendors then
                     npc_list(item.vendors.sources, "Vendor")
-                    local conditions = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.vendor_conditions
+                    local workflows = MTSL_ZONE_WORKFLOWS
+                    local conditions = workflows and workflows.vendor_conditions
                     local by_item = conditions and conditions[self:Name(item)]
-                    if by_item then
-                        for _, vid in pairs(item.vendors.sources or {}) do
-                            local vendor = MTSL_LOGIC_PLAYER_NPC:GetNpcById(vid)
-                            local cond = vendor and by_item[self:Name(vendor)]
+                    local found_requirement = false
+                    for _, vid in pairs(item.vendors.sources or {}) do
+                        local vendor = MTSL_LOGIC_PLAYER_NPC:GetNpcById(vid)
+                        if vendor then
+                            local vendor_name = self:Name(vendor)
+                            local cond = by_item and by_item[vendor_name]
                             if cond then
-                                add("VENDOR UNLOCK: " .. self:Name(vendor) .. " [" .. (cond.status or "UNVERIFIED") .. "]")
+                                found_requirement = true
+                                add("VENDOR UNLOCK: " .. vendor_name .. " [" .. (cond.status or "UNVERIFIED") .. "]")
                                 for n, step in ipairs(cond.steps or {}) do add("  " .. n .. ". " .. step) end
                             end
+                            local rep = workflows and workflows.thorium_brotherhood_reputation
+                            local required = rep and rep[self:Name(item)]
+                            if vendor_name == (workflows and workflows.thorium_brotherhood_vendor) and required then
+                                found_requirement = true
+                                add("VENDOR REQUIREMENT: Thorium Brotherhood - " .. required .. " reputation")
+                                add("  Vendor: Lokhtos Darkbargainer, Grim Guzzler, Blackrock Depths.")
+                                add("  Build reputation through Thorium Point turn-ins (Searing Gorge)")
+                                add("  and later Molten Core material turn-ins at Lokhtos.")
+                                add("  DOCUMENTED in Classic references; not yet confirmed in this 1.12 client.")
+                            end
                         end
-                    else
+                    end
+                    if not found_requirement then
                         add("VENDOR AVAILABILITY: unlocks/stock not verified; quest or reputation may be required")
                     end
                 end
