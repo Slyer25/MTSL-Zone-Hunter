@@ -330,6 +330,24 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                 for n, step in ipairs(cond.steps or {}) do add("  " .. n .. ". " .. step) end
                                 if cond.reference then add("  Reference: " .. cond.reference) end
                             end
+                            local cenarion = workflows and workflows.reputation_vendor_conditions
+                            local cenarion_condition = cenarion and cenarion[self:Name(item)]
+                            if cenarion_condition and vendor_name == cenarion_condition.vendor then
+                                found_requirement = true
+                                add("VENDOR REQUIREMENT: " .. cenarion_condition.faction .. " - " .. cenarion_condition.rank .. " reputation")
+                                add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
+                                if cenarion_condition.reference then add("  Reference: " .. cenarion_condition.reference) end
+                            end
+                            local argent = workflows and workflows.argent_dawn_vendor_conditions
+                            local argent_vendors = workflows and workflows.argent_dawn_vendors
+                            local argent_rank = argent and argent[self:Name(item)]
+                            if argent_rank and argent_vendors and argent_vendors[vendor_name] then
+                                found_requirement = true
+                                add("VENDOR REQUIREMENT: Argent Dawn - " .. argent_rank .. " reputation")
+                                add("  Earn reputation through Argent Dawn quests, Scourgestones, and undead dungeon activities.")
+                                add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
+                                add("  Reference: wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic")
+                            end
                             local rep = workflows and workflows.thorium_brotherhood_reputation
                             local required = rep and rep[self:Name(item)]
                             if vendor_name == (workflows and workflows.thorium_brotherhood_vendor) and required then
