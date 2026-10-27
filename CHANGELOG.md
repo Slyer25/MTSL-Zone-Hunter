@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.6 — 2026-10-27
+- Group recorded dungeon NPC and object sources under their outdoor zones, including Dire Maul to Feralas and Uldaman to Badlands; preserve dungeon names in details.
+- Additional mapping for Scholomance, Stratholme, and other Vanilla dungeons based on zone names.
+- Added documented quest-gated purchase notes for Magnus Frostwake's blacksmithing and alchemy recipes at Scholomance; full prerequisite chain still requires in-game verification.
+- Vendor acquisition details now render external reference text where supplied.
+- No automatic completion checks; dungeon mapping depends on exact zone names in TradeSkillsData and needs in-game testing.
+
 ## V5.5.3 — 2026-10-27
 - Moved specialization unlocking workflows after trainer, vendor, quest and drop acquisition sources in the details panel.
 - Confirmed unlock steps only display when the specialization is not recorded as learned; learned specializations now show a compact confirmation.
