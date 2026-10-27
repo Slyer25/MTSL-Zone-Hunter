@@ -219,6 +219,10 @@ MTSL_LOGIC_PLAYER_NPC = {
 
         local have_unlearned_profession = false
 
+        -- Do not infer that a profession was unlearned from an unavailable
+        -- skill-line snapshot. At login this list can be empty temporarily.
+        if GetSkillLineInfo(1) == nil then return false end
+
         -- only check if we actualy added professions to list to check
         if not MTSL_TOOLS:TableEmpty(profession_names) then
             -- loop all the skill lines
