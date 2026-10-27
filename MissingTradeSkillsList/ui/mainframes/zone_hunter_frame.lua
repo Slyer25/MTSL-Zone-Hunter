@@ -228,8 +228,19 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                 else table.insert(other_npcs, npc) end
             end
         end
-        for _, npc in ipairs(local_npcs) do add("  " .. heading .. " (HERE): " .. self:Name(npc) .. " - " .. self:Location(npc)) end
-        for _, npc in ipairs(other_npcs) do add("  " .. heading .. ": " .. self:Name(npc) .. " - " .. self:Location(npc)) end
+        local function show_npc(npc, here)
+            local name = self:Name(npc)
+            add("  " .. heading .. (here and " (HERE): " or ": ") .. name .. " - " .. self:Location(npc))
+            local db = MTSL_ZONE_WORKFLOWS
+            local access = db and db.source_access and db.source_access[name]
+            if access and access.kind == heading then
+                add("  SOURCE ACCESS [" .. (access.status or "UNVERIFIED") .. "]:")
+                for i, step in ipairs(access.steps or {}) do add("    " .. i .. ". " .. step) end
+                if access.reference then add("  Reference: " .. access.reference) end
+            end
+        end
+        for _, npc in ipairs(local_npcs) do show_npc(npc, true) end
+        for _, npc in ipairs(other_npcs) do show_npc(npc, false) end
     end
     local function object_list(ids)
         if not ids then return end
@@ -304,6 +315,15 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         if vendor then
                             local vendor_name = self:Name(vendor)
                             local cond = by_item and by_item[vendor_name]
+                            local item_access = workflows and workflows.item_vendor_access
+                            local access_by_vendor = item_access and item_access[self:Name(item)]
+                            local access = access_by_vendor and access_by_vendor[vendor_name]
+                            if access then
+                                found_requirement = true
+                                add("VENDOR ACCESS: " .. vendor_name .. " [" .. (access.status or "UNVERIFIED") .. "]")
+                                for i, step in ipairs(access.steps or {}) do add("  " .. i .. ". " .. step) end
+                                if access.reference then add("  Reference: " .. access.reference) end
+                            end
                             if cond then
                                 found_requirement = true
                                 add("VENDOR UNLOCK: " .. vendor_name .. " [" .. (cond.status or "UNVERIFIED") .. "]")
