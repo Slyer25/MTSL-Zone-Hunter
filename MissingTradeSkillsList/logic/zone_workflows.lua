@@ -129,6 +129,42 @@ MTSL_ZONE_WORKFLOWS = {
         ["Master Hammersmith"] = "Master Hammersmith",
         ["Master Swordsmith"] = "Master Swordsmith"
     },
+    -- Thorium Brotherhood vendor, conditional on reputation.
+    -- Match BOTH the recipe item name and vendor name; no global vendor-wide lock.
+    -- Source: WoW Classic Thorium Brotherhood reputation reward tables.
+    -- These values have not yet been tested in our Vanilla 1.12 client.
+    thorium_brotherhood_vendor = "Lokhtos Darkbargainer",
+    thorium_brotherhood_reputation = {
+        ["Recipe: Transmute Elemental Fire"] = "Friendly",
+        ["Plans: Dark Iron Bracers"] = "Friendly",
+        ["Formula: Enchant Weapon - Strength"] = "Friendly",
+        ["Pattern: Molten Helm"] = "Friendly",
+        ["Pattern: Corehound Boots"] = "Friendly",
+        ["Pattern: Flarecore Gloves"] = "Friendly",
+        ["Plans: Dark Iron Helm"] = "Honored",
+        ["Plans: Dark Iron Destroyer"] = "Honored",
+        ["Plans: Dark Iron Reaver"] = "Honored",
+        ["Plans: Fiery Chain Girdle"] = "Honored",
+        ["Formula: Enchant Weapon - Mighty Spirit"] = "Honored",
+        ["Pattern: Lava Belt"] = "Honored",
+        ["Pattern: Black Dragonscale Boots"] = "Honored",
+        ["Pattern: Flarecore Mantle"] = "Honored",
+        ["Pattern: Flarecore Robe"] = "Honored",
+        ["Plans: Black Amnesty"] = "Revered",
+        ["Plans: Blackfury"] = "Revered",
+        ["Plans: Fiery Chain Shoulders"] = "Revered",
+        ["Plans: Dark Iron Gauntlets"] = "Revered",
+        ["Plans: Dark Iron Leggings"] = "Revered",
+        ["Formula: Enchant Weapon - Mighty Intellect"] = "Revered",
+        ["Pattern: Molten Belt"] = "Revered",
+        ["Pattern: Corehound Belt"] = "Revered",
+        ["Pattern: Chromatic Gauntlets"] = "Revered",
+        ["Pattern: Flarecore Leggings"] = "Revered",
+        ["Plans: Nightfall"] = "Exalted",
+        ["Plans: Ebon Hand"] = "Exalted",
+        ["Plans: Blackguard"] = "Exalted",
+        ["Plans: Dark Iron Boots"] = "Exalted"
+    },
     -- Add conditional vendors only when source, exact item, and gating criteria are validated.
     -- Keys should use the exact recipe item name and vendor NPC name, never just a zone.
     vendor_conditions = {
