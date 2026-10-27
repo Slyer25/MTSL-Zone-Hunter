@@ -33,7 +33,30 @@ function MTSLUI_ZONE_HUNTER:SourceInZone(source_zone_id, selected_zone_id)
     if not source_zone_id or not selected_zone_id then return false end
     local source_name = MTSL_LOGIC_WORLD:GetZoneNameById(source_zone_id)
     local selected_name = MTSL_LOGIC_WORLD:GetZoneNameById(selected_zone_id)
-    return source_name == "Blackrock Depths" and selected_name == "Blackrock Mountain"
+    local parent_zones = {
+        ["Blackrock Depths"] = "Blackrock Mountain",
+        ["Blackrock Spire"] = "Blackrock Mountain",
+        ["Dire Maul"] = "Feralas",
+        ["Uldaman"] = "Badlands",
+        ["Scholomance"] = "Western Plaguelands",
+        ["Stratholme"] = "Eastern Plaguelands",
+        ["Gnomeregan"] = "Dun Morogh",
+        ["Scarlet Monastery"] = "Tirisfal Glades",
+        ["Maraudon"] = "Desolace",
+        ["Razorfen Kraul"] = "The Barrens",
+        ["Razorfen Downs"] = "The Barrens",
+        ["Wailing Caverns"] = "The Barrens",
+        ["The Deadmines"] = "Westfall",
+        ["Deadmines"] = "Westfall",
+        ["The Stockade"] = "Stormwind City",
+        ["The Temple of Atal'Hakkar"] = "Swamp of Sorrows",
+        ["Sunken Temple"] = "Swamp of Sorrows",
+        ["Blackfathom Deeps"] = "Ashenvale",
+        ["Shadowfang Keep"] = "Silverpine Forest",
+        ["Ragefire Chasm"] = "Orgrimmar",
+        ["Zul'Farrak"] = "Tanaris"
+    }
+    return parent_zones[source_name] == selected_name
 end
 
 function MTSLUI_ZONE_HUNTER:AddNPCs(sources, ids, kind, zone_id)
@@ -285,6 +308,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                 found_requirement = true
                                 add("VENDOR UNLOCK: " .. vendor_name .. " [" .. (cond.status or "UNVERIFIED") .. "]")
                                 for n, step in ipairs(cond.steps or {}) do add("  " .. n .. ". " .. step) end
+                                if cond.reference then add("  Reference: " .. cond.reference) end
                             end
                             local rep = workflows and workflows.thorium_brotherhood_reputation
                             local required = rep and rep[self:Name(item)]
