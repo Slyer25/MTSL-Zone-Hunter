@@ -135,6 +135,32 @@ MTSL_ZONE_WORKFLOWS = {
         -- ["Recipe: Example"] = { ["Vendor Name"] = { status="DOCUMENTED", steps={"..."} } }
     },
     quest_conditions = {
-        -- ["Badlands Reagent Run II"] = { status="DOCUMENTED", steps={"..."} }
+        -- Quest IDs are used to distinguish Alliance and Horde versions with identical names.
+        [2501] = {
+            status = "DOCUMENTED (Classic quest database and Uldaman guide)",
+            faction = "Alliance",
+            steps = {
+                "Start Badlands Reagent Run from Ghak Healtouch in Thelsamar, Loch Modan.",
+                "Complete Uldaman Reagent Run: collect 12 Magenta Fungus Caps in Uldaman; return to Ghak.",
+                "Accept Badlands Reagent Run II from Ghak Healtouch.",
+                "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
+                "Return to Ghak Healtouch in Thelsamar to learn Restorative Potion.",
+                "The final quest may require Alchemy 210; verify the profession prerequisite in-game."
+            },
+            reference = "wowhead.com/classic/quest=2501/badlands-reagent-run-ii"
+        },
+        [2203] = {
+            status = "DOCUMENTED (Classic quest database)",
+            faction = "Horde",
+            steps = {
+                "Start Badlands Reagent Run from Jarkal Mossmeld in Kargath, Badlands.",
+                "Complete Uldaman Reagent Run: collect 12 Magenta Fungus Caps in Uldaman; return to Jarkal.",
+                "Accept Badlands Reagent Run II from Jarkal Mossmeld.",
+                "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
+                "Return to Jarkal Mossmeld in Kargath to learn Restorative Potion.",
+                "The final quest may require Alchemy 210; verify the profession prerequisite in-game."
+            },
+            reference = "classicdb.ch/?quest=2203"
+        }
     }
 }
