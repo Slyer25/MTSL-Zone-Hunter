@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.4.2 — 2026-10-27
+- Fixed startup deletion of saved primary professions: `LoadPlayer()` no longer calls `RemoveUnlearnedProfessions()` before the skill lines are ready.
+- Added a safeguard against running profession removal on an empty skill-line snapshot.
+- The V5.4.1 initializer fix was insufficient; this revision addresses the observed relogging symptom more directly.
+- Needs in-game relog testing; previously lost cache data must be refreshed once by opening profession windows.
+
 ## V5.4.1 — 2026-10-27
 - Fixed two unconditional `MTSL_PLAYERS = {}` initializers in the original addon code so existing SavedVariables are preserved.
 - Does not automatically scan unopened professions; open each profession once to populate learned recipes, then verify persistence after relogging.
