@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.5.3 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.6 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -51,3 +51,5 @@ To repair the existing `5.4` release: open **Actions → Package Zone Hunter add
 **V5.5 acquisition improvements:** documented Thorium Brotherhood vendor recipe reputation thresholds are shown in acquisition details only when the matching recipe item is sold by Lokhtos Darkbargainer. Reputation is not read live and the data must still be checked against our target Vanilla 1.12 client. Other vendor prerequisites remain unverified.
 
 **V5.5.1 navigation:** the next/previous zone controls skip zones with no recipes matching the learned toggle. Blackrock Depths acquisition sources are grouped into Blackrock Mountain; the details panel still shows the actual dungeon location. These updates are not yet verified in-game.
+
+**V5.6 dungeon coverage:** dungeon-only sources are grouped beneath their surrounding outdoor zones (e.g. Dire Maul → Feralas, Uldaman → Badlands), while retaining the instance location in details. Magnus Frostwake vendor recipes now include documented quest-gating notes. Dungeon and vendor additions still require testing against the installed 1.12 data.
