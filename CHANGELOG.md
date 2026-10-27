@@ -2,6 +2,10 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.5.2 — 2026-10-27
+- Moved the selected-zone label to the top of acquisition details, ahead of profession and skill requirements, so it appears on the first details page.
+- Removed the duplicate zone label from the end of the details.
+
 ## V5.5.1 — 2026-10-27
 - Zone navigation now skips zones with no recipes in the active missing/all display mode.
 - When showing learned recipes, completed zones reappear; zones without any recipes remain hidden.
