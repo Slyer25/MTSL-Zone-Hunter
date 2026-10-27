@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.4 — 2026-10-27
+- Added faction-specific, documented Restorative Potion prerequisite quest chains (IDs 2501 and 2203).
+- Changed quest-workflow lookup to prefer quest ID over shared localized quest names.
+- Show workflow reference links as plain text in acquisition details.
+- Conditional vendor prerequisites remain unverified and will be added only with source-specific evidence.
+
 ## V5.3 — 2026-10-27
 - Fixed Engineering workflow name mismatch (Gnomish Engineer / Goblin Engineer vs Engineering).
 - Added cautiously documented Master Axesmith, Master Hammersmith and Master Swordsmith paths, with explicit Vanilla 1.12 verification warnings.
