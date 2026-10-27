@@ -37,3 +37,9 @@ See [CHANGELOG.md](CHANGELOG.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 **Current development builds:** on GitHub, open **Actions → Package Zone Hunter addon**, choose the latest successful run and download the `Zone-Hunter-install-ready` artifact. GitHub may wrap the artifact in a download ZIP; open that outer archive to find the install-ready `MTSL-Zone-Hunter-<version>.zip`. For release tags (`v*`), the workflow also attaches the install-ready ZIP to a GitHub Release.
 
 **Maintainers:** locally run `python3 scripts/package.py`; the resulting `dist/MTSL-Zone-Hunter-<version>.zip` is ready to extract into the WoW addons directory. Do not install the entire repository downloaded via **Code → Download ZIP**; that source archive includes an extra repository directory and development files.
+
+### Release publishing
+
+Publishing a GitHub Release triggers the packaging workflow, which attaches an **install-ready** `MTSL-Zone-Hunter-*.zip` and uses the matching `CHANGELOG.md` section as release notes. GitHub also displays unavoidable automatic **Source code (zip/tar.gz)** entries; those are repository snapshots, **not** addon installers.
+
+To repair the existing `5.4` release: open **Actions → Package Zone Hunter addon → Run workflow**, choose branch `main`, enter `5.4` in **release_tag**, and run. This packages the current `main` source and attaches the result to that existing release. Use the repair option only when main still matches the version being repaired.
