@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.5.3 — 2026-10-27
+- Moved specialization unlocking workflows after trainer, vendor, quest and drop acquisition sources in the details panel.
+- Confirmed unlock steps only display when the specialization is not recorded as learned; learned specializations now show a compact confirmation.
+- Left recipe list and other acquisition data unchanged.
+
 ## V5.5.2 — 2026-10-27
 - Moved the selected-zone label to the top of acquisition details, ahead of profession and skill requirements, so it appears on the first details page.
 - Removed the duplicate zone label from the end of the details.
