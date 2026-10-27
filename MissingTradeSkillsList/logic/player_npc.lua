@@ -3,7 +3,7 @@
 -----------------------------------------
 
 -- Shared/saved variable
-MTSL_PLAYERS = {}
+MTSL_PLAYERS = MTSL_PLAYERS or {}
 
 -- Holds info about the current logged in player
 -- Contains following info once loaded from data
