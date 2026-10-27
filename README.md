@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.4.1 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.4.2 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -45,3 +45,5 @@ Publishing a GitHub Release triggers the packaging workflow, which attaches an *
 To repair the existing `5.4` release: open **Actions → Package Zone Hunter addon → Run workflow**, choose branch `main`, enter `5.4` in **release_tag**, and run. This packages the current `main` source and attaches the result to that existing release. Use the repair option only when main still matches the version being repaired.
 
 **Saved recipe tracking:** WoW 1.12 cannot reliably inspect unopened profession recipe books. Open each profession once to initialize or update known skills; subsequent sessions should load preserved SavedVariables. V5.4.1 prevents two early Lua assignments from clearing MTSL_PLAYERS. Back up `WTF/Account/<account>/SavedVariables/MissingTradeSkillsList.lua` before updating; already overwritten records cannot be reconstructed without rescanning.
+
+**V5.4.2 login fix:** removed destructive profession-unlearn reconciliation from `PLAYER_LOGIN` because WoW's skill lines may not be initialized then. Cached learned recipes should survive relogging once scanned; test with a normal logout/login. The V5.4.1 initialization guard alone did not resolve this issue.
