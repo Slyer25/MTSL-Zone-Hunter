@@ -26,11 +26,21 @@ function MTSLUI_ZONE_HUNTER:NPCZone(npc)
     return npc and npc.zone_id
 end
 
+-- Instance vendors/mobs are grouped under the outdoor parent for zone-first browsing.
+-- Keep original instance names in acquisition details.
+function MTSLUI_ZONE_HUNTER:SourceInZone(source_zone_id, selected_zone_id)
+    if source_zone_id == selected_zone_id then return true end
+    if not source_zone_id or not selected_zone_id then return false end
+    local source_name = MTSL_LOGIC_WORLD:GetZoneNameById(source_zone_id)
+    local selected_name = MTSL_LOGIC_WORLD:GetZoneNameById(selected_zone_id)
+    return source_name == "Blackrock Depths" and selected_name == "Blackrock Mountain"
+end
+
 function MTSLUI_ZONE_HUNTER:AddNPCs(sources, ids, kind, zone_id)
     if not ids then return end
     for _, id in pairs(ids) do
         local npc = MTSL_LOGIC_PLAYER_NPC:GetNpcById(id)
-        if npc and self:NPCZone(npc) == zone_id then
+        if npc and self:SourceInZone(self:NPCZone(npc), zone_id) then
             self:AddSource(sources, kind, self:Name(npc))
         end
     end
@@ -40,7 +50,7 @@ function MTSLUI_ZONE_HUNTER:AddObjects(sources, ids, kind, zone_id)
     if not ids then return end
     for _, id in pairs(ids) do
         local obj = MTSL_LOGIC_ITEM_OBJECT:GetObjectById(id)
-        if obj and obj.zone_id == zone_id then self:AddSource(sources, kind, self:Name(obj)) end
+        if obj and self:SourceInZone(obj.zone_id, zone_id) then self:AddSource(sources, kind, self:Name(obj)) end
     end
 end
 
@@ -191,7 +201,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         for _, id in pairs(ids) do
             local npc = MTSL_LOGIC_PLAYER_NPC:GetNpcById(id)
             if npc then
-                if zone and self:NPCZone(npc) == zone.id then table.insert(local_npcs, npc)
+                if zone and self:SourceInZone(self:NPCZone(npc), zone.id) then table.insert(local_npcs, npc)
                 else table.insert(other_npcs, npc) end
             end
         end
@@ -451,10 +461,25 @@ function MTSLUI_ZONE_HUNTER:Refresh()
     self:UpdateDetails()
 end
 
+-- Skip completed and truly empty zones. We scan lazily on navigation rather
+-- than precomputing the whole world on every click.
+function MTSLUI_ZONE_HUNTER:SeekNonemptyZone(delta)
+    local n = table.getn(self.zones)
+    if n == 0 then return end
+    local original = self.zone_index
+    for i = 1, n do
+        self.zone_index = self.zone_index + delta
+        if self.zone_index < 1 then self.zone_index = n end
+        if self.zone_index > n then self.zone_index = 1 end
+        self:BuildRows()
+        if table.getn(self.rows) > 0 then return end
+    end
+    self.zone_index = original
+    self:BuildRows()
+end
+
 function MTSLUI_ZONE_HUNTER:ChangeZone(delta)
-    self.zone_index = self.zone_index + delta
-    if self.zone_index < 1 then self.zone_index = table.getn(self.zones) end
-    if self.zone_index > table.getn(self.zones) then self.zone_index = 1 end
+    self:SeekNonemptyZone(delta)
     self.page = 1
     self.selected_id = nil; self.detail_page = 1
     self:Refresh()
@@ -463,6 +488,8 @@ end
 function MTSLUI_ZONE_HUNTER:Show()
     if not self.frame then self:Initialise() end
     self.frame:Show()
+    self:BuildRows()
+    if table.getn(self.rows) == 0 then self:SeekNonemptyZone(1) end
     self:Refresh()
 end
 
@@ -509,12 +536,18 @@ function MTSLUI_ZONE_HUNTER:Initialise()
             if MTSLUI_ZONE_HUNTER:Name(z) == name then MTSLUI_ZONE_HUNTER.zone_index = i; break end
         end
         MTSLUI_ZONE_HUNTER.page=1; MTSLUI_ZONE_HUNTER.selected_id=nil
-        MTSLUI_ZONE_HUNTER.detail_page=1; MTSLUI_ZONE_HUNTER:Refresh()
+        MTSLUI_ZONE_HUNTER.detail_page=1
+        MTSLUI_ZONE_HUNTER:BuildRows()
+        if table.getn(MTSLUI_ZONE_HUNTER.rows) == 0 then MTSLUI_ZONE_HUNTER:SeekNonemptyZone(1) end
+        MTSLUI_ZONE_HUNTER:Refresh()
     end)
     self.mode = button("Show learned too", 342, -54, 162, function()
         MTSLUI_ZONE_HUNTER.show_all = not MTSLUI_ZONE_HUNTER.show_all
         MTSLUI_ZONE_HUNTER.page=1; MTSLUI_ZONE_HUNTER.selected_id=nil
-        MTSLUI_ZONE_HUNTER.detail_page=1; MTSLUI_ZONE_HUNTER:Refresh()
+        MTSLUI_ZONE_HUNTER.detail_page=1
+        MTSLUI_ZONE_HUNTER:BuildRows()
+        if table.getn(MTSLUI_ZONE_HUNTER.rows) == 0 then MTSLUI_ZONE_HUNTER:SeekNonemptyZone(1) end
+        MTSLUI_ZONE_HUNTER:Refresh()
     end)
     self.counter = label(689, -54, 225, 22)
     label(30, -91, 395, 24):SetText("RECIPE  /  LOCAL SOURCE (click for details)")
