@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.1 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.2 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -16,12 +16,12 @@ A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained
 - Approximate world-drop matches based on mob/zone-level overlap (**not confirmed mob drops**).
 - Learned status, class eligibility, skill-level warnings, specialization locks.
 - Sources in the selected zone prioritized, with local quest NPCs marked `[HERE]`.
-- Initial Tribal Leatherworking unlock workflow; long instruction wrapping and detail pagination.
+- Documented specialization workflows for Leatherworking, Blacksmithing, and Engineering; long instruction wrapping and detail pagination.
 - Separate `logic/zone_workflows.lua` correction and workflow data layer.
 
 ## Limitations
 - Vendor offerings may require quests, reputation, or other conditions not yet documented.
-- Full specialization workflows currently cover Tribal Leatherworking only.
+- Specialization workflow steps are documented but not yet tested in-game; some introductory prerequisites remain incomplete.
 - Prerequisite quest chains are incomplete unless explicitly verified.
 - The current build was manually tested in-game, but no automated WoW 1.12 tests exist.
 
