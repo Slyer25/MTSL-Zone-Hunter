@@ -81,7 +81,11 @@ MTSL_LOGIC_PLAYER_NPC = {
         MTSL_CURRENT_PLAYER = current_player
 
         self:CheckSavedProfessions()
-        self:RemoveUnlearnedProfessions()
+        -- Do not remove saved professions at PLAYER_LOGIN: the Vanilla skill list may
+        -- not be populated yet. RemoveUnlearnedProfessions() interprets an empty
+        -- GetSkillLineInfo() scan as proof that all primary professions were
+        -- unlearned, destroying the cached learned recipes across sessions.
+        -- SKILL_LINES_CHANGED performs the removal later while SkillFrame is open.
         self:UpdatePlayerSkillLevels()
 
         return return_code
