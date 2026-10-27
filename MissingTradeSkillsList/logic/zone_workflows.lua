@@ -211,6 +211,33 @@ MTSL_ZONE_WORKFLOWS = {
             }
         }
     },
+    -- Access notes describe reaching the source, not learning prerequisites.
+    source_access = {
+        ["Annora"] = {
+            kind = "Trainer",
+            status = "DOCUMENTED - INSTANCE ACCESS",
+            steps = {
+                "Enter Uldaman in Badlands and find Annora's scorpid room.",
+                "Defeat all scorpids in her room to make Annora appear.",
+                "You do not need to clear the entire dungeon to make her appear."
+            },
+            reference = "warcraft.wiki.gg/wiki/Annora"
+        }
+    },
+    item_vendor_access = {
+        ["Pattern: Mooncloth Robe"] = {
+            ["Shen'dralar Provisioner"] = {
+                status = "DOCUMENTED - INSTANCE ACCESS",
+                steps = {
+                    "Find the Shen'dralar Provisioner inside Dire Maul's Athenaeum (library), Feralas.",
+                    "The pattern is a vendor purchase; no prerequisite quest is documented.",
+                    "Reaching the library may require opening locked doors or taking another route.",
+                    "Vendor stock may be limited; availability can vary."
+                },
+                reference = "wowhead.com/classic/npc=14371/shendralar-provisioner"
+            }
+        }
+    },
     quest_conditions = {
         -- Quest IDs are used to distinguish Alliance and Horde versions with identical names.
         [2501] = {
