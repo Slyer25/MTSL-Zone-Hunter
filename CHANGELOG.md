@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.5 — 2026-10-27
+- Added source-specific reputation requirements for documented Thorium Brotherhood recipes sold by Lokhtos Darkbargainer.
+- Display requirement and reputation acquisition route within the existing acquisition details panel.
+- Improved vendor condition rendering to avoid losing conditions when other vendors on the same item lack records.
+- Unverified vendor unlocks remain clearly identified, and recipe availability remains visible regardless of reputation.
+- No automatic quest completion or reputation detection; manual acquisition verification pending.
+
 ## V5.4.2 — 2026-10-27
 - Fixed startup deletion of saved primary professions: `LoadPlayer()` no longer calls `RemoveUnlearnedProfessions()` before the skill lines are ready.
 - Added a safeguard against running profession removal on an empty skill-line snapshot.
