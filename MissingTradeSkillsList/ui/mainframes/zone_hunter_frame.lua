@@ -218,10 +218,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                     npc_list(q.npcs, "Quest NPC")
                     object_list(q.objects)
                     local qdb = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.quest_conditions
-                    local flow = qdb and qdb[self:Name(q)]
+                    local flow = qdb and (qdb[tonumber(id)] or qdb[self:Name(q)])
                     if flow then
                         add("  WORKFLOW [" .. (flow.status or "UNVERIFIED") .. "]:")
                         for n, step in ipairs(flow.steps or {}) do add("    " .. n .. ". " .. step) end
+                        if flow.reference then add("  Reference: " .. flow.reference) end
                     else
                         add("  Quest prerequisites not verified; earlier steps may be required")
                     end
