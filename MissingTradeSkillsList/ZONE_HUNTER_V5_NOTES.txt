@@ -1,0 +1,14 @@
+Zone Hunter V5 - early acquisition workflow layer (official-style Vanilla 1.12)
+
+- Keeps tested V4 layout and class/skill/zone logic.
+- Adds documented Tribal Leatherworking unlock steps to the right panel for recipes requiring it.
+- Adds a supplemental database at logic/zone_workflows.lua for corrected quest prerequisites and conditional vendors.
+- Vendor entries show a caution when stock/unlock conditions have not been verified.
+- Quest reward entries explicitly warn when prerequisites have not been verified.
+- Sources: https://www.wowhead.com/classic/guide/leatherworking-leveling-1-300-wow-classic
+           https://warcraft.wiki.gg/wiki/Tribal_Leatherworking_(quest)
+- Quest completion cannot yet be read automatically; workflow is instructions, not live quest tracking.
+- Vendor gates are intentionally not guessed or filled from unverified comments.
+- This build is syntactically reviewed but not tested inside a WoW client.
+
+Installation: back up V4, replace MissingTradeSkillsList folder, keep TradeSkillsData installed, /mtsl zone.

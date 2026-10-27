@@ -1,0 +1,5 @@
+Zone Hunter V5.1 - details panel text-wrapping fix (Vanilla WoW 1.12)
+
+Long acquisition steps now wrap by rendered font width and paginate based on the wrapped lines. No changes to recipe discovery, class filtering, requirements, or the supplemental acquisition data.
+
+Install over your existing MissingTradeSkillsList addon (back it up first), keeping TradeSkillsData installed. Not yet tested in a WoW 1.12 client.
