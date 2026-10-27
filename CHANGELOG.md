@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.7 — 2026-10-28
+- Expanded recipe-specific reputation vendor data for Cenarion Circle in Silithus: Vargus, Kania, Aendel Windspear and Mishta, including Friendly/Honored/Revered tiers.
+- Added Argent Dawn reputation requirements for Girdle of the Dawn, Gloves of the Dawn, Argent Boots and Argent Shoulders at their quartermasters.
+- Requires an exact recipe item and named vendor match: no blanket reputation locks on unrelated recipes or vendors.
+- Requirements are sourced from Classic guides and not yet verified in our Vanilla 1.12 client.
+- Preserved interface, dungeon mapping, saved character tracking and automated release ZIP packaging.
+
 ## V5.6.1 — 2026-10-27
 - Added source-access instructions for Annora in Uldaman (clear scorpids in her room) under Badlands.
 - Added Dire Maul Athenaeum access notes for Pattern: Mooncloth Robe, without mislabeling it as quest-gated.
