@@ -240,6 +240,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             end
         end
     end
+    add("SELECTED ZONE: " .. self:Name(self.zones[self.zone_index]))
     add("PROFESSION: " .. entry.profession .. "  |  Skill: " .. tostring(entry.min_skill))
     add(entry.learned and "STATUS: Learned" or (entry.trained and "STATUS: Missing" or "STATUS: Profession not learned"))
     local current, needed, spec, known = self:Requirements(entry.profession, entry.skill)
@@ -323,7 +324,6 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         end
     end
     add(" ")
-    add("Selected zone: " .. self:Name(self.zones[self.zone_index]))
     add("These are recorded sources, not verified drop chances.")
     return out
 end
