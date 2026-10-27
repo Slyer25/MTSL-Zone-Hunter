@@ -211,6 +211,32 @@ MTSL_ZONE_WORKFLOWS = {
             }
         }
     },
+    -- Exact recipe item -> vendor reputation condition; no universal zone-based gating.
+    -- Source: Classic Cenarion Circle reputation profession reward tables.
+    reputation_vendor_conditions = {
+        ["Plans: Heavy Obsidian Belt"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Plans: Ironvine Belt"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Plans: Light Obsidian Belt"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Plans: Ironvine Gloves"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Plans: Ironvine Breastplate"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Formula: Enchant Cloak - Greater Fire Resistance"] = {vendor = "Kania", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Formula: Enchant Cloak - Greater Nature Resistance"] = {vendor = "Kania", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sandstalker Bracers"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Spitfire Bracers"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Bramblewood Belt"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sandstalker Gauntlets"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Spitfire Gauntlets"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Bramblewood Boots"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sandstalker Breastplate"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Spitfire Breastplate"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Bramblewood Helm"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Cenarion Herb Bag"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sylvan Shoulders"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sylvan Crown"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Satchel of Cenarius"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Sylvan Vest"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Gaea's Embrace"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
