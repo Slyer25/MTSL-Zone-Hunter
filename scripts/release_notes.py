@@ -7,7 +7,7 @@ import sys
 root = Path(__file__).resolve().parents[1]
 changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
 toc = (root / "MissingTradeSkillsList" / "MissingTradeSkillsList.toc").read_text(encoding="utf-8-sig")
-match = re.search(r"^## Version:\s*1\.17\.4-ZH(\d+\.\d+)\s*$", toc, re.M)
+match = re.search(r"^## Version:\s*1\.17\.4-ZH(\d+(?:\.\d+)+)\s*$", toc, re.M)
 if not match:
     sys.exit("Unable to find Zone Hunter version in TOC")
 version = match.group(1)
