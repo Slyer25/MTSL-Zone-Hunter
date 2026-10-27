@@ -171,7 +171,8 @@ end
 
 function MTSLUI_ZONE_HUNTER:WorkflowLines(spec)
     local db = MTSL_ZONE_WORKFLOWS
-    local w = db and db.specialisations and db.specialisations[spec]
+    local key = db and db.aliases and db.aliases[spec] or spec
+    local w = db and db.specialisations and db.specialisations[key]
     if not w then return nil end
     local lines = {"UNLOCK WORKFLOW: " .. spec, "  " .. w.confidence}
     for i, step in ipairs(w.steps or {}) do table.insert(lines, "  " .. i .. ". " .. step) end
