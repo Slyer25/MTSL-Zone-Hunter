@@ -237,6 +237,17 @@ MTSL_ZONE_WORKFLOWS = {
         ["Pattern: Sylvan Vest"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Pattern: Gaea's Embrace"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
     },
+    argent_dawn_vendor_conditions = {
+        ["Plans: Girdle of the Dawn"] = "Honored",
+        ["Plans: Gloves of the Dawn"] = "Revered",
+        ["Pattern: Argent Boots"] = "Honored",
+        ["Pattern: Argent Shoulders"] = "Revered"
+    },
+    argent_dawn_vendors = {
+        ["Argent Quartermaster Hasana"] = true,
+        ["Argent Quartermaster Lightspark"] = true,
+        ["Quartermaster Miranda Breechlock"] = true
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
