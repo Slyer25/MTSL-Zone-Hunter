@@ -63,6 +63,39 @@ MTSL_ZONE_WORKFLOWS = {
             },
             reference = "wowhead.com/classic/quest=5141/dragonscale-leatherworking"
         },
+        ["Master Axesmith"] = {
+            confidence = "DOCUMENTED trainer/location; Vanilla 1.12 unlock quest requirements not fully verified",
+            steps = {
+                "First become a Weaponsmith through The Way of the Weaponsmith.",
+                "Reach the advanced Blacksmithing/character-level requirement (commonly reported as Blacksmithing 300, level 50).",
+                "Find Kilram at Everlook in Winterspring; select the Master Axesmith branch.",
+                "IMPORTANT: Modern Classic databases include Snakestone of the Shadow Huntress (LBRS). Do not assume that quest exists or is required in the 1.12 client.",
+                "Confirm any quest or dialogue requirement with the actual in-game trainer."
+            },
+            reference = "wow-professions.com/classic/weaponsmith-specialization-wow-classic"
+        },
+        ["Master Hammersmith"] = {
+            confidence = "DOCUMENTED trainer/location; Vanilla 1.12 unlock quest requirements not fully verified",
+            steps = {
+                "First become a Weaponsmith through The Way of the Weaponsmith.",
+                "Reach the advanced Blacksmithing/character-level requirement (commonly reported as Blacksmithing 300, level 50).",
+                "Find Lilith the Lithe at Everlook in Winterspring; select the Master Hammersmith branch.",
+                "IMPORTANT: Modern Classic databases include Sweet Serenity (Stratholme). Do not assume that quest exists or is required in 1.12.",
+                "Confirm any quest or dialogue requirement with the actual in-game trainer."
+            },
+            reference = "wow-professions.com/classic/weaponsmith-specialization-wow-classic"
+        },
+        ["Master Swordsmith"] = {
+            confidence = "DOCUMENTED trainer/location; Vanilla 1.12 unlock quest requirements not fully verified",
+            steps = {
+                "First become a Weaponsmith through The Way of the Weaponsmith.",
+                "Reach the advanced Blacksmithing/character-level requirement (commonly reported as Blacksmithing 300, level 50).",
+                "Find Seril Scourgebane at Everlook in Winterspring; select the Master Swordsmith branch.",
+                "IMPORTANT: Modern Classic databases include Corruption (Stratholme). Do not assume that quest exists or is required in 1.12.",
+                "Confirm any quest or dialogue requirement with the actual in-game trainer."
+            },
+            reference = "wow-professions.com/classic/weaponsmith-specialization-wow-classic"
+        },
         ["Gnomish Engineering"] = {
             confidence = "DOCUMENTED (Classic guide; verify faction-specific introductory quests)",
             steps = {
@@ -87,6 +120,14 @@ MTSL_ZONE_WORKFLOWS = {
             },
             reference = "wow-professions.com/classic/gnomish-and-goblin-engineering-specialization-guide-wow-classic"
         }
+    },
+    -- Aliases match profession names returned by TradeSkillsData in Vanilla 1.12.
+    aliases = {
+        ["Gnomish Engineer"] = "Gnomish Engineering",
+        ["Goblin Engineer"] = "Goblin Engineering",
+        ["Master Axesmith"] = "Master Axesmith",
+        ["Master Hammersmith"] = "Master Hammersmith",
+        ["Master Swordsmith"] = "Master Swordsmith"
     },
     -- Add conditional vendors only when source, exact item, and gating criteria are validated.
     -- Keys should use the exact recipe item name and vendor NPC name, never just a zone.
