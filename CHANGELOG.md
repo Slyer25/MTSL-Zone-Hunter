@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.2 — 2026-10-27
+- Updated the addon TOC version to `1.17.4-ZH5.2`.
+- Added documented acquisition steps for Armorsmith, Weaponsmith, Elemental Leatherworking, Dragonscale Leatherworking, Gnomish Engineering and Goblin Engineering.
+- Marked unverified/possibly incomplete introductory quest steps explicitly; excluded Season of Discovery-only quests.
+- Vendor-specific unlock data still needs independent verification.
+
 ## V5.1 — 2026-10-27
 - Wrapped long acquisition workflow text in the details panel.
 - Paginated based on the resulting visible display lines.
