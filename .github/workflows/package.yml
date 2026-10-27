@@ -31,6 +31,27 @@ jobs:
           name: Zone-Hunter-install-ready
           path: dist/*.zip
           if-no-files-found: error
+      - name: Publish new version automatically from main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! python3 scripts/release_notes.py; then
+            echo "No matching changelog entry yet; leaving ZIP as Actions artifact."
+            exit 0
+          fi
+          version=$(sed -n 's/^## Version: 1\\.17\\.4-ZH//p' MissingTradeSkillsList/MissingTradeSkillsList.toc | tr -d '\\r')
+          if [ -z "$version" ]; then
+            echo "No Zone Hunter version found; not publishing."
+            exit 0
+          fi
+          if gh release view "$version" >/dev/null 2>&1; then
+            echo "Release $version already exists; no automatic changes to published versions."
+            exit 0
+          fi
+          gh release create "$version" dist/*.zip --target "$GITHUB_SHA" --title "Zone Hunter V$version" --notes-file dist/release-notes.md
       - name: Attach ZIP and changelog to release
         if: github.event_name == 'release' || inputs.release_tag != ''
         uses: softprops/action-gh-release@v2
