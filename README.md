@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.3 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.4 (2026-10-27).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -22,7 +22,7 @@ A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained
 ## Limitations
 - Vendor offerings may require quests, reputation, or other conditions not yet documented.
 - Specialization workflow steps are documented but not yet tested in-game; some introductory prerequisites remain incomplete.
-- Prerequisite quest chains are incomplete unless explicitly verified.
+- Added a documented Alliance/Horde Restorative Potion quest chain, keyed to quest IDs. Other prerequisite quest chains remain incomplete unless explicitly verified.
 - The current build was manually tested in-game, but no automated WoW 1.12 tests exist.
 
 ## Upstream credits
