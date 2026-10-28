@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.17 — 2026-10-29
+- Corrected Restorative Potion quest instructions: after Badlands Reagent Run, Uldaman Reagent Run and Badlands Reagent Run II are parallel follow-ups; Uldaman Reagent Run is not required to learn the recipe.
+- Marked the Alliance direct-learning route as verified by in-game observation. Horde sequence remains documented, not independently tested.
+- Preserved faction-aware ordering, both faction routes, NPC source display and recipe learned-state tracking.
+- Expanded static quest audit to guard against accidentally restoring the false Uldaman prerequisite.
+
 ## V5.8.16 — 2026-10-28
 - Restorative Potion acquisition details now include both Alliance and Horde quest variants even when upstream MTSL only supplies one or no quest IDs.
 - Display prioritizes the character's faction while retaining the other quest as clearly labeled reference information.
