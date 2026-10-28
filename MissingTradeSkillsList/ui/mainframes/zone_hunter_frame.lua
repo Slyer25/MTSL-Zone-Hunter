@@ -310,6 +310,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                     local conditions = workflows and workflows.vendor_conditions
                     local by_item = conditions and conditions[self:Name(item)]
                     local found_requirement = false
+                    -- Several quartermasters can sell the same recipe at the same reputation.
+                    -- Show all vendor locations, but each shared requirement only once.
+                    local shown_reputation = {}
                     for _, vid in pairs(item.vendors.sources or {}) do
                         local vendor = MTSL_LOGIC_PLAYER_NPC:GetNpcById(vid)
                         if vendor then
@@ -334,29 +337,41 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             local cenarion_condition = cenarion and cenarion[self:Name(item)]
                             if cenarion_condition and vendor_name == cenarion_condition.vendor then
                                 found_requirement = true
-                                add("VENDOR REQUIREMENT: " .. cenarion_condition.faction .. " - " .. cenarion_condition.rank .. " reputation")
-                                add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
-                                if cenarion_condition.reference then add("  Reference: " .. cenarion_condition.reference) end
+                                local key = cenarion_condition.faction .. ":" .. cenarion_condition.rank
+                                if not shown_reputation[key] then
+                                    shown_reputation[key] = true
+                                    add("VENDOR REQUIREMENT: " .. cenarion_condition.faction .. " - " .. cenarion_condition.rank .. " reputation")
+                                    add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
+                                    if cenarion_condition.reference then add("  Reference: " .. cenarion_condition.reference) end
+                                end
                             end
                             local argent = workflows and workflows.argent_dawn_vendor_conditions
                             local argent_vendors = workflows and workflows.argent_dawn_vendors
                             local argent_rank = argent and argent[self:Name(item)]
                             if argent_rank and argent_vendors and argent_vendors[vendor_name] then
                                 found_requirement = true
-                                add("VENDOR REQUIREMENT: Argent Dawn - " .. argent_rank .. " reputation")
-                                add("  Earn reputation through Argent Dawn quests, Scourgestones, and undead dungeon activities.")
-                                add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
-                                add("  Reference: wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic")
+                                local key = "Argent Dawn:" .. argent_rank
+                                if not shown_reputation[key] then
+                                    shown_reputation[key] = true
+                                    add("VENDOR REQUIREMENT: Argent Dawn - " .. argent_rank .. " reputation")
+                                    add("  Earn reputation through Argent Dawn quests, Scourgestones, and undead dungeon activities.")
+                                    add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
+                                    add("  Reference: wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic")
+                                end
                             end
                             local rep = workflows and workflows.thorium_brotherhood_reputation
                             local required = rep and rep[self:Name(item)]
                             if vendor_name == (workflows and workflows.thorium_brotherhood_vendor) and required then
                                 found_requirement = true
-                                add("VENDOR REQUIREMENT: Thorium Brotherhood - " .. required .. " reputation")
-                                add("  Vendor: Lokhtos Darkbargainer, Grim Guzzler, Blackrock Depths.")
-                                add("  Build reputation through Thorium Point turn-ins (Searing Gorge)")
-                                add("  and later Molten Core material turn-ins at Lokhtos.")
-                                add("  DOCUMENTED in Classic references; not yet confirmed in this 1.12 client.")
+                                local key = "Thorium Brotherhood:" .. required
+                                if not shown_reputation[key] then
+                                    shown_reputation[key] = true
+                                    add("VENDOR REQUIREMENT: Thorium Brotherhood - " .. required .. " reputation")
+                                    add("  Vendor: Lokhtos Darkbargainer, Grim Guzzler, Blackrock Depths.")
+                                    add("  Build reputation through Thorium Point turn-ins (Searing Gorge)")
+                                    add("  and later Molten Core material turn-ins at Lokhtos.")
+                                    add("  DOCUMENTED in Classic references; not yet confirmed in this 1.12 client.")
+                                end
                             end
                         end
                     end
