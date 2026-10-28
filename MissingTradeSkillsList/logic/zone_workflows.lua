@@ -306,6 +306,25 @@ MTSL_ZONE_WORKFLOWS = {
         ["Icebane Gauntlets"] = {profession = "Blacksmithing", rank = "Revered"},
         ["Icebane Breastplate"] = {profession = "Blacksmithing", rank = "Exalted"},
     },
+    -- Quest-reward plans: combine both book halves and hand in the tome at
+    -- Lorekeeper Lydros, Athenaeum (Dire Maul). No reputation tier asserted.
+    enchanted_thorium_quests = {
+        ["Enchanted Thorium Breastplate"] = {
+            volume = "I", quest_id = 7649,
+            first = "King Gordok - Dire Maul North",
+            second = "Goraluk Anvilcrack - Lower Blackrock Spire"
+        },
+        ["Enchanted Thorium Leggings"] = {
+            volume = "II", quest_id = 7650,
+            first = "Rattlegore - Scholomance",
+            second = "Crimson Hammersmith - Stratholme (live side)"
+        },
+        ["Enchanted Thorium Helm"] = {
+            volume = "III", quest_id = 7651,
+            first = "Urok Doomhowl - Lower Blackrock Spire",
+            second = "Black Guard Swordsmith - Stratholme (undead side)"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
