@@ -359,9 +359,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("  Obtain the two halves of Advanced Armorsmithing Volume " .. tome.volume .. ":")
         add("  1. " .. tome.first)
         add("  2. " .. tome.second)
-        add("  Combine both halves into a completed book.")
+        add("  Combine both halves: the completed book starts the turn-in quest.")
+        add("  No earlier quest chain or reputation unlock is required.")
         add("  Turn it in to Lorekeeper Lydros, Athenaeum, Dire Maul (Feralas).")
-        add("  Reward: Plans: " .. entry.name .. " (recipe item).")
     end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
