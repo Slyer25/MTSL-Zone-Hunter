@@ -283,7 +283,7 @@ if not quest_section:
     errors.append("Restorative Potion quest workflows missing")
 else:
     for quest_id, faction in ((2501, "Alliance"), (2203, "Horde")):
-        pattern = rf'\[{quest_id}\]\s*=\s*\{{(.*?)(?=\n        \[\d+\]|\n    \}})'
+        pattern = rf'\[{quest_id}\]\s*=\s*\{{(.*?)(?=\n        \[\d+\]|\Z)'
         match = re.search(pattern, quest_section.group(1), re.S)
         if not match or not all(term in match.group(1) for term in (
             f'faction = "{faction}"',
