@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.7.2 — 2026-10-28
+- Removed the long Argent Dawn guide URL from the in-game detail lines to prevent a reference-only second page.
+- Preserved the reference in the supplemental workflow database for traceability.
+- Vendor names, reputation instructions, and acquisition logic remain unchanged.
+
 ## V5.7.1 — 2026-10-28
 - Fixed repeated Argent Dawn reputation requirements when the same recipe is sold by several quartermasters.
 - Deduplicated identical reputation requirements for Cenarion Circle and Thorium Brotherhood as a preventive measure.
