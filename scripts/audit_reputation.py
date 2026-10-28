@@ -166,8 +166,63 @@ if not item_rep_match or not re.search(
 if thorium_section and "Recipe: Transmute Elemental Fire" in thorium_actual:
     errors.append("Transmute Elemental Fire must not be audited as an ordinary stock-only recipe")
 
+# Argent Dawn standard quartermaster recipes, confirmed in-game.
+argent_expected = {
+    "Plans: Girdle of the Dawn": "Honored",
+    "Plans: Gloves of the Dawn": "Revered",
+    "Pattern: Argent Boots": "Honored",
+    "Pattern: Argent Shoulders": "Revered",
+    "Recipe: Transmute Air to Fire": "Honored",
+    "Pattern: Dawn Treaders": "Honored",
+    "Pattern: Golden Mantle of the Dawn": "Revered",
+    "Formula: Powerful Anti-Venom": "Honored",
+    "Formula: Enchant Bracer - Mana Regeneration": "Honored",
+    "Formula: Enchant Bracer - Healing": "Revered",
+}
+argent_section = re.search(r"argent_dawn_vendor_conditions\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not argent_section:
+    errors.append("Argent Dawn vendor table missing")
+else:
+    pairs = re.findall(r'\["([^"]+)"\]\s*=\s*"([^"]+)"', argent_section.group(1))
+    values = {}
+    for name, rank in pairs:
+        if name in values:
+            errors.append("duplicate Argent Dawn recipe: " + name)
+        values[name] = rank
+    if values != argent_expected:
+        errors.append("Argent Dawn stock list or reputation ranks differ from confirmed list")
+
+# Omarion teaches frost-resistance patterns according to profession and reputation.
+omarion_expected = {
+    "Glacial Wrists": ("Tailoring", "Revered"),
+    "Glacial Gloves": ("Tailoring", "Revered"),
+    "Glacial Vest": ("Tailoring", "Exalted"),
+    "Glacial Cloak": ("Tailoring", "Exalted"),
+    "Polar Bracers": ("Leatherworking", "Revered"),
+    "Polar Gloves": ("Leatherworking", "Revered"),
+    "Icy Scale Bracers": ("Leatherworking", "Revered"),
+    "Icy Scale Gauntlets": ("Leatherworking", "Revered"),
+    "Polar Tunic": ("Leatherworking", "Exalted"),
+    "Icy Scale Breastplate": ("Leatherworking", "Exalted"),
+    "Icebane Bracers": ("Blacksmithing", "Revered"),
+    "Icebane Gauntlets": ("Blacksmithing", "Revered"),
+    "Icebane Breastplate": ("Blacksmithing", "Exalted"),
+}
+omarion_section = re.search(r"omarion_recipes\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not omarion_section:
+    errors.append("Omarion frost-resistance recipes table missing")
+else:
+    pairs = re.findall(r'\["([^"]+)"\]\s*=\s*\{profession = "([^"]+)", rank = "([^"]+)"', omarion_section.group(1))
+    values = {}
+    for name, profession, rank in pairs:
+        if name in values:
+            errors.append("duplicate Omarion recipe: " + name)
+        values[name] = (profession, rank)
+    if values != omarion_expected:
+        errors.append("Omarion recipe profession or reputation tiers differ from checked list")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 84 vendor recipes audited (11 Timbermaw, 22 Zandalar, 23 Cenarion Circle, 28 Thorium Brotherhood); no missing keys, mismatches or duplicates")
+print("PASS: 107 acquisition records audited (84 other reputation recipes, 10 Argent quartermaster, 13 Omarion); no missing keys, mismatches or duplicates")
