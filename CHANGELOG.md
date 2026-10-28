@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.7.1 — 2026-10-28
+- Fixed repeated Argent Dawn reputation requirements when the same recipe is sold by several quartermasters.
+- Deduplicated identical reputation requirements for Cenarion Circle and Thorium Brotherhood as a preventive measure.
+- Preserved all vendor names and locations; this change only affects the acquisition details text.
+- Pending in-game confirmation.
+
 ## V5.7 — 2026-10-28
 - Expanded recipe-specific reputation vendor data for Cenarion Circle in Silithus: Vargus, Kania, Aendel Windspear and Mishta, including Friendly/Honored/Revered tiers.
 - Added Argent Dawn reputation requirements for Girdle of the Dawn, Gloves of the Dawn, Argent Boots and Argent Shoulders at their quartermasters.
