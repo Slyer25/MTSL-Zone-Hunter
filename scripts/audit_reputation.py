@@ -226,9 +226,16 @@ ui = (Path(__file__).resolve().parents[1] / "MissingTradeSkillsList/ui/mainframe
 sources_body = re.search(r"function MTSLUI_ZONE_HUNTER:GetSources\(skill, profession, zone_id\)(.*?)\nend", ui, re.S)
 if not sources_body or not all(term in sources_body.group(1) for term in (
     "omarion_recipes", "self:Name(skill)", "Eastern Plaguelands",
-    "Craftsman Wilhelm", "Master Craftsman Omarion"
+    'self:AddSource(sources, "Quest", "Wilhelm / Trainer: Omarion")'
 )):
-    errors.append("Omarion/Wilhelm recipes must be indexed in Eastern Plaguelands source lookup")
+    errors.append("Omarion/Wilhelm recipes must be indexed with the compact source label in Eastern Plaguelands")
+details_body = re.search(r"function MTSLUI_ZONE_HUNTER:DetailLines\(entry\)(.*?)\nend", ui, re.S)
+if not details_body or not all(term in details_body.group(1) for term in (
+    "TRAINING: Master Craftsman Omarion",
+    "QUEST ROUTE: Craftsman Wilhelm",
+    "Omarion's Handbook",
+)):
+    errors.append("Omarion/Wilhelm acquisition details must retain complete names and handbook prerequisite")
 
 if errors:
     for error in errors:
