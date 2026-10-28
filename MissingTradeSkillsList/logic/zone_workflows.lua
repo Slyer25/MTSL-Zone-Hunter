@@ -237,6 +237,7 @@ MTSL_ZONE_WORKFLOWS = {
         ["Pattern: Sylvan Vest"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Pattern: Gaea's Embrace"] = {vendor = "Mishta", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
     },
+    argent_dawn_reference = "wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic",
     argent_dawn_vendor_conditions = {
         ["Plans: Girdle of the Dawn"] = "Honored",
         ["Plans: Gloves of the Dawn"] = "Revered",
