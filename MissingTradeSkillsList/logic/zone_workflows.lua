@@ -136,6 +136,7 @@ MTSL_ZONE_WORKFLOWS = {
     thorium_brotherhood_vendor = "Lokhtos Darkbargainer",
     -- Vendor inventory visibility thresholds, not requirements on the recipe item itself.
     -- Confirmed in-game with Lokhtos, 2026-10-28.
+    thorium_item_reputation = { ["Recipe: Transmute Elemental Fire"] = "Friendly" },
     thorium_brotherhood_reputation = {
 
         ["Plans: Dark Iron Bracers"] = "Friendly",
