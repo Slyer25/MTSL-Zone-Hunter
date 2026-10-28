@@ -277,8 +277,24 @@ if not all(fragment in ui for fragment in (
 )):
     errors.append("NPC coordinate overrides must be zone-scoped and retain upstream fallback")
 
+# Restorative Potion is taught directly by the faction-specific final quest.
+quest_section = re.search(r"quest_conditions\s*=\s*\{(.*?)\n    \}\n\}", data, re.S)
+if not quest_section:
+    errors.append("Restorative Potion quest workflows missing")
+else:
+    for quest_id, faction in ((2501, "Alliance"), (2203, "Horde")):
+        pattern = rf'\[{quest_id}\]\s*=\s*\{{(.*?)(?=\n        \[\d+\]|\n    \}})'
+        match = re.search(pattern, quest_section.group(1), re.S)
+        if not match or not all(term in match.group(1) for term in (
+            f'faction = "{faction}"',
+            "DOCUMENTED - DIRECT RECIPE LEARNING",
+            "Quest completion directly teaches Restorative Potion",
+            "Alchemy 210",
+        )):
+            errors.append(f"Restorative Potion quest {quest_id} direct-learning workflow mismatch")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 113 acquisition records audited (107 reputation-based, 6 Magnus quest-gated); no missing keys, mismatches or duplicates")
+print("PASS: 115 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants); no missing keys, mismatches or duplicates")
