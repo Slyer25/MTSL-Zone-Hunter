@@ -269,6 +269,17 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         local player_faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
         local ordered = {}
         for _, id in pairs(ids) do table.insert(ordered, id) end
+        -- Upstream source data may list only one faction's final quest.
+        -- Both quests teach Restorative Potion; retain both in details.
+        if entry.name == "Restorative Potion" then
+            local has_alliance, has_horde = false, false
+            for _, id in ipairs(ordered) do
+                if tonumber(id) == 2501 then has_alliance = true end
+                if tonumber(id) == 2203 then has_horde = true end
+            end
+            if not has_alliance then table.insert(ordered, 2501) end
+            if not has_horde then table.insert(ordered, 2203) end
+        end
         -- Prioritize the current faction, but preserve other-faction sources.
         table.sort(ordered, function(a, b)
             local fa = qdb and qdb[tonumber(a)] and qdb[tonumber(a)].faction
