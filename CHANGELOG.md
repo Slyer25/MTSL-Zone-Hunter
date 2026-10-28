@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.11 — 2026-10-28
+- Shortened Eastern Plaguelands frost-resistance recipe source labels to 'Quest: Wilhelm / Trainer: Omarion' so they fit in the left list and hover tooltip.
+- Retained complete NPC names, locations and reputation-gated acquisition instructions in the right panel.
+- No changes to learned recipe state, zone indexing or pagination.
+
 ## V5.8.10 — 2026-10-28
 - Shortened Omarion/Wilhelm frost-resistance source labels in Eastern Plaguelands to prevent list truncation.
 - Consolidated frost-resistance acquisition details: reputation, Omarion training, and Wilhelm's handbook-gated quest route remain visible without repeating upstream trainer and handbook quest sections.
