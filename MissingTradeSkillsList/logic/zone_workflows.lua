@@ -242,7 +242,13 @@ MTSL_ZONE_WORKFLOWS = {
         ["Plans: Girdle of the Dawn"] = "Honored",
         ["Plans: Gloves of the Dawn"] = "Revered",
         ["Pattern: Argent Boots"] = "Honored",
-        ["Pattern: Argent Shoulders"] = "Revered"
+        ["Pattern: Argent Shoulders"] = "Revered",
+        ["Recipe: Transmute Air to Fire"] = "Honored",
+        ["Pattern: Dawn Treaders"] = "Honored",
+        ["Pattern: Golden Mantle of the Dawn"] = "Revered",
+        ["Formula: Powerful Anti-Venom"] = "Honored",
+        ["Formula: Enchant Bracer - Mana Regeneration"] = "Honored",
+        ["Formula: Enchant Bracer - Healing"] = "Revered"
     },
     argent_dawn_vendors = {
         ["Argent Quartermaster Hasana"] = true,
