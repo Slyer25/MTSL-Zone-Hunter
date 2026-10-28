@@ -386,12 +386,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                     add("  Vendor: Lokhtos Darkbargainer, Grim Guzzler, Blackrock Depths.")
                                     add("  Build reputation through Thorium Point turn-ins (Searing Gorge)")
                                     add("  and later Molten Core material turn-ins at Lokhtos.")
-                                    add("  Stock visibility confirmed in-game; recipe item has no separate reputation requirement.")
                                 end
                             end
                         end
                     end
-                    if not found_requirement then
+                    if not found_requirement and not item_rank then
                         add("VENDOR AVAILABILITY: unlocks/stock not verified; quest or reputation may be required")
                     end
                 end
