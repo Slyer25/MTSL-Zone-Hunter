@@ -103,7 +103,7 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     local frost = omarion and omarion[self:Name(skill)]
     if frost and frost.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Eastern Plaguelands" then
-        self:AddSource(sources, "Quest: Craftsman Wilhelm", "Trainer: Master Craftsman Omarion")
+        self:AddSource(sources, "Quest", "Wilhelm / Trainer: Omarion")
     end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
