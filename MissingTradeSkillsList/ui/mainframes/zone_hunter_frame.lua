@@ -304,6 +304,12 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             local item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(item_id, entry.profession)
             if item then
                 add("RECIPE ITEM: " .. self:Name(item))
+                local item_reputation = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.thorium_item_reputation
+                local item_rank = item_reputation and item_reputation[self:Name(item)]
+                if item_rank then
+                    add("RECIPE ITEM REQUIREMENT: Thorium Brotherhood - " .. item_rank .. " reputation")
+                    add("  This requirement is on the recipe item itself, unlike Lokhtos stock unlocks.")
+                end
                 if item.vendors then
                     npc_list(item.vendors.sources, "Vendor")
                     local workflows = MTSL_ZONE_WORKFLOWS
