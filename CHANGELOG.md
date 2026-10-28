@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.9 — 2026-10-28
+- Fixed frost-resistance recipes missing from Eastern Plaguelands: GetSources now indexes the 13 Omarion/Wilhelm recipe entries there, independently of missing upstream MTSL NPC or quest associations.
+- Shows the Light's Hope Chapel quest and Naxxramas training routes in the source summary without changing unrelated recipes or character learned-state logic.
+- Added a source-index regression check to the automated acquisition audit.
+- Needs in-game verification of all 13 recipe names and display.
+
 ## V5.8.8 — 2026-10-28
 - Added 13 Master Craftsman Omarion frost-resistance recipes with profession and Argent Dawn Revered/Exalted tiers from in-game observations.
 - Shows Omarion's Naxxramas training route and Wilhelm's Omarion's Handbook prerequisite/quest route separately in acquisition details.
