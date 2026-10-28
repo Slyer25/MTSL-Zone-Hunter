@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.21 — 2026-10-29
+- Added Blackrock Depths quest acquisition information for Smelt Dark Iron (The Spectral Chalice, Gloom'rel, Mining 230 and reagent tribute) and Sulfuron Hammer (A Binding Contract, Sulfuron Ingot and Lokhtos).
+- Indexed both special acquisition routes under Blackrock Mountain with the distinction between direct spell learning and a plans-item reward.
+- Extended automated acquisition audit to 120 reviewed records. No changes to NPC coordinates, character faction logic or base UI layout.
+- In-game source indexing and detail display remain to be verified.
+
 ## V5.8.20 — 2026-10-29
 - Suppressed the contradictory generic unverified-prerequisite warning for the three known Enchanted Thorium volume turn-in quests only.
 - Kept quest ID, minimum level, book workflow, Armorsmith unlock and all other quest records unchanged.
