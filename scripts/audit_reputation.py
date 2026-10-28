@@ -300,6 +300,14 @@ if not all(fragment in ui for fragment in (
 )):
     errors.append("Quest detail faction prioritization must retain alternate routes")
 
+if not all(fragment in ui for fragment in (
+    'entry.name == "Restorative Potion"',
+    'table.insert(ordered, 2501)',
+    'table.insert(ordered, 2203)',
+    'ids or {}',
+)):
+    errors.append("Restorative Potion must include both faction variants when upstream quest links are incomplete")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
