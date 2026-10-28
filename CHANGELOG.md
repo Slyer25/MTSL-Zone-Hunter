@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.4 — 2026-10-28
+- Extended automated reputation-vendor audit to all 23 current Cenarion Circle recipe records for Vargus, Kania, Mishta and Aendel Windspear, including Dreamscale Breastplate (Exalted).
+- Audit now checks 56 recipe records across Cenarion Circle, Timbermaw Hold and Zandalar Tribe for missing entries, duplicate keys and incorrect tiers.
+- Cenarion Circle thresholds are based on user-provided in-game vendor tooltip evidence; additional vendor inventory changes will require updating the audit expectations.
+- No addon UI or acquisition display logic changed; Thorium Brotherhood audit remains pending a separate vendor review.
+
 ## V5.8.3 — 2026-10-28
 - Added Pattern: Dreamscale Breastplate from Aendel Windspear at Cenarion Circle Exalted, confirmed by in-game vendor screenshot and Classic item data.
 - Preserved Dragonscale Leatherworking specialization requirement in original MTSL recipe data.
