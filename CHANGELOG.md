@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.7.3 — 2026-10-28
+- Added six more Argent Dawn recipe reputation requirements, confirmed by in-game quartermaster tooltips: Transmute Air to Fire, Dawn Treaders, Golden Mantle of the Dawn, Powerful Anti-Venom, Enchant Bracer - Mana Regeneration, and Enchant Bracer - Healing.
+- Removed the redundant unverified wording for Argent Dawn reputation requirements directly checked in-game.
+- Removed the global drop-chance disclaimer from acquisition details; estimated world drops retain their contextual uncertainty notes.
+- Removed a trailing blank line to prevent an almost-empty detail page for vendor-only recipes.
+- The new reputation entries still depend on exact recipe item names matching TradeSkillsData.
+
 ## V5.7.2 — 2026-10-28
 - Removed the long Argent Dawn guide URL from the in-game detail lines to prevent a reference-only second page.
 - Preserved the reference in the supplemental workflow database for traceability.
