@@ -264,11 +264,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     end
     local visited = {}
     local function quests(ids)
-        if not ids then return end
+        if not ids and entry.name ~= "Restorative Potion" then return end
         local qdb = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.quest_conditions
         local player_faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
         local ordered = {}
-        for _, id in pairs(ids) do table.insert(ordered, id) end
+        for _, id in pairs(ids or {}) do table.insert(ordered, id) end
         -- Upstream source data may list only one faction's final quest.
         -- Both quests teach Restorative Potion; retain both in details.
         if entry.name == "Restorative Potion" then
