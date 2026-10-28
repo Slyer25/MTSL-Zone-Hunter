@@ -485,7 +485,16 @@ function MTSLUI_ZONE_HUNTER:UpdateDetails()
     local max_page = math.max(1, math.ceil(table.getn(lines) / 14))
     if self.detail_page > max_page then self.detail_page = max_page end
     self.detail_title:SetText(entry and entry.name or "Recipe details")
-    self.detail_counter:SetText("Details " .. self.detail_page .. "/" .. max_page)
+    if max_page <= 1 then
+        self.detail_prev:Hide()
+        self.detail_next:Hide()
+        self.detail_counter:Hide()
+    else
+        self.detail_prev:Show()
+        self.detail_next:Show()
+        self.detail_counter:Show()
+        self.detail_counter:SetText("Details " .. self.detail_page .. "/" .. max_page)
+    end
     for i=1,14 do
         local t = self.detail_lines[i]
         local line = lines[(self.detail_page-1)*14+i]
@@ -686,11 +695,11 @@ function MTSLUI_ZONE_HUNTER:Initialise()
         if MTSLUI_ZONE_HUNTER.page*12 < table.getn(MTSLUI_ZONE_HUNTER.rows) then MTSLUI_ZONE_HUNTER.page=MTSLUI_ZONE_HUNTER.page+1 end
         MTSLUI_ZONE_HUNTER:Refresh()
     end)
-    button("< Details", 482, -460, 100, function()
+    self.detail_prev = button("< Details", 482, -460, 100, function()
         if MTSLUI_ZONE_HUNTER.detail_page > 1 then MTSLUI_ZONE_HUNTER.detail_page=MTSLUI_ZONE_HUNTER.detail_page-1 end
         MTSLUI_ZONE_HUNTER:UpdateDetails()
     end)
-    button("Details >", 592, -460, 100, function()
+    self.detail_next = button("Details >", 592, -460, 100, function()
         MTSLUI_ZONE_HUNTER.detail_page=MTSLUI_ZONE_HUNTER.detail_page+1
         MTSLUI_ZONE_HUNTER:UpdateDetails()
     end)
