@@ -366,8 +366,22 @@ if not all(fragment in ui for fragment in (
 )):
     errors.append("Known BRD quest IDs must not show an unverified prerequisite warning")
 
+# Field Repair Bot schematic must be an in-world object, not an NPC drop.
+bot = re.search(r'engineering_object_recipes\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not bot or not all(term in bot.group(1) for term in (
+    '["Field Repair Bot 74A"]', 'profession = "Engineering"',
+    'Schematic: Field Repair Bot 74A', 'Golem Lord Argelmach',
+    'Engineering 300', 'interactable world object',
+)):
+    errors.append("Field Repair Bot 74A schematic source incomplete")
+if not all(term in ui for term in (
+    "engineering_object_recipes", 'object_flow.object .. " (BRD)"',
+    "OBJECT SCHEMATIC:", "object_flow.steps",
+)):
+    errors.append("Field Repair Bot 74A source indexing or detail rendering missing")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 120 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions); no missing keys, mismatches or duplicates")
+print("PASS: 121 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic); no missing keys, mismatches or duplicates")
