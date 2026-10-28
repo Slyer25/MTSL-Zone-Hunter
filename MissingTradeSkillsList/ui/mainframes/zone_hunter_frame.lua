@@ -345,6 +345,17 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                     if cenarion_condition.reference then add("  Reference: " .. cenarion_condition.reference) end
                                 end
                             end
+                            local additional = workflows and workflows.additional_reputation_vendors
+                            local extra = additional and additional[self:Name(item)]
+                            if extra and vendor_name == extra.vendor then
+                                found_requirement = true
+                                local key = extra.faction .. ":" .. extra.rank
+                                if not shown_reputation[key] then
+                                    shown_reputation[key] = true
+                                    add("VENDOR REQUIREMENT: " .. extra.faction .. " - " .. extra.rank .. " reputation")
+                                    if extra.reference then add("  Reference: " .. extra.reference) end
+                                end
+                            end
                             local argent = workflows and workflows.argent_dawn_vendor_conditions
                             local argent_vendors = workflows and workflows.argent_dawn_vendors
                             local argent_rank = argent and argent[self:Name(item)]
