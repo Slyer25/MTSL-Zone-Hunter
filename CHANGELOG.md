@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.1 — 2026-10-28
+- Filled missing Rin'wosho the Trader reputation requirements from original Vanilla vendor reward lists.
+- Added Greater Dreamless Sleep (Friendly), Bloodvine Lens (Friendly), Blood Tiger Shoulders, Bloodvine Leggings, Primal Batskin Gloves and Bloodsoul Shoulders (Honored), Blood Tiger Breastplate, Darksoul Breastplate and Mageblood Potion (Revered), and Living Action Potion (Exalted).
+- Retained exact recipe/vendor matching and added Classic vendor reference links; no UI changes.
+- Pending in-game verification of the new entries.
+
 ## V5.8 — 2026-10-28
 - Hid Details previous/next buttons and page counter for recipes with only one details page; restored them automatically for multi-page records.
 - Added documented Timbermaw Hold reputation requirements for Meilosh's profession recipes.
