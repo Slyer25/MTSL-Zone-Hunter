@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.19 — 2026-10-29
+- Clarified that each completed Advanced Armorsmithing volume directly starts its Enchanted Thorium turn-in quest; no additional quest chain or reputation unlock is needed, based on user in-game experience across the three volumes.
+- Removed the duplicate plan reward line while retaining the MTSL RECIPE ITEM entry.
+- Added regression checks for both acquisition instructions and duplicate-reward prevention. No changes to zone listing, coordinates, learned status or layout.
+
 ## V5.8.18 — 2026-10-29
 - Added three Enchanted Thorium Platemail quest acquisitions (Volumes I-III), each listing its two dungeon drop sources and the Lorekeeper Lydros turn-in in Dire Maul.
 - Indexed these quest-reward plans under Feralas independently of incomplete upstream MTSL source links.
