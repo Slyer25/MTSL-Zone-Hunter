@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.6 — 2026-10-28
+- Added Recipe: Transmute Elemental Fire as an exceptional Thorium Brotherhood item-level Friendly reputation requirement (Alchemy 300), distinct from Lokhtos vendor stock visibility tiers.
+- Displays the recipe-item reputation requirement explicitly in acquisition details when item is present in MTSL records.
+- Added regression audit asserting the special requirement is not mixed with Lokhtos stock-only entries.
+- Confirmed with Classic item databases; requires in-game display validation.
+
 ## V5.8.5 — 2026-10-28
 - Audited all 28 Lokhtos Darkbargainer reputation-gated vendor stock recipes against direct in-game inventory observations.
 - Corrected Formula: Enchant Weapon - Strength from Friendly to Honored.
