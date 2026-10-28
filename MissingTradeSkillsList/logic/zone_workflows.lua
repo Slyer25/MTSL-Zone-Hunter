@@ -221,6 +221,7 @@ MTSL_ZONE_WORKFLOWS = {
         ["Plans: Ironvine Breastplate"] = {vendor = "Vargus", faction = "Cenarion Circle", rank = "Revered", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Formula: Enchant Cloak - Greater Fire Resistance"] = {vendor = "Kania", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Formula: Enchant Cloak - Greater Nature Resistance"] = {vendor = "Kania", faction = "Cenarion Circle", rank = "Honored", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
+        ["Pattern: Dreamscale Breastplate"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Exalted", reference = "wowhead.com/classic/item=20382/pattern-dreamscale-breastplate"},
         ["Pattern: Sandstalker Bracers"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Pattern: Spitfire Bracers"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
         ["Pattern: Bramblewood Belt"] = {vendor = "Aendel Windspear", faction = "Cenarion Circle", rank = "Friendly", reference = "wowhead.com/classic/guide/cenarion-circle-reputation-wow-classic"},
