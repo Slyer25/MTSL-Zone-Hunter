@@ -255,6 +255,31 @@ MTSL_ZONE_WORKFLOWS = {
         ["Argent Quartermaster Lightspark"] = true,
         ["Quartermaster Miranda Breechlock"] = true
     },
+    additional_reputation_vendors = {
+        ["Recipe: Transmute Earth to Water"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Friendly", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Formula: Enchant 2H Weapon - Agility"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Friendly", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Warbear Harness"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Friendly", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Warbear Woolies"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Friendly", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Formula: Enchant Weapon - Agility"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Honored", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Might of the Timbermaw"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Honored", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Wisdom of the Timbermaw"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Honored", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Plans: Heavy Timbermaw Belt"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Honored", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Mantle of the Timbermaw"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Revered", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Timbermaw Brawlers"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Revered", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Plans: Heavy Timbermaw Boots"] = {vendor = "Meilosh", faction = "Timbermaw Hold", rank = "Revered", reference = "wowhead.com/classic/guide/timbermaw-hold-reputation-wow-classic"},
+        ["Pattern: Bloodvine Boots"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Friendly", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Pattern: Primal Batskin Bracers"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Friendly", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Plans: Bloodsoul Gauntlets"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Friendly", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Plans: Darksoul Shoulders"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Friendly", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Formula: Brilliant Mana Oil"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Friendly", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Plans: Darksoul Leggings"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Honored", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Schematic: Bloodvine Goggles"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Honored", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Recipe: Major Troll's Blood Potion"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Honored", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Formula: Brilliant Wizard Oil"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Honored", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Pattern: Bloodvine Vest"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Revered", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Pattern: Primal Batskin Jerkin"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Revered", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+        ["Plans: Bloodsoul Breastplate"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Revered", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
