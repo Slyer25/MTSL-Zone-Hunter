@@ -356,7 +356,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                     add("VENDOR REQUIREMENT: Argent Dawn - " .. argent_rank .. " reputation")
                                     add("  Earn reputation through Argent Dawn quests, Scourgestones, and undead dungeon activities.")
                                     add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
-                                    add("  Reference: wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic")
+                                    -- Source is documented in zone_workflows.lua; avoid a reference-only details page.
                                 end
                             end
                             local rep = workflows and workflows.thorium_brotherhood_reputation
