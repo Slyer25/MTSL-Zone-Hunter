@@ -264,6 +264,19 @@ if not magnus_access or not all(word in magnus_access.group(1) for word in ("Spe
 if "cond.shared_access" not in ui or "workflows[cond.shared_access]" not in ui:
     errors.append("Zone Hunter UI must resolve Magnus shared access workflow")
 
+# Verify coordinate fixes are narrow, sourced, and applied only in the matching zone.
+coords_section = re.search(r"npc_coordinate_overrides\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not coords_section or not re.search(
+    r'\["Magnus Frostwake"\]\s*=\s*\{zone = "Western Plaguelands", x = 68\.1, y = 77\.6, reference = "wowhead.com/classic/npc=11278/magnus-frostwake"\}',
+    coords_section.group(1),
+):
+    errors.append("Magnus coordinate correction must be 68.1, 77.6 in Western Plaguelands")
+if not all(fragment in ui for fragment in (
+    "npc_coordinate_overrides", "correction and z == correction.zone",
+    "tostring(correction.x)", "tostring(correction.y)", "elseif record.location",
+)):
+    errors.append("NPC coordinate overrides must be zone-scoped and retain upstream fallback")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
