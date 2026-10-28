@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.5 — 2026-10-28
+- Audited all 28 Lokhtos Darkbargainer reputation-gated vendor stock recipes against direct in-game inventory observations.
+- Corrected Formula: Enchant Weapon - Strength from Friendly to Honored.
+- Removed unconfirmed Recipe: Transmute Elemental Fire from Lokhtos reputation stock data; investigate its source separately.
+- Clarified Thorium Brotherhood unlocks gate vendor inventory visibility, not the recipe items themselves.
+- Extended CI reputation audit from 56 to 84 records, preserving existing packaging/release workflow.
+
 ## V5.8.4 — 2026-10-28
 - Extended automated reputation-vendor audit to all 23 current Cenarion Circle recipe records for Vargus, Kania, Mishta and Aendel Windspear, including Dreamscale Breastplate (Exalted).
 - Audit now checks 56 recipe records across Cenarion Circle, Timbermaw Hold and Zandalar Tribe for missing entries, duplicate keys and incorrect tiers.
