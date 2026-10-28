@@ -134,10 +134,12 @@ MTSL_ZONE_WORKFLOWS = {
     -- Source: WoW Classic Thorium Brotherhood reputation reward tables.
     -- These values have not yet been tested in our Vanilla 1.12 client.
     thorium_brotherhood_vendor = "Lokhtos Darkbargainer",
+    -- Vendor inventory visibility thresholds, not requirements on the recipe item itself.
+    -- Confirmed in-game with Lokhtos, 2026-10-28.
     thorium_brotherhood_reputation = {
-        ["Recipe: Transmute Elemental Fire"] = "Friendly",
+
         ["Plans: Dark Iron Bracers"] = "Friendly",
-        ["Formula: Enchant Weapon - Strength"] = "Friendly",
+        ["Formula: Enchant Weapon - Strength"] = "Honored",
         ["Pattern: Molten Helm"] = "Friendly",
         ["Pattern: Corehound Boots"] = "Friendly",
         ["Pattern: Flarecore Gloves"] = "Friendly",
