@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.15 — 2026-10-28
+- Quest acquisition details now prioritize routes matching the character's faction, while preserving opposite-faction routes and recipes.
+- Mark faction-scoped quest descriptions as YOUR FACTION or OTHER FACTION, without modifying skill availability or learned status.
+- Added automated audit guard for faction-aware quest ordering.
+- In-game verification pending for Restorative Potion on Alliance and Horde characters.
+
 ## V5.8.14 — 2026-10-28
 - Clarified that completion of Badlands Reagent Run II directly teaches Restorative Potion for both Alliance (2501) and Horde (2203).
 - Distinguished Alchemy 210 crafting skill from unverified quest eligibility, without asserting a recipe item is awarded.
