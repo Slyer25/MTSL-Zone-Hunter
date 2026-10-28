@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.7.3 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.8 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -57,3 +57,5 @@ To repair the existing `5.4` release: open **Actions → Package Zone Hunter add
 **V5.6.1:** added source access notes for Annora (Uldaman scorpids) and Shen'dralar Provisioner (Dire Maul Athenaeum). These explain reaching NPCs, not extra recipe-learning restrictions. Unverified source behavior is not presented as tested.
 
 **V5.7:** added documented Cenarion Circle and Argent Dawn recipe-specific vendor reputation requirements. The display checks both recipe and vendor, without requiring live reputation tracking. Acquisition instructions are documented, not yet tested in-game.
+
+**V5.8:** expands reputation recipes for Timbermaw Hold and Zandalar Tribe and automatically hides the Details navigation when a recipe fits one page. Unverified in game.
