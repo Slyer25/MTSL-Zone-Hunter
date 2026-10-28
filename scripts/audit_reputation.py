@@ -344,8 +344,23 @@ if not all(term in ui for term in (
 )):
     errors.append("Enchanted Thorium quest warning must be suppressed only for matching book quest IDs")
 
+# Blackrock Depths: special quest acquisitions are not reputation vendor stock.
+brd_section = re.search(r"blackrock_quest_recipes\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not brd_section:
+    errors.append("Blackrock quest acquisition database missing")
+else:
+    for recipe, terms in {
+        "Smelt Dark Iron": ("Mining", 'kind = "direct"', "Gloom'rel", "20 Gold Bars", "10 Truesilver Bars", "2 Star Rubies", "Black Forge"),
+        "Sulfuron Hammer": ("Blacksmithing", 'kind = "item"', "Sulfuron Ingot", "Golemagg", "Lokhtos", "A Binding Contract"),
+    }.items():
+        rec = re.search(r'\["' + re.escape(recipe) + r'"\]\s*=\s*\{(.*?)\n        \}', brd_section.group(1), re.S)
+        if not rec or not all(term in rec.group(1) for term in terms):
+            errors.append("Blackrock quest acquisition incomplete: " + recipe)
+if not all(term in ui for term in ("blackrock_quest_recipes", '== "Blackrock Mountain"', "Gloom'rel (BRD)", "Lokhtos Darkbargainer (BRD)", "brd_flow.steps")):
+    errors.append("Blackrock quest acquisition UI must index and describe both routes")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 118 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests); no missing keys, mismatches or duplicates")
+print("PASS: 120 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions); no missing keys, mismatches or duplicates")
