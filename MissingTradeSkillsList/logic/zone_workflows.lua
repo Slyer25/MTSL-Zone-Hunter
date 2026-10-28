@@ -327,6 +327,32 @@ MTSL_ZONE_WORKFLOWS = {
             second = "Black Guard Swordsmith - Stratholme (undead side)"
         }
     },
+    -- BRD direct-learning and quest-item acquisition, distinct from reputation stock.
+    blackrock_quest_recipes = {
+        ["Smelt Dark Iron"] = {
+            profession = "Mining",
+            kind = "direct",
+            steps = {
+                "Requires Mining 230. Enter Blackrock Depths, Summoners' Tomb (the Seven).",
+                "Speak with Gloom'rel BEFORE starting Doom'rel's encounter.",
+                "Accept The Spectral Chalice and offer 20 Gold Bars, 10 Truesilver Bars and 2 Star Rubies.",
+                "Speak with Gloom'rel again to learn Smelt Dark Iron directly.",
+                "Smelting requires the Black Forge in Blackrock Depths; 8 Dark Iron Ore make 1 bar."
+            },
+            reference = "wowhead.com/classic/guide/blackrock-depths-shadowforge-city-dungeon-strategy-wow-classic"
+        },
+        ["Sulfuron Hammer"] = {
+            profession = "Blacksmithing",
+            kind = "item",
+            steps = {
+                "Obtain 1 Sulfuron Ingot from Golemagg the Incinerator in Molten Core.",
+                "Take the ingot to Lokhtos Darkbargainer in the Grim Guzzler, Blackrock Depths.",
+                "Accept and complete A Binding Contract to receive Plans: Sulfuron Hammer.",
+                "This is an ingot-triggered quest reward, not a Thorium Brotherhood reputation-stock unlock."
+            },
+            reference = "zockify.com/classic/dungeons/blackrock-depths/"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
