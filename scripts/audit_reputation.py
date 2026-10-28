@@ -293,6 +293,13 @@ else:
         )):
             errors.append(f"Restorative Potion quest {quest_id} direct-learning workflow mismatch")
 
+# Faction-specific quest routes must be sorted, not hidden.
+if not all(fragment in ui for fragment in (
+    "MTSL_CURRENT_PLAYER.FACTION", "table.sort(ordered",
+    "YOUR FACTION", "OTHER FACTION", "for _, id in ipairs(ordered)",
+)):
+    errors.append("Quest detail faction prioritization must retain alternate routes")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
