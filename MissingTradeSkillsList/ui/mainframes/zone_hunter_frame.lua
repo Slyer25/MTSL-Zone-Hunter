@@ -205,7 +205,11 @@ function MTSLUI_ZONE_HUNTER:Location(record)
     if not record then return "Unknown location" end
     local z = MTSL_LOGIC_WORLD:GetZoneNameById(self:NPCZone(record) or record.zone_id)
     if not z or z == "" then z = "Unknown zone" end
-    if record.location and record.location.x and record.location.x ~= "-" and record.location.x ~= "" then
+    local corrections = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.npc_coordinate_overrides
+    local correction = corrections and corrections[self:Name(record)]
+    if correction and z == correction.zone then
+        z = z .. " (" .. tostring(correction.x) .. ", " .. tostring(correction.y) .. ")"
+    elseif record.location and record.location.x and record.location.x ~= "-" and record.location.x ~= "" then
         z = z .. " (" .. tostring(record.location.x) .. ", " .. tostring(record.location.y or "?") .. ")"
     end
     return z
