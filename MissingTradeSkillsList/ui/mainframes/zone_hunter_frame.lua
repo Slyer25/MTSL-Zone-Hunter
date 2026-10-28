@@ -355,8 +355,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                     shown_reputation[key] = true
                                     add("VENDOR REQUIREMENT: Argent Dawn - " .. argent_rank .. " reputation")
                                     add("  Earn reputation through Argent Dawn quests, Scourgestones, and undead dungeon activities.")
-                                    add("  DOCUMENTED in Classic guides; not yet verified in this 1.12 client.")
-                                    -- Source is documented in zone_workflows.lua; avoid a reference-only details page.
+                                    -- Argent Dawn reputation thresholds confirmed in-game at Miranda Breechlock.
                                 end
                             end
                             local rep = workflows and workflows.thorium_brotherhood_reputation
@@ -405,8 +404,8 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             add("  Workflow not verified; prerequisite steps may exist.")
         end
     end
-    add(" ")
-    add("These are recorded sources, not verified drop chances.")
+    -- Drop uncertainty is already stated beside estimated world-drop sources.
+    -- Do not append a generic drop disclaimer to vendors, quests or trainers.
     return out
 end
 
