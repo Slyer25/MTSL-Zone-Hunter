@@ -105,6 +105,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Eastern Plaguelands" then
         self:AddSource(sources, "Quest", "Wilhelm / Trainer: Omarion")
     end
+    local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
+    local tome = tomes and tomes[self:Name(skill)]
+    if profession == "Blacksmithing" and tome
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Feralas" then
+        self:AddSource(sources, "Quest", "Lorekeeper Lydros (Dire Maul)")
+    end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
     self:AddObjects(sources, skill.objects, "Object", zone_id)
@@ -346,6 +352,17 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("  Complete Omarion's Handbook, then Wilhelm's crafting quest to learn the recipe.")
     end
     add(" ")
+    local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
+    local tome = tomes and tomes[entry.name]
+    if tome and entry.profession == "Blacksmithing" then
+        add("QUEST REWARD: Enchanted Thorium Platemail - Volume " .. tome.volume .. " [ID " .. tome.quest_id .. "]")
+        add("  Obtain the two halves of Advanced Armorsmithing Volume " .. tome.volume .. ":")
+        add("  1. " .. tome.first)
+        add("  2. " .. tome.second)
+        add("  Combine both halves into a completed book.")
+        add("  Turn it in to Lorekeeper Lydros, Athenaeum, Dire Maul (Feralas).")
+        add("  Reward: Plans: " .. entry.name .. " (recipe item).")
+    end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
     if not frost then quests(skill.quests) end
