@@ -237,8 +237,35 @@ if not details_body or not all(term in details_body.group(1) for term in (
 )):
     errors.append("Omarion/Wilhelm acquisition details must retain complete names and handbook prerequisite")
 
+# Magnus Frostwake: six Classic vendor recipes share the Spectral Essence gate.
+magnus_expected = {
+    "Plans: Ebon Shiv", "Plans: Ornate Thorium Handaxe",
+    "Plans: Huge Thorium Battleaxe", "Plans: Storm Gauntlets",
+    "Recipe: Transmute Water to Air", "Recipe: Major Mana Potion",
+}
+magnus_section = re.search(r"vendor_conditions\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not magnus_section:
+    errors.append("Magnus vendor_conditions table missing")
+else:
+    magnus_pairs = re.findall(
+        r'\["([^"]+)"\]\s*=\s*\{\s*\["Magnus Frostwake"\]\s*=\s*\{\s*shared_access\s*=\s*"([^"]+)"',
+        magnus_section.group(1),
+    )
+    magnus_actual = {}
+    for item, access in magnus_pairs:
+        if item in magnus_actual:
+            errors.append("duplicate Magnus recipe: " + item)
+        magnus_actual[item] = access
+    if set(magnus_actual) != magnus_expected or any(access != "magnus_frostwake_access" for access in magnus_actual.values()):
+        errors.append("Magnus vendor inventory or shared Spectral Essence gate mismatch")
+magnus_access = re.search(r"magnus_frostwake_access\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not magnus_access or not all(word in magnus_access.group(1) for word in ("Spectral Essence", "Eva Sarkhoff", "Kirtonos", "Equip")):
+    errors.append("Magnus access workflow must explain obtaining and equipping Spectral Essence")
+if "cond.shared_access" not in ui or "workflows[cond.shared_access]" not in ui:
+    errors.append("Zone Hunter UI must resolve Magnus shared access workflow")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 107 acquisition records audited (84 other reputation recipes, 10 Argent quartermaster, 13 Omarion); no missing keys, mismatches or duplicates")
+print("PASS: 113 acquisition records audited (107 reputation-based, 6 Magnus quest-gated); no missing keys, mismatches or duplicates")
