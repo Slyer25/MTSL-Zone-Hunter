@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.7 — 2026-10-28
+- Removed the redundant stock visibility confirmation sentence from Thorium Brotherhood vendor acquisition details.
+- Suppressed generic unverified vendor availability messaging when an explicit recipe-item reputation requirement is already recorded, including Transmute Elemental Fire.
+- Preserved source listings, precise reputation thresholds, specialization details, and audit coverage.
+- Needs in-game display verification.
+
 ## V5.8.6 — 2026-10-28
 - Added Recipe: Transmute Elemental Fire as an exceptional Thorium Brotherhood item-level Friendly reputation requirement (Alchemy 300), distinct from Lokhtos vendor stock visibility tiers.
 - Displays the recipe-item reputation requirement explicitly in acquisition details when item is present in MTSL records.
