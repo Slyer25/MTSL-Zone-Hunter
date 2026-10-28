@@ -287,9 +287,11 @@ else:
         match = re.search(pattern, quest_section.group(1), re.S)
         if not match or not all(term in match.group(1) for term in (
             f'faction = "{faction}"',
-            "DOCUMENTED - DIRECT RECIPE LEARNING",
+            "DIRECT RECIPE LEARNING",
             "Quest completion directly teaches Restorative Potion",
             "Alchemy 210",
+            "both Uldaman Reagent Run and Badlands Reagent Run II become available",
+            "not a prerequisite for learning Restorative Potion",
         )):
             errors.append(f"Restorative Potion quest {quest_id} direct-learning workflow mismatch")
 
