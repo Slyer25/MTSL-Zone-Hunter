@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.8 — 2026-10-28
+- Added 13 Master Craftsman Omarion frost-resistance recipes with profession and Argent Dawn Revered/Exalted tiers from in-game observations.
+- Shows Omarion's Naxxramas training route and Wilhelm's Omarion's Handbook prerequisite/quest route separately in acquisition details.
+- Removed redundant explanation beneath Transmute Elemental Fire's item reputation requirement.
+- Extended automated acquisition audit from 84 to 107 records, including 10 standard Argent Dawn quartermaster and 13 Omarion records.
+- In-game display and individual Wilhelm quest details still require verification.
+
 ## V5.8.7 — 2026-10-28
 - Removed the redundant stock visibility confirmation sentence from Thorium Brotherhood vendor acquisition details.
 - Suppressed generic unverified vendor availability messaging when an explicit recipe-item reputation requirement is already recorded, including Transmute Elemental Fire.
