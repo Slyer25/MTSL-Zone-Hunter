@@ -310,8 +310,30 @@ if not all(fragment in ui for fragment in (
 )):
     errors.append("Restorative Potion must include both faction variants when upstream quest links are incomplete")
 
+# Three separately rewarded Enchanted Thorium plans and their book halves.
+thorium_books = re.search(r"enchanted_thorium_quests\s*=\s*\{(.*?)\n    \},", data, re.S)
+book_expected = {
+    "Enchanted Thorium Breastplate": ("I", "7649", "King Gordok", "Goraluk Anvilcrack"),
+    "Enchanted Thorium Leggings": ("II", "7650", "Rattlegore", "Crimson Hammersmith"),
+    "Enchanted Thorium Helm": ("III", "7651", "Urok Doomhowl", "Black Guard Swordsmith"),
+}
+if not thorium_books:
+    errors.append("Enchanted Thorium quest acquisition data missing")
+else:
+    found = re.findall(r'\["(Enchanted Thorium [^"]+)"\]\s*=\s*\{(.*?)\n        \}', thorium_books.group(1), re.S)
+    if len(found) != 3 or {name for name, _ in found} != set(book_expected):
+        errors.append("Enchanted Thorium plan count or identity mismatch")
+    for name, details in found:
+        if name in book_expected and not all(term in details for term in book_expected[name]):
+            errors.append("Enchanted Thorium quest volume or drop mismatch: " + name)
+if not all(term in ui for term in (
+    "enchanted_thorium_quests", '== "Feralas"',
+    'Lorekeeper Lydros (Dire Maul)', "QUEST REWARD: Enchanted Thorium Platemail",
+)):
+    errors.append("Enchanted Thorium quest routes must be indexed under Feralas and shown in details")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 115 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants); no missing keys, mismatches or duplicates")
+print("PASS: 118 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests); no missing keys, mismatches or duplicates")
