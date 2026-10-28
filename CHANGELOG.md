@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.22 — 2026-10-29
+- In-game verified the Smelt Dark Iron and Sulfuron Hammer acquisition workflows in Blackrock Mountain.
+- Removed the conflicting generic unverified-prerequisite warning for The Spectral Chalice (4083) and A Binding Contract (7604), while keeping all other quest warnings intact.
+- Added targeted audit checks. No interface, coordinate or learned-state changes.
+
 ## V5.8.21 — 2026-10-29
 - Added Blackrock Depths quest acquisition information for Smelt Dark Iron (The Spectral Chalice, Gloom'rel, Mining 230 and reagent tribute) and Sulfuron Hammer (A Binding Contract, Sulfuron Ingot and Lokhtos).
 - Indexed both special acquisition routes under Blackrock Mountain with the distinction between direct spell learning and a plans-item reward.
