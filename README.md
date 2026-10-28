@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.8.12 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.8.13 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
