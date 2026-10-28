@@ -98,8 +98,65 @@ else:
         if key not in cenarion_required:
             errors.append(f"unreviewed Cenarion Circle entry: {key}")
 
+# Lokhtos inventory visibility verified in-game on 2026-10-28.
+thorium_expected = {
+    "Friendly": [
+        "Plans: Dark Iron Bracers",
+        "Pattern: Corehound Boots",
+        "Pattern: Flarecore Gloves",
+        "Pattern: Molten Helm"
+    ],
+    "Honored": [
+        "Plans: Fiery Chain Girdle",
+        "Plans: Dark Iron Helm",
+        "Plans: Dark Iron Reaver",
+        "Plans: Dark Iron Destroyer",
+        "Pattern: Flarecore Mantle",
+        "Pattern: Flarecore Robe",
+        "Pattern: Black Dragonscale Boots",
+        "Pattern: Lava Belt",
+        "Formula: Enchant Weapon - Mighty Spirit",
+        "Formula: Enchant Weapon - Strength"
+    ],
+    "Revered": [
+        "Plans: Fiery Chain Shoulders",
+        "Plans: Dark Iron Gauntlets",
+        "Plans: Dark Iron Leggings",
+        "Plans: Blackfury",
+        "Plans: Black Amnesty",
+        "Pattern: Chromatic Gauntlets",
+        "Pattern: Corehound Belt",
+        "Pattern: Molten Belt",
+        "Pattern: Flarecore Leggings",
+        "Formula: Enchant Weapon - Mighty Intellect"
+    ],
+    "Exalted": [
+        "Plans: Ebon Hand",
+        "Plans: Blackguard",
+        "Plans: Nightfall",
+        "Plans: Dark Iron Boots"
+    ]
+}
+thorium_section = re.search(r"thorium_brotherhood_reputation\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not thorium_section:
+    errors.append("Thorium Brotherhood reputation table missing")
+else:
+    thorium_pairs = re.findall(r'\["([^"]+)"\]\s*=\s*"([^"]+)"', thorium_section.group(1))
+    thorium_actual = {}
+    for item, rank in thorium_pairs:
+        if item in thorium_actual:
+            errors.append("duplicate Thorium Brotherhood recipe: " + item)
+        thorium_actual[item] = rank
+    thorium_required = {item: rank for rank, items in thorium_expected.items() for item in items}
+    for item, rank in thorium_required.items():
+        if thorium_actual.get(item) != rank:
+            errors.append(f"Thorium mismatch: {item}: expected {rank}, got {thorium_actual.get(item)}")
+    for item in thorium_actual:
+        if item not in thorium_required:
+            errors.append(f"unreviewed Thorium Brotherhood entry: {item}")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 56 vendor recipes audited (11 Timbermaw, 22 Zandalar, 23 Cenarion Circle); no missing keys, mismatches or duplicates")
+print("PASS: 84 vendor recipes audited (11 Timbermaw, 22 Zandalar, 23 Cenarion Circle, 28 Thorium Brotherhood); no missing keys, mismatches or duplicates")
