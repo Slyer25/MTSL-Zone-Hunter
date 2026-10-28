@@ -170,48 +170,38 @@ MTSL_ZONE_WORKFLOWS = {
     },
     -- Add conditional vendors only when source, exact item, and gating criteria are validated.
     -- Keys should use the exact recipe item name and vendor NPC name, never just a zone.
+    -- All six Classic Magnus Frostwake stock recipes share one access condition.
+    -- Spectral Essence is a trinket that must be equipped to see and interact
+    -- with Caer Darrow ghosts; this does not grant or teach a recipe directly.
+    magnus_frostwake_access = {
+        status = "DOCUMENTED - SPECTRAL ESSENCE REQUIRED",
+        steps = {
+            "Speak with Eva Sarkhoff outside Scholomance at Caer Darrow, Western Plaguelands.",
+            "Complete her Scholomance chain starting with Doctor Theolen Krastinov, the Butcher.",
+            "Complete the Kirtonos the Herald quest to obtain Spectral Essence.",
+            "Equip the Spectral Essence trinket to see and interact with Caer Darrow ghosts.",
+            "Find Magnus Frostwake inside the blacksmith building at Caer Darrow (around 68, 77)."
+        },
+        reference = "wow-professions.com/classic/npc/magnus-frostwake"
+    },
     vendor_conditions = {
-        -- Magnus is visible after the Sarkhoff ghost-reveal chain; exact steps
-        -- should be tested in Vanilla 1.12 before being considered verified.
         ["Plans: Ebon Shiv"] = {
-            ["Magnus Frostwake"] = {
-                status = "DOCUMENTED - QUEST GATED",
-                steps = {
-                    "Visit Eva Sarkhoff at Caer Darrow, Western Plaguelands.",
-                    "Complete her Scholomance-related quest sequence to reveal the ghosts.",
-                    "Once the ghosts are visible, find Magnus Frostwake near Scholomance.",
-                    "Additional chain steps not individually verified in our 1.12 client."
-                },
-                reference = "wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic"
-            }
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
         },
         ["Plans: Ornate Thorium Handaxe"] = {
-            ["Magnus Frostwake"] = {
-                status = "DOCUMENTED - QUEST GATED",
-                steps = {"Complete Eva Sarkhoff's ghost-reveal quest sequence at Caer Darrow / Scholomance before shopping with Magnus.", "Full prerequisite chain not yet verified in-game."},
-                reference = "wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic"
-            }
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
         },
         ["Plans: Huge Thorium Battleaxe"] = {
-            ["Magnus Frostwake"] = {
-                status = "DOCUMENTED - QUEST GATED",
-                steps = {"Complete Eva Sarkhoff's ghost-reveal quest sequence at Caer Darrow / Scholomance before shopping with Magnus.", "Full prerequisite chain not yet verified in-game."},
-                reference = "wowhead.com/classic/guide/blacksmithing-vendor-recipes-wow-classic"
-            }
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
+        },
+        ["Plans: Storm Gauntlets"] = {
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
         },
         ["Recipe: Transmute Water to Air"] = {
-            ["Magnus Frostwake"] = {
-                status = "DOCUMENTED - QUEST GATED",
-                steps = {"Complete Eva Sarkhoff's ghost-reveal quest sequence before shopping with Magnus Frostwake near Scholomance.", "Full prerequisite chain not yet verified in-game."},
-                reference = "wowhead.com/classic/guide/alchemy-vendor-recipes-wow-classic"
-            }
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
         },
         ["Recipe: Major Mana Potion"] = {
-            ["Magnus Frostwake"] = {
-                status = "DOCUMENTED - QUEST GATED",
-                steps = {"Complete Eva Sarkhoff's ghost-reveal quest sequence before shopping with Magnus Frostwake near Scholomance.", "Full prerequisite chain not yet verified in-game."},
-                reference = "wowhead.com/classic/guide/alchemy-vendor-recipes-wow-classic"
-            }
+            ["Magnus Frostwake"] = { shared_access = "magnus_frostwake_access" }
         }
     },
     -- Exact recipe item -> vendor reputation condition; no universal zone-based gating.
