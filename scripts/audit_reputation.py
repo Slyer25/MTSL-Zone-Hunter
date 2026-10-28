@@ -337,6 +337,13 @@ if not all(term in ui for term in (
 )):
     errors.append("Enchanted Thorium quest routes must be indexed under Feralas and shown in details")
 
+if not all(term in ui for term in (
+    'book and tonumber(id) == book.quest_id',
+    'entry.profession == "Blacksmithing"',
+    'Quest prerequisites not verified; earlier steps may be required',
+)):
+    errors.append("Enchanted Thorium quest warning must be suppressed only for matching book quest IDs")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
