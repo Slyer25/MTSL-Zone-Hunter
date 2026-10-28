@@ -325,7 +325,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                     else
                         local books = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
                         local book = books and books[entry.name]
-                        if not (entry.profession == "Blacksmithing" and book and tonumber(id) == book.quest_id) then
+                        if not ((entry.profession == "Blacksmithing" and book and tonumber(id) == book.quest_id)
+                            or (entry.profession == "Mining" and entry.name == "Smelt Dark Iron" and tonumber(id) == 4083)
+                            or (entry.profession == "Blacksmithing" and entry.name == "Sulfuron Hammer" and tonumber(id) == 7604)) then
                             add("  Quest prerequisites not verified; earlier steps may be required")
                         end
                     end
