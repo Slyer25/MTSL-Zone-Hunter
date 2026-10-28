@@ -307,7 +307,9 @@ MTSL_ZONE_WORKFLOWS = {
         ["Icebane Breastplate"] = {profession = "Blacksmithing", rank = "Exalted"},
     },
     -- Quest-reward plans: combine both book halves and hand in the tome at
-    -- Lorekeeper Lydros, Athenaeum (Dire Maul). No reputation tier asserted.
+    -- Lorekeeper Lydros, Athenaeum (Dire Maul). The completed book starts
+    -- the turn-in quest, without a separate prerequisite quest chain or reputation unlock.
+    -- User confirmed across all three volumes from prior in-game experience.
     enchanted_thorium_quests = {
         ["Enchanted Thorium Breastplate"] = {
             volume = "I", quest_id = 7649,
