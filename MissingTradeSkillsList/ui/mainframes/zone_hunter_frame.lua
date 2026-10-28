@@ -111,6 +111,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Feralas" then
         self:AddSource(sources, "Quest", "Lorekeeper Lydros (Dire Maul)")
     end
+    local brd_flows = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.blackrock_quest_recipes
+    local brd_flow = brd_flows and brd_flows[self:Name(skill)]
+    if brd_flow and brd_flow.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
+        self:AddSource(sources, "Quest", brd_flow.kind == "direct" and "Gloom'rel (BRD)" or "Lokhtos Darkbargainer (BRD)")
+    end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
     self:AddObjects(sources, skill.objects, "Object", zone_id)
@@ -366,6 +372,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("  Combine both halves: the completed book starts the turn-in quest.")
         add("  No earlier quest chain or reputation unlock is required.")
         add("  Turn it in to Lorekeeper Lydros, Athenaeum, Dire Maul (Feralas).")
+    end
+    local brd_flows = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.blackrock_quest_recipes
+    local brd_flow = brd_flows and brd_flows[entry.name]
+    if brd_flow and brd_flow.profession == entry.profession then
+        add(brd_flow.kind == "direct" and "QUEST: THE SPECTRAL CHALICE - DIRECT LEARNING"
+            or "QUEST: A BINDING CONTRACT - RECIPE ITEM REWARD")
+        for n, step in ipairs(brd_flow.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
