@@ -103,7 +103,7 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     local frost = omarion and omarion[self:Name(skill)]
     if frost and frost.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Eastern Plaguelands" then
-        self:AddSource(sources, "Quest / training", "Craftsman Wilhelm (Light's Hope Chapel) / Master Craftsman Omarion (Naxxramas)")
+        self:AddSource(sources, "Quest: Craftsman Wilhelm", "Trainer: Master Craftsman Omarion")
     end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
@@ -307,16 +307,14 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local frost = omarion and omarion[entry.name]
     if frost and frost.profession == entry.profession then
         add("ARGENT DAWN: " .. frost.rank .. " reputation")
-        add("ACQUISITION: Master Craftsman Omarion - Naxxramas (Military Quarter)")
-        add("  Teaches the recipe for the relevant crafting profession and reputation.")
-        add("ALTERNATIVE: Craftsman Wilhelm - Light's Hope Chapel, Eastern Plaguelands")
-        add("  Complete Omarion's Handbook prerequisite, then the relevant crafting quest.")
-        add("  Wilhelm's quest teaches the crafting recipe directly.")
+        add("TRAINING: Master Craftsman Omarion - Naxxramas (Military Quarter)")
+        add("QUEST ROUTE: Craftsman Wilhelm - Light's Hope Chapel, Eastern Plaguelands")
+        add("  Complete Omarion's Handbook, then Wilhelm's crafting quest to learn the recipe.")
     end
     add(" ")
     local skill = entry.skill
-    if skill.trainers then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
-    quests(skill.quests)
+    if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
+    if not frost then quests(skill.quests) end
     object_list(skill.objects)
     if skill.items then
         for _, item_id in pairs(skill.items) do
