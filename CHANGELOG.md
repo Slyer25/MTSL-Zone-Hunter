@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.13 — 2026-10-28
+- Corrected Magnus Frostwake's displayed position in Western Plaguelands to verified 68.1, 77.6, leaving the original MTSL NPC records untouched.
+- Added a zone-scoped, auditable NPC coordinate override table with upstream-coordinate fallback for all other NPCs.
+- Extended CI audit to validate the correction and avoid accidental global X/Y swaps.
+- Full NPC-wide coordinate audit is not possible from this repo alone because the full MTSL NPC data is supplied externally.
+
 ## V5.8.12 — 2026-10-28
 - Completed Magnus Frostwake's documented Classic six-recipe inventory with Plans: Storm Gauntlets.
 - Replaced vague ghost-reveal prerequisites with a shared Spectral Essence acquisition and equip workflow for all six vendor recipes.
