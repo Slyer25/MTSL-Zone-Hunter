@@ -336,11 +336,12 @@ MTSL_ZONE_WORKFLOWS = {
     quest_conditions = {
         -- Quest IDs are used to distinguish Alliance and Horde versions with identical names.
         [2501] = {
-            status = "DOCUMENTED - DIRECT RECIPE LEARNING",
+            status = "IN-GAME VERIFIED - DIRECT RECIPE LEARNING",
             faction = "Alliance",
             steps = {
                 "Start Badlands Reagent Run from Ghak Healtouch in Thelsamar, Loch Modan.",
-                "Complete Uldaman Reagent Run: collect 12 Magenta Fungus Caps in Uldaman; return to Ghak.",
+                "After completing Badlands Reagent Run, both Uldaman Reagent Run and Badlands Reagent Run II become available.",
+                "Uldaman Reagent Run is a separate follow-up, not a prerequisite for learning Restorative Potion.",
                 "Accept Badlands Reagent Run II from Ghak Healtouch.",
                 "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
                 "Return to Ghak Healtouch in Thelsamar to learn Restorative Potion.",
@@ -354,7 +355,8 @@ MTSL_ZONE_WORKFLOWS = {
             faction = "Horde",
             steps = {
                 "Start Badlands Reagent Run from Jarkal Mossmeld in Kargath, Badlands.",
-                "Complete Uldaman Reagent Run: collect 12 Magenta Fungus Caps in Uldaman; return to Jarkal.",
+                "After completing Badlands Reagent Run, both Uldaman Reagent Run and Badlands Reagent Run II become available.",
+                "Uldaman Reagent Run is a separate follow-up, not a prerequisite for learning Restorative Potion.",
                 "Accept Badlands Reagent Run II from Jarkal Mossmeld.",
                 "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
                 "Return to Jarkal Mossmeld in Kargath to learn Restorative Potion.",
