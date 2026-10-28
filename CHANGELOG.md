@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.14 — 2026-10-28
+- Clarified that completion of Badlands Reagent Run II directly teaches Restorative Potion for both Alliance (2501) and Horde (2203).
+- Distinguished Alchemy 210 crafting skill from unverified quest eligibility, without asserting a recipe item is awarded.
+- Added automated checks for both faction-specific direct-learning workflows; 115 audited acquisition records.
+- No global NPC coordinate changes or visual layout changes.
+
 ## V5.8.13 — 2026-10-28
 - Corrected Magnus Frostwake's displayed position in Western Plaguelands to verified 68.1, 77.6, leaving the original MTSL NPC records untouched.
 - Added a zone-scoped, auditable NPC coordinate override table with upstream-coordinate fallback for all other NPCs.
