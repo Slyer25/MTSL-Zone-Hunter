@@ -294,6 +294,23 @@ MTSL_ZONE_WORKFLOWS = {
         ["Pattern: Primal Batskin Jerkin"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Revered", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
         ["Plans: Bloodsoul Breastplate"] = {vendor = "Rin'wosho the Trader", faction = "Zandalar Tribe", rank = "Revered", reference = "wowhead.com/classic/guide/zandalar-tribe-reputation-wow-classic"},
     },
+    -- In-game profession/reputation breakdown supplied for Master Craftsman Omarion.
+    -- Separate from Wilhelm's handbook-gated crafting quests.
+    omarion_recipes = {
+        ["Glacial Wrists"] = {profession = "Tailoring", rank = "Revered"},
+        ["Glacial Gloves"] = {profession = "Tailoring", rank = "Revered"},
+        ["Glacial Vest"] = {profession = "Tailoring", rank = "Exalted"},
+        ["Glacial Cloak"] = {profession = "Tailoring", rank = "Exalted"},
+        ["Polar Bracers"] = {profession = "Leatherworking", rank = "Revered"},
+        ["Polar Gloves"] = {profession = "Leatherworking", rank = "Revered"},
+        ["Icy Scale Bracers"] = {profession = "Leatherworking", rank = "Revered"},
+        ["Icy Scale Gauntlets"] = {profession = "Leatherworking", rank = "Revered"},
+        ["Polar Tunic"] = {profession = "Leatherworking", rank = "Exalted"},
+        ["Icy Scale Breastplate"] = {profession = "Leatherworking", rank = "Exalted"},
+        ["Icebane Bracers"] = {profession = "Blacksmithing", rank = "Revered"},
+        ["Icebane Gauntlets"] = {profession = "Blacksmithing", rank = "Revered"},
+        ["Icebane Breastplate"] = {profession = "Blacksmithing", rank = "Exalted"},
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
