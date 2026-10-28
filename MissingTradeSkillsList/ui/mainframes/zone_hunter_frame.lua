@@ -265,17 +265,36 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local visited = {}
     local function quests(ids)
         if not ids then return end
-        for _, id in pairs(ids) do
+        local qdb = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.quest_conditions
+        local player_faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
+        local ordered = {}
+        for _, id in pairs(ids) do table.insert(ordered, id) end
+        -- Prioritize the current faction, but preserve other-faction sources.
+        table.sort(ordered, function(a, b)
+            local fa = qdb and qdb[tonumber(a)] and qdb[tonumber(a)].faction
+            local fb = qdb and qdb[tonumber(b)] and qdb[tonumber(b)].faction
+            local pa = (fa == player_faction) and 0 or (not fa and 1 or 2)
+            local pb = (fb == player_faction) and 0 or (not fb and 1 or 2)
+            if pa ~= pb then return pa < pb end
+            return tonumber(a) < tonumber(b)
+        end)
+        for _, id in ipairs(ordered) do
             if not visited[id] then
                 visited[id] = true
                 local q = MTSL_LOGIC_QUEST:GetQuestById(id)
                 if q then
-                    add("QUEST: " .. self:Name(q) .. " [ID " .. tostring(id) .. "]")
+                    local flow = qdb and (qdb[tonumber(id)] or qdb[self:Name(q)])
+                    local faction_note = ""
+                    if flow and flow.faction then
+                        faction_note = " [" .. flow.faction
+                        if player_faction == flow.faction then faction_note = faction_note .. " - YOUR FACTION"
+                        elseif player_faction then faction_note = faction_note .. " - OTHER FACTION" end
+                        faction_note = faction_note .. "]"
+                    end
+                    add("QUEST: " .. self:Name(q) .. " [ID " .. tostring(id) .. "]" .. faction_note)
                     if q.min_xp_level then add("  Minimum character level: " .. tostring(q.min_xp_level)) end
                     npc_list(q.npcs, "Quest NPC")
                     object_list(q.objects)
-                    local qdb = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.quest_conditions
-                    local flow = qdb and (qdb[tonumber(id)] or qdb[self:Name(q)])
                     if flow then
                         add("  WORKFLOW [" .. (flow.status or "UNVERIFIED") .. "]:")
                         for n, step in ipairs(flow.steps or {}) do add("    " .. n .. ". " .. step) end
