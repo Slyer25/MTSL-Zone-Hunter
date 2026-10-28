@@ -2,7 +2,7 @@
 
 A zone-first recipe-hunting extension for **MissingTradeSkillsList**, maintained as a community modification. Browse recipes available or potentially farmable in the selected zone, across professions, and inspect their acquisition methods.
 
-**Current tested build: V5.8.3 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
+**Current tested build: V5.8.4 (2026-10-28).** The original addon still reports version 1.17.4 in its TOC; Zone Hunter uses separate version numbering.
 
 ## Installation
 1. Install the compatible **TradeSkillsData** dependency. This project targets official-style Vanilla WoW 1.12 (no Turtle-specific recipes).
@@ -60,4 +60,4 @@ To repair the existing `5.4` release: open **Actions → Package Zone Hunter add
 
 **V5.8:** expands reputation recipes for Timbermaw Hold and Zandalar Tribe and automatically hides the Details navigation when a recipe fits one page. Unverified in game.
 
-**Database quality checks:** `python3 scripts/audit_reputation.py` validates researched Meilosh and Rin'wosho recipe coverage against independent Classic vendor lists. GitHub Actions runs this audit before packaging releases. This does not validate every other vendor or confirm behavior on custom servers.
+**Database quality checks:** `python3 scripts/audit_reputation.py` validates researched Meilosh, Rin'wosho and Cenarion Circle vendor recipe coverage against independent Classic vendor lists. GitHub Actions runs this audit before packaging releases. This does not validate every other vendor or confirm behavior on custom servers.
