@@ -327,6 +327,11 @@ else:
         if name in book_expected and not all(term in details for term in book_expected[name]):
             errors.append("Enchanted Thorium quest volume or drop mismatch: " + name)
 if not all(term in ui for term in (
+    "the completed book starts the turn-in quest",
+    "No earlier quest chain or reputation unlock is required.",
+)) or 'add("  Reward: Plans: " .. entry.name' in ui:
+    errors.append("Enchanted Thorium instructions must explain no extra prerequisites without duplicate reward")
+if not all(term in ui for term in (
     "enchanted_thorium_quests", '== "Feralas"',
     'Lorekeeper Lydros (Dire Maul)', "QUEST REWARD: Enchanted Thorium Platemail",
 )):
