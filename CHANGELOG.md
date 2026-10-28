@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.18 — 2026-10-29
+- Added three Enchanted Thorium Platemail quest acquisitions (Volumes I-III), each listing its two dungeon drop sources and the Lorekeeper Lydros turn-in in Dire Maul.
+- Indexed these quest-reward plans under Feralas independently of incomplete upstream MTSL source links.
+- Clarified that quests reward usable blacksmithing plans, not direct spell learning; kept existing zone navigation and coordinate records unchanged.
+- Expanded static acquisition audit to 118 records. In-game verification pending.
+
 ## V5.8.17 — 2026-10-29
 - Corrected Restorative Potion quest instructions: after Badlands Reagent Run, Uldaman Reagent Run and Badlands Reagent Run II are parallel follow-ups; Uldaman Reagent Run is not required to learn the recipe.
 - Marked the Alliance direct-learning route as verified by in-game observation. Horde sequence remains documented, not independently tested.
