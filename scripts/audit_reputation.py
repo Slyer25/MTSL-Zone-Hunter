@@ -221,6 +221,15 @@ else:
     if values != omarion_expected:
         errors.append("Omarion recipe profession or reputation tiers differ from checked list")
 
+# A reputation record is only useful if the zone browser indexes it.
+ui = (Path(__file__).resolve().parents[1] / "MissingTradeSkillsList/ui/mainframes/zone_hunter_frame.lua").read_text()
+sources_body = re.search(r"function MTSLUI_ZONE_HUNTER:GetSources\(skill, profession, zone_id\)(.*?)\nend", ui, re.S)
+if not sources_body or not all(term in sources_body.group(1) for term in (
+    "omarion_recipes", "self:Name(skill)", "Eastern Plaguelands",
+    "Craftsman Wilhelm", "Master Craftsman Omarion"
+)):
+    errors.append("Omarion/Wilhelm recipes must be indexed in Eastern Plaguelands source lookup")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
