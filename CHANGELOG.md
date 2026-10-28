@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.23 — 2026-10-29
+- Documented Field Repair Bot 74A's interactable floor schematic near Golem Lord Argelmach in the Blackrock Depths Manufactory (Engineering 300).
+- Indexed the schematic under Blackrock Mountain even if upstream MTSL lacks an object-source association; clarified it is neither an NPC drop nor a vendor purchase.
+- Extended static acquisition audit to 121 reviewed records. No changes to learned-status tracking, character faction, NPC coordinates or UI layout.
+- In-game display and source identity pending verification.
+
 ## V5.8.22 — 2026-10-29
 - In-game verified the Smelt Dark Iron and Sulfuron Hammer acquisition workflows in Blackrock Mountain.
 - Removed the conflicting generic unverified-prerequisite warning for The Spectral Chalice (4083) and A Binding Contract (7604), while keeping all other quest warnings intact.
