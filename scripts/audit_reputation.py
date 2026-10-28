@@ -359,6 +359,13 @@ else:
 if not all(term in ui for term in ("blackrock_quest_recipes", '== "Blackrock Mountain"', "Gloom'rel (BRD)", "Lokhtos Darkbargainer (BRD)", "brd_flow.steps")):
     errors.append("Blackrock quest acquisition UI must index and describe both routes")
 
+# BRD quests are confirmed by the user's completed acquisition paths.
+if not all(fragment in ui for fragment in (
+    'entry.name == "Smelt Dark Iron" and tonumber(id) == 4083',
+    'entry.name == "Sulfuron Hammer" and tonumber(id) == 7604',
+)):
+    errors.append("Known BRD quest IDs must not show an unverified prerequisite warning")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
