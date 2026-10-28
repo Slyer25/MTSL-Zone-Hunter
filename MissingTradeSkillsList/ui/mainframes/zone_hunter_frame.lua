@@ -96,6 +96,15 @@ end
 
 function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     local sources = {}
+    -- Wilhelm's handbook-gated quests take place at Light's Hope Chapel.
+    -- Index Omarion's frost-resistance recipes under Eastern Plaguelands,
+    -- even when upstream MTSL lacks quest/NPC source associations.
+    local omarion = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.omarion_recipes
+    local frost = omarion and omarion[self:Name(skill)]
+    if frost and frost.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Eastern Plaguelands" then
+        self:AddSource(sources, "Quest / training", "Craftsman Wilhelm (Light's Hope Chapel) / Master Craftsman Omarion (Naxxramas)")
+    end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
     self:AddObjects(sources, skill.objects, "Object", zone_id)
