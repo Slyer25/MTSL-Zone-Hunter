@@ -351,9 +351,10 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             end
                             if cond then
                                 found_requirement = true
-                                add("VENDOR UNLOCK: " .. vendor_name .. " [" .. (cond.status or "UNVERIFIED") .. "]")
-                                for n, step in ipairs(cond.steps or {}) do add("  " .. n .. ". " .. step) end
-                                if cond.reference then add("  Reference: " .. cond.reference) end
+                                local access_flow = cond.shared_access and workflows and workflows[cond.shared_access] or cond
+                                add("VENDOR ACCESS: " .. vendor_name .. " [" .. (access_flow.status or "UNVERIFIED") .. "]")
+                                for n, step in ipairs(access_flow.steps or {}) do add("  " .. n .. ". " .. step) end
+                                if access_flow.reference then add("  Reference: " .. access_flow.reference) end
                             end
                             local cenarion = workflows and workflows.reputation_vendor_conditions
                             local cenarion_condition = cenarion and cenarion[self:Name(item)]
