@@ -353,6 +353,20 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "zockify.com/classic/dungeons/blackrock-depths/"
         }
     },
+    -- In-world interactable schematic; not a dropped inventory recipe item.
+    engineering_object_recipes = {
+        ["Field Repair Bot 74A"] = {
+            profession = "Engineering",
+            object = "Schematic: Field Repair Bot 74A",
+            steps = {
+                "Enter Blackrock Depths and reach the Manufactory.",
+                "Find the schematic on the floor near Golem Lord Argelmach.",
+                "Read the schematic in place with Engineering 300 to learn Field Repair Bot 74A.",
+                "This is an interactable world object, not loot from Argelmach or a vendor purchase."
+            },
+            reference = "warcraft.wiki.gg/wiki/Repair_Bot"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
