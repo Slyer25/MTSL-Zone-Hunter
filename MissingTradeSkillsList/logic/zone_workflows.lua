@@ -336,7 +336,7 @@ MTSL_ZONE_WORKFLOWS = {
     quest_conditions = {
         -- Quest IDs are used to distinguish Alliance and Horde versions with identical names.
         [2501] = {
-            status = "DOCUMENTED (Classic quest database and Uldaman guide)",
+            status = "DOCUMENTED - DIRECT RECIPE LEARNING",
             faction = "Alliance",
             steps = {
                 "Start Badlands Reagent Run from Ghak Healtouch in Thelsamar, Loch Modan.",
@@ -344,12 +344,13 @@ MTSL_ZONE_WORKFLOWS = {
                 "Accept Badlands Reagent Run II from Ghak Healtouch.",
                 "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
                 "Return to Ghak Healtouch in Thelsamar to learn Restorative Potion.",
-                "The final quest may require Alchemy 210; verify the profession prerequisite in-game."
+                "Quest completion directly teaches Restorative Potion (no recipe item to purchase).",
+                "Alchemy 210 is required to craft the potion; verify quest eligibility in-game."
             },
             reference = "wowhead.com/classic/quest=2501/badlands-reagent-run-ii"
         },
         [2203] = {
-            status = "DOCUMENTED (Classic quest database)",
+            status = "DOCUMENTED - DIRECT RECIPE LEARNING",
             faction = "Horde",
             steps = {
                 "Start Badlands Reagent Run from Jarkal Mossmeld in Kargath, Badlands.",
@@ -357,7 +358,8 @@ MTSL_ZONE_WORKFLOWS = {
                 "Accept Badlands Reagent Run II from Jarkal Mossmeld.",
                 "In Badlands, use three provided vessels on Scorched Guardians to obtain 3 Vessels of Dragon's Blood.",
                 "Return to Jarkal Mossmeld in Kargath to learn Restorative Potion.",
-                "The final quest may require Alchemy 210; verify the profession prerequisite in-game."
+                "Quest completion directly teaches Restorative Potion (no recipe item to purchase).",
+                "Alchemy 210 is required to craft the potion; verify quest eligibility in-game."
             },
             reference = "classicdb.ch/?quest=2203"
         }
