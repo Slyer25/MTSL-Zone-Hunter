@@ -155,6 +155,17 @@ else:
         if item not in thorium_required:
             errors.append(f"unreviewed Thorium Brotherhood entry: {item}")
 
+# Transmute Elemental Fire has a requirement on the recipe item, not merely
+# a conditional vendor stock entry. Confirmed by Classic item records.
+item_rep_match = re.search(r"thorium_item_reputation\s*=\s*\{(.*?)\}", data, re.S)
+if not item_rep_match or not re.search(
+    r'\["Recipe: Transmute Elemental Fire"\]\s*=\s*"Friendly"',
+    item_rep_match.group(1),
+):
+    errors.append("Transmute Elemental Fire must retain its item-level Friendly requirement")
+if thorium_section and "Recipe: Transmute Elemental Fire" in thorium_actual:
+    errors.append("Transmute Elemental Fire must not be audited as an ordinary stock-only recipe")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
