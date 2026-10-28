@@ -317,7 +317,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         for n, step in ipairs(flow.steps or {}) do add("    " .. n .. ". " .. step) end
                         if flow.reference then add("  Reference: " .. flow.reference) end
                     else
-                        add("  Quest prerequisites not verified; earlier steps may be required")
+                        local books = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
+                        local book = books and books[entry.name]
+                        if not (entry.profession == "Blacksmithing" and book and tonumber(id) == book.quest_id) then
+                            add("  Quest prerequisites not verified; earlier steps may be required")
+                        end
                     end
                 end
             end
