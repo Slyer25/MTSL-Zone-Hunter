@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8 — 2026-10-28
+- Hid Details previous/next buttons and page counter for recipes with only one details page; restored them automatically for multi-page records.
+- Added documented Timbermaw Hold reputation requirements for Meilosh's profession recipes.
+- Added documented Zandalar Tribe reputation requirements for Rin'wosho the Trader's profession recipes.
+- Applied conditions only where recipe item and vendor names match, with source references retained.
+- Data and UI changes need in-game testing in the Vanilla 1.12 client.
+
 ## V5.7.3 — 2026-10-28
 - Added six more Argent Dawn recipe reputation requirements, confirmed by in-game quartermaster tooltips: Transmute Air to Fire, Dawn Treaders, Golden Mantle of the Dawn, Powerful Anti-Venom, Enchant Bracer - Mana Regeneration, and Enchant Bracer - Healing.
 - Removed the redundant unverified wording for Argent Dawn reputation requirements directly checked in-game.
