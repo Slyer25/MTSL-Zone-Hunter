@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.16 — 2026-10-28
+- Restorative Potion acquisition details now include both Alliance and Horde quest variants even when upstream MTSL only supplies one or no quest IDs.
+- Display prioritizes the character's faction while retaining the other quest as clearly labeled reference information.
+- Added audit protection for this fallback. No quest filtering or global zone/NPC changes.
+
 ## V5.8.15 — 2026-10-28
 - Quest acquisition details now prioritize routes matching the character's faction, while preserving opposite-faction routes and recipes.
 - Mark faction-scoped quest descriptions as YOUR FACTION or OTHER FACTION, without modifying skill availability or learned status.
