@@ -376,11 +376,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                                 local key = "Thorium Brotherhood:" .. required
                                 if not shown_reputation[key] then
                                     shown_reputation[key] = true
-                                    add("VENDOR REQUIREMENT: Thorium Brotherhood - " .. required .. " reputation")
+                                    add("VENDOR STOCK UNLOCK: Thorium Brotherhood - " .. required .. " reputation")
                                     add("  Vendor: Lokhtos Darkbargainer, Grim Guzzler, Blackrock Depths.")
                                     add("  Build reputation through Thorium Point turn-ins (Searing Gorge)")
                                     add("  and later Molten Core material turn-ins at Lokhtos.")
-                                    add("  DOCUMENTED in Classic references; not yet confirmed in this 1.12 client.")
+                                    add("  Stock visibility confirmed in-game; recipe item has no separate reputation requirement.")
                                 end
                             end
                         end
