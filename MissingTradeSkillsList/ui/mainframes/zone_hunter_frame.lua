@@ -294,6 +294,16 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             add("LOCKED - SPECIALISATION: " .. spec)
         end
     end
+    local omarion = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.omarion_recipes
+    local frost = omarion and omarion[entry.name]
+    if frost and frost.profession == entry.profession then
+        add("ARGENT DAWN: " .. frost.rank .. " reputation")
+        add("ACQUISITION: Master Craftsman Omarion - Naxxramas (Military Quarter)")
+        add("  Teaches the recipe for the relevant crafting profession and reputation.")
+        add("ALTERNATIVE: Craftsman Wilhelm - Light's Hope Chapel, Eastern Plaguelands")
+        add("  Complete Omarion's Handbook prerequisite, then the relevant crafting quest.")
+        add("  Wilhelm's quest teaches the crafting recipe directly.")
+    end
     add(" ")
     local skill = entry.skill
     if skill.trainers then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
@@ -308,7 +318,6 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                 local item_rank = item_reputation and item_reputation[self:Name(item)]
                 if item_rank then
                     add("RECIPE ITEM REQUIREMENT: Thorium Brotherhood - " .. item_rank .. " reputation")
-                    add("  This requirement is on the recipe item itself, unlike Lokhtos stock unlocks.")
                 end
                 if item.vendors then
                     npc_list(item.vendors.sources, "Vendor")
