@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.10 — 2026-10-28
+- Shortened Omarion/Wilhelm frost-resistance source labels in Eastern Plaguelands to prevent list truncation.
+- Consolidated frost-resistance acquisition details: reputation, Omarion training, and Wilhelm's handbook-gated quest route remain visible without repeating upstream trainer and handbook quest sections.
+- No change to recipe status, zone indexing, vendor reputation thresholds or pagination.
+
 ## V5.8.9 — 2026-10-28
 - Fixed frost-resistance recipes missing from Eastern Plaguelands: GetSources now indexes the 13 Omarion/Wilhelm recipe entries there, independently of missing upstream MTSL NPC or quest associations.
 - Shows the Light's Hope Chapel quest and Naxxramas training routes in the source summary without changing unrelated recipes or character learned-state logic.
