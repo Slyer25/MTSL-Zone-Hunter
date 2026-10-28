@@ -173,6 +173,11 @@ MTSL_ZONE_WORKFLOWS = {
     -- All six Classic Magnus Frostwake stock recipes share one access condition.
     -- Spectral Essence is a trinket that must be equipped to see and interact
     -- with Caer Darrow ghosts; this does not grant or teach a recipe directly.
+    -- Corrections apply only to NPCs whose positions were independently verified.
+    -- Never globally reverse MTSL's x/y coordinates.
+    npc_coordinate_overrides = {
+        ["Magnus Frostwake"] = {zone = "Western Plaguelands", x = 68.1, y = 77.6, reference = "wowhead.com/classic/npc=11278/magnus-frostwake"}
+    },
     magnus_frostwake_access = {
         status = "DOCUMENTED - SPECTRAL ESSENCE REQUIRED",
         steps = {
