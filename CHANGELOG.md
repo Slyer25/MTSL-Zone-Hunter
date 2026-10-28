@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.20 — 2026-10-29
+- Suppressed the contradictory generic unverified-prerequisite warning for the three known Enchanted Thorium volume turn-in quests only.
+- Kept quest ID, minimum level, book workflow, Armorsmith unlock and all other quest records unchanged.
+- Added a targeted automated regression check.
+
 ## V5.8.19 — 2026-10-29
 - Clarified that each completed Advanced Armorsmithing volume directly starts its Enchanted Thorium turn-in quest; no additional quest chain or reputation unlock is needed, based on user in-game experience across the three volumes.
 - Removed the duplicate plan reward line while retaining the MTSL RECIPE ITEM entry.
