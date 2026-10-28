@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.12 — 2026-10-28
+- Completed Magnus Frostwake's documented Classic six-recipe inventory with Plans: Storm Gauntlets.
+- Replaced vague ghost-reveal prerequisites with a shared Spectral Essence acquisition and equip workflow for all six vendor recipes.
+- Extended static acquisition audit to 113 entries including the Magnus vendor list and UI shared-workflow wiring.
+- Existing zone indexing and learned-state logic unchanged; needs in-game verification of Magnus access text.
+
 ## V5.8.11 — 2026-10-28
 - Shortened Eastern Plaguelands frost-resistance recipe source labels to 'Quest: Wilhelm / Trainer: Omarion' so they fit in the left list and hover tooltip.
 - Retained complete NPC names, locations and reputation-gated acquisition instructions in the right panel.
