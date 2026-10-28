@@ -117,6 +117,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
         self:AddSource(sources, "Quest", brd_flow.kind == "direct" and "Gloom'rel (BRD)" or "Lokhtos Darkbargainer (BRD)")
     end
+    local objects = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.engineering_object_recipes
+    local object_flow = objects and objects[self:Name(skill)]
+    if object_flow and object_flow.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
+        self:AddSource(sources, "Object", object_flow.object .. " (BRD)")
+    end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
     self:AddObjects(sources, skill.objects, "Object", zone_id)
@@ -381,6 +387,12 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add(brd_flow.kind == "direct" and "QUEST: THE SPECTRAL CHALICE - DIRECT LEARNING"
             or "QUEST: A BINDING CONTRACT - RECIPE ITEM REWARD")
         for n, step in ipairs(brd_flow.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local objects = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.engineering_object_recipes
+    local object_flow = objects and objects[entry.name]
+    if object_flow and object_flow.profession == entry.profession then
+        add("OBJECT SCHEMATIC: " .. object_flow.object .. " - Blackrock Depths")
+        for n, step in ipairs(object_flow.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
