@@ -28,6 +28,42 @@ end
 
 -- Instance vendors/mobs are grouped under the outdoor parent for zone-first browsing.
 -- Keep original instance names in acquisition details.
+-- Instance suffixes apply to actual instance sources, never outdoor bosses.
+function MTSLUI_ZONE_HUNTER:InstanceTag(source_zone_id, source_name)
+    local tags = {
+        ["Blackrock Depths"] = "BRD", ["Blackrock Spire"] = "BRS",
+        ["Lower Blackrock Spire"] = "LBRS", ["Upper Blackrock Spire"] = "UBRS",
+        ["Molten Core"] = "MC", ["Onyxia's Lair"] = "Ony",
+        ["Zul'Gurub"] = "ZG", ["Ruins of Ahn'Qiraj"] = "AQ20",
+        ["Ruins of Ahn'Qiraj (AQ20)"] = "AQ20",
+        ["Ahn'Qiraj"] = "AQ40", ["Temple of Ahn'Qiraj"] = "AQ40",
+        ["Ahn'Qiraj Temple"] = "AQ40", ["Naxxramas"] = "Naxx",
+        ["Dire Maul"] = "DM", ["Uldaman"] = "Ulda",
+        ["Scholomance"] = "Scholo", ["Stratholme"] = "Strat",
+        ["Gnomeregan"] = "Gnomer", ["Scarlet Monastery"] = "SM",
+        ["Maraudon"] = "Mara", ["Razorfen Kraul"] = "RFK",
+        ["Razorfen Downs"] = "RFD", ["Wailing Caverns"] = "WC",
+        ["The Deadmines"] = "VC", ["Deadmines"] = "VC",
+        ["The Stockade"] = "Stocks", ["The Temple of Atal'Hakkar"] = "ST",
+        ["Sunken Temple"] = "ST", ["Blackfathom Deeps"] = "BFD",
+        ["Shadowfang Keep"] = "SFK", ["Ragefire Chasm"] = "RFC",
+        ["Zul'Farrak"] = "ZF"
+    }
+    local zone_name = source_zone_id and MTSL_LOGIC_WORLD:GetZoneNameById(source_zone_id)
+    local tag = tags[zone_name]
+    -- The upstream Lokhtos NPC record may use an outdoor zone.
+    if source_name == "Lokhtos Darkbargainer" then tag = "BRD" end
+    return tag
+end
+
+function MTSLUI_ZONE_HUNTER:InstanceSourceName(name, source_zone_id)
+    local tag = self:InstanceTag(source_zone_id, name)
+    if tag and not string.find(name, "(" .. tag .. ")", 1, true) then
+        return name .. " (" .. tag .. ")"
+    end
+    return name
+end
+
 function MTSLUI_ZONE_HUNTER:SourceInZone(source_zone_id, selected_zone_id)
     if source_zone_id == selected_zone_id then return true end
     if not source_zone_id or not selected_zone_id then return false end
@@ -36,6 +72,17 @@ function MTSLUI_ZONE_HUNTER:SourceInZone(source_zone_id, selected_zone_id)
     local parent_zones = {
         ["Blackrock Depths"] = "Blackrock Mountain",
         ["Blackrock Spire"] = "Blackrock Mountain",
+        ["Lower Blackrock Spire"] = "Blackrock Mountain",
+        ["Upper Blackrock Spire"] = "Blackrock Mountain",
+        ["Molten Core"] = "Blackrock Mountain",
+        ["Onyxia's Lair"] = "Dustwallow Marsh",
+        ["Zul'Gurub"] = "Stranglethorn Vale",
+        ["Ruins of Ahn'Qiraj"] = "Silithus",
+        ["Ruins of Ahn'Qiraj (AQ20)"] = "Silithus",
+        ["Ahn'Qiraj"] = "Silithus",
+        ["Temple of Ahn'Qiraj"] = "Silithus",
+        ["Ahn'Qiraj Temple"] = "Silithus",
+        ["Naxxramas"] = "Eastern Plaguelands",
         ["Dire Maul"] = "Feralas",
         ["Uldaman"] = "Badlands",
         ["Scholomance"] = "Western Plaguelands",
@@ -64,7 +111,7 @@ function MTSLUI_ZONE_HUNTER:AddNPCs(sources, ids, kind, zone_id)
     for _, id in pairs(ids) do
         local npc = MTSL_LOGIC_PLAYER_NPC:GetNpcById(id)
         if npc and self:SourceInZone(self:NPCZone(npc), zone_id) then
-            self:AddSource(sources, kind, self:Name(npc))
+            self:AddSource(sources, kind, self:InstanceSourceName(self:Name(npc), self:NPCZone(npc)))
         end
     end
 end
@@ -73,7 +120,7 @@ function MTSLUI_ZONE_HUNTER:AddObjects(sources, ids, kind, zone_id)
     if not ids then return end
     for _, id in pairs(ids) do
         local obj = MTSL_LOGIC_ITEM_OBJECT:GetObjectById(id)
-        if obj and self:SourceInZone(obj.zone_id, zone_id) then self:AddSource(sources, kind, self:Name(obj)) end
+        if obj and self:SourceInZone(obj.zone_id, zone_id) then self:AddSource(sources, kind, self:InstanceSourceName(self:Name(obj), obj.zone_id)) end
     end
 end
 
