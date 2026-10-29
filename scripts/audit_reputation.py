@@ -396,6 +396,14 @@ if not all(term in ui for term in (
 if '["Molten Core"] = "Blackrock Mountain"' not in ui or '["Temple of Ahn\'Qiraj"] = "Silithus"' not in ui:
     errors.append("Raid parent-zone mapping must include MC and AQ")
 
+# Reviewed frost source must take precedence over upstream Handbook quest labels.
+get_sources = re.search(r"function MTSLUI_ZONE_HUNTER:GetSources\(skill, profession, zone_id\)(.*?)\nend", ui, re.S)
+if not get_sources or not re.search(
+    r'self:AddSource\(sources, "Quest", "Wilhelm / Trainer: Omarion"\).*?return sources\s*end',
+    get_sources.group(1), re.S
+):
+    errors.append("Frost sources must return compact Wilhelm/Omarion label before upstream sources")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
