@@ -380,6 +380,22 @@ if not all(term in ui for term in (
 )):
     errors.append("Field Repair Bot 74A source indexing or detail rendering missing")
 
+# Dungeon/raid suffixes only use instance-zone source metadata (or Lokhtos override).
+if not all(term in ui for term in (
+    "function MTSLUI_ZONE_HUNTER:InstanceTag",
+    'source_name == "Lokhtos Darkbargainer"',
+    '["Blackrock Depths"] = "BRD"',
+    '["Molten Core"] = "MC"',
+    '["Ruins of Ahn\'Qiraj"] = "AQ20"',
+    '["Temple of Ahn\'Qiraj"] = "AQ40"',
+    'self:InstanceSourceName(self:Name(npc), self:NPCZone(npc))',
+    'self:InstanceSourceName(self:Name(obj), obj.zone_id)',
+    'if tag and not string.find(name, "(" .. tag .. ")", 1, true)',
+)):
+    errors.append("Dungeon suffixes must be source-zone-specific for NPCs, drops and objects")
+if '["Molten Core"] = "Blackrock Mountain"' not in ui or '["Temple of Ahn\'Qiraj"] = "Silithus"' not in ui:
+    errors.append("Raid parent-zone mapping must include MC and AQ")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
