@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.24 — 2026-10-29
+- Added compact dungeon/raid abbreviations to Zone Hunter source labels for instance-local vendors, mob/boss drops, quest NPCs and world objects.
+- Uses recorded source zone rather than inferred boss status; outdoor world bosses remain untagged. Added a targeted BRD label for Lokhtos Darkbargainer.
+- Added parent-zone mapping for Molten Core (Blackrock Mountain), AQ20/AQ40 (Silithus) and other documented raid instances; retained established dungeon mapping.
+- Prevents duplicate instance suffixes and adds static regression checks. Learned status, faction ordering, details layout and NPC coordinates unchanged.
+- In-game verification pending, particularly for source zones encoded at outdoor rather than instance level.
+
 ## V5.8.23 — 2026-10-29
 - Documented Field Repair Bot 74A's interactable floor schematic near Golem Lord Argelmach in the Blackrock Depths Manufactory (Engineering 300).
 - Indexed the schematic under Blackrock Mountain even if upstream MTSL lacks an object-source association; clarified it is neither an NPC drop nor a vendor purchase.
