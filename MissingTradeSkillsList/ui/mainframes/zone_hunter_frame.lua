@@ -151,6 +151,10 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     if frost and frost.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Eastern Plaguelands" then
         self:AddSource(sources, "Quest", "Wilhelm / Trainer: Omarion")
+        -- This reviewed source summarizes both acquisition paths. Do not append
+        -- upstream Omarion's Handbook quest locations to the short list label.
+        -- Full quest/trainer details are retained in DetailLines().
+        return sources
     end
     local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
     local tome = tomes and tomes[self:Name(skill)]
