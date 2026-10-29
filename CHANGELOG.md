@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.25 — 2026-10-29
+- Restored compact `Quest: Wilhelm / Trainer: Omarion` source labels for all 13 reviewed Argent Dawn frost-resistance recipes under Eastern Plaguelands.
+- Prevented upstream Omarion's Handbook source records from replacing the reviewed compact source summary; full acquisition details remain unchanged.
+- Added a source-priority regression check. Dungeon and raid abbreviations, learned-state logic and other sources are unaffected.
+
 ## V5.8.24 — 2026-10-29
 - Added compact dungeon/raid abbreviations to Zone Hunter source labels for instance-local vendors, mob/boss drops, quest NPCs and world objects.
 - Uses recorded source zone rather than inferred boss status; outdoor world bosses remain untagged. Added a targeted BRD label for Lokhtos Darkbargainer.
