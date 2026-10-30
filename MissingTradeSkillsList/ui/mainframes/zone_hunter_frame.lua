@@ -174,6 +174,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
         self:AddSource(sources, "Object", object_flow.object .. " (BRD)")
     end
+    local tribute_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tribute_recipes
+    local tribute = tribute_db and tribute_db[self:Name(skill)]
+    if tribute and tribute.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Feralas" then
+        self:AddSource(sources, "Tribute chest", "Gordok Tribute (DM)")
+    end
     if skill.trainers then self:AddNPCs(sources, skill.trainers.sources, "Trainer", zone_id) end
     self:AddQuests(sources, skill.quests, zone_id)
     self:AddObjects(sources, skill.objects, "Object", zone_id)
@@ -444,6 +450,12 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     if object_flow and object_flow.profession == entry.profession then
         add("OBJECT SCHEMATIC: " .. object_flow.object .. " - Blackrock Depths")
         for n, step in ipairs(object_flow.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local tribute_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tribute_recipes
+    local tribute = tribute_db and tribute_db[entry.name]
+    if tribute and tribute.profession == entry.profession then
+        add("TRIBUTE REWARD: " .. tribute.item .. " - Dire Maul North")
+        for n, step in ipairs(tribute.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
