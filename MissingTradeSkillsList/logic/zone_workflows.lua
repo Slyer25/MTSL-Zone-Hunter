@@ -367,6 +367,21 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "warcraft.wiki.gg/wiki/Repair_Bot"
         }
     },
+    -- Dire Maul North tribute acquisition; alternate loot records may exist.
+    tribute_recipes = {
+        ["Major Recombobulator"] = {
+            profession = "Engineering",
+            item = "Schematic: Major Recombobulator",
+            steps = {
+                "Enter Dire Maul North in Feralas and complete a Gordok Tribute run.",
+                "Keep the named Gordok guards alive to preserve the tribute reward.",
+                "After defeating King Gordok, check the Gordok Tribute chest in Gordok Commons.",
+                "The schematic is a possible tribute reward, not a guaranteed drop.",
+                "Requires Engineering 275 to learn the schematic."
+            },
+            reference = "warcraft.wiki.gg/wiki/Schematic:Major_Recombobulator"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
