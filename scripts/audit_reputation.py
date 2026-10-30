@@ -404,8 +404,23 @@ if not get_sources or not re.search(
 ):
     errors.append("Frost sources must return compact Wilhelm/Omarion label before upstream sources")
 
+# Dire Maul North tribute engineering schematic: preserve possible-reward wording.
+tribute = re.search(r"tribute_recipes\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not tribute or not all(term in tribute.group(1) for term in (
+    '["Major Recombobulator"]', 'profession = "Engineering"',
+    'Gordok Tribute', 'Engineering 275',
+    'possible tribute reward, not a guaranteed drop',
+)):
+    errors.append("Major Recombobulator Gordok Tribute acquisition data missing or overstated")
+if not all(term in ui for term in (
+    "MTSL_ZONE_WORKFLOWS.tribute_recipes",
+    'self:AddSource(sources, "Tribute chest", "Gordok Tribute (DM)")',
+    'TRIBUTE REWARD:', 'tribute.steps',
+)):
+    errors.append("Major Recombobulator tribute source/details must render in Feralas")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 121 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic); no missing keys, mismatches or duplicates")
+print("PASS: 122 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic); no missing keys, mismatches or duplicates")
