@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.26 — 2026-10-30
+- Added Major Recombobulator's possible Gordok Tribute chest acquisition in Dire Maul North under Feralas, including the non-guaranteed reward and Engineering 275 requirement.
+- Kept upstream source records available, including alternate reported sources, rather than asserting the tribute chest is exclusive.
+- Expanded static acquisition audit to 122 records. Compact Omarion/Wilhelm labels, dungeon tags, coordinates and learned status unchanged.
+- In-game display still needs testing.
+
 ## V5.8.25 — 2026-10-29
 - Restored compact `Quest: Wilhelm / Trainer: Omarion` source labels for all 13 reviewed Argent Dawn frost-resistance recipes under Eastern Plaguelands.
 - Prevented upstream Omarion's Handbook source records from replacing the reviewed compact source summary; full acquisition details remain unchanged.
