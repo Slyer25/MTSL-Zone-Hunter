@@ -457,6 +457,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("TRIBUTE REWARD: " .. tribute.item .. " - Dire Maul North")
         for n, step in ipairs(tribute.steps) do add("  " .. n .. ". " .. step) end
     end
+    local dungeon_guides = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_drop_guidance
+    local dungeon_guide = dungeon_guides and dungeon_guides[entry.name]
+    if dungeon_guide and dungeon_guide.profession == entry.profession then
+        add("DUNGEON SCHEMATIC: " .. dungeon_guide.item)
+        add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)
+        for n, step in ipairs(dungeon_guide.steps) do add("  " .. n .. ". " .. step) end
+    end
     local skill = entry.skill
     if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
     if not frost then quests(skill.quests) end
