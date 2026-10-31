@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.27 — 2026-10-31
+- Added verified Classic acquisition guidance for Goblin Jumper Cables XL: possible schematic drop from Plugger Spazzring in the Grim Guzzler, Blackrock Depths.
+- Documented Engineering 265 and Goblin Engineering item-use requirements without claiming guaranteed loot or direct spell learning.
+- Kept existing MTSL drop source labels and zone indexing unchanged; expanded audit to 123 records.
+- In-game detail display remains to be verified.
+
 ## V5.8.26 — 2026-10-30
 - Added Major Recombobulator's possible Gordok Tribute chest acquisition in Dire Maul North under Feralas, including the non-guaranteed reward and Engineering 275 requirement.
 - Kept upstream source records available, including alternate reported sources, rather than asserting the tribute chest is exclusive.
