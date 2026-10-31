@@ -419,8 +419,23 @@ if not all(term in ui for term in (
 )):
     errors.append("Major Recombobulator tribute source/details must render in Feralas")
 
+# Dungeon drops: avoid inventing separate quests or guaranteed rewards.
+guidance = re.search(r"dungeon_drop_guidance\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not guidance or not all(part in guidance.group(1) for part in (
+    '["Goblin Jumper Cables XL"]', 'profession = "Engineering"',
+    'Plugger Spazzring', 'Blackrock Depths', 'Engineering 265',
+    'Goblin Engineering', 'not a guaranteed reward',
+    'does not teach it directly',
+)):
+    errors.append("Goblin Jumper Cables XL dungeon guidance missing or incomplete")
+if not all(part in ui for part in (
+    "MTSL_ZONE_WORKFLOWS.dungeon_drop_guidance",
+    "DUNGEON SCHEMATIC:", "dungeon_guide.steps",
+)):
+    errors.append("Goblin Jumper Cables XL acquisition details not wired")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 122 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic); no missing keys, mismatches or duplicates")
+print("PASS: 123 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop); no missing keys, mismatches or duplicates")
