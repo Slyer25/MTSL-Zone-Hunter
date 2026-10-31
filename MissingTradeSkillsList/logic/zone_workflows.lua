@@ -367,6 +367,23 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "warcraft.wiki.gg/wiki/Repair_Bot"
         }
     },
+    -- Additional dungeon loot instructions. The base MTSL drop remains the
+    -- source of truth for zone placement and the left-panel drop label.
+    dungeon_drop_guidance = {
+        ["Goblin Jumper Cables XL"] = {
+            profession = "Engineering",
+            source = "Plugger Spazzring",
+            dungeon = "Blackrock Depths",
+            item = "Schematic: Goblin Jumper Cables XL",
+            steps = {
+                "Defeat Plugger Spazzring in the Grim Guzzler, Blackrock Depths.",
+                "The schematic is a possible drop, not a guaranteed reward.",
+                "Requires Engineering 265 and Goblin Engineering to learn the schematic.",
+                "Loot and use the schematic item to learn the recipe; defeating Plugger does not teach it directly."
+            },
+            reference = "wowhead.com/classic/item=18653/schematic-goblin-jumper-cables-xl"
+        }
+    },
     -- Dire Maul North tribute acquisition; alternate loot records may exist.
     tribute_recipes = {
         ["Major Recombobulator"] = {
