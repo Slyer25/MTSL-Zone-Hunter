@@ -378,8 +378,7 @@ MTSL_ZONE_WORKFLOWS = {
             steps = {
                 "Defeat Plugger Spazzring in the Grim Guzzler, Blackrock Depths.",
                 "The schematic is a possible drop, not a guaranteed reward.",
-                "Requires Engineering 265 and Goblin Engineering to learn the schematic.",
-                "Loot and use the schematic item to learn the recipe; defeating Plugger does not teach it directly."
+                "Requires Engineering 265 and Goblin Engineering to learn the schematic."
             },
             reference = "wowhead.com/classic/item=18653/schematic-goblin-jumper-cables-xl"
         }
