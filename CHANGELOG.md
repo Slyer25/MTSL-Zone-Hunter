@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.28 — 2026-11-02
+- Removed the redundant fourth Goblin Jumper Cables XL acquisition instruction.
+- Promoted the underlying MTSL known mob drop list above the schematic-specific instructions so Plugger Spazzring's BRD source appears on details page one.
+- Suppressed the later duplicate mob-drop section only for Goblin Jumper Cables XL, preserving all other recipes and existing detail pagination.
+- Added regression checks for source order and the concise three-step workflow.
+
 ## V5.8.27 — 2026-10-31
 - Added verified Classic acquisition guidance for Goblin Jumper Cables XL: possible schematic drop from Plugger Spazzring in the Grim Guzzler, Blackrock Depths.
 - Documented Engineering 265 and Goblin Engineering item-use requirements without claiming guaranteed loot or direct spell learning.
