@@ -425,7 +425,7 @@ if not guidance or not all(part in guidance.group(1) for part in (
     '["Goblin Jumper Cables XL"]', 'profession = "Engineering"',
     'Plugger Spazzring', 'Blackrock Depths', 'Engineering 265',
     'Goblin Engineering', 'not a guaranteed reward',
-    'does not teach it directly',
+    'Requires Engineering 265 and Goblin Engineering to learn the schematic.',
 )):
     errors.append("Goblin Jumper Cables XL dungeon guidance missing or incomplete")
 if not all(part in ui for part in (
@@ -433,6 +433,17 @@ if not all(part in ui for part in (
     "DUNGEON SCHEMATIC:", "dungeon_guide.steps",
 )):
     errors.append("Goblin Jumper Cables XL acquisition details not wired")
+
+# Keep the actual MTSL mob drop ahead of the custom Goblin Jumper Cables XL
+# workflow, and avoid duplicating the drop on a subsequent details page.
+if not all(part in ui for part in (
+    'local promote_jumper_drops = entry.name == "Goblin Jumper Cables XL"',
+    'if promote_jumper_drops and entry.skill.items then',
+    'if not promote_jumper_drops then',
+)):
+    errors.append("Jumper Cables XL known mob drop must be promoted without duplication")
+if 'Loot and use the schematic item to learn the recipe; defeating Plugger' in data:
+    errors.append("Jumper Cables XL redundant fourth instruction must stay removed")
 
 if errors:
     for error in errors:
