@@ -427,6 +427,18 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("  Complete Omarion's Handbook, then Wilhelm's crafting quest to learn the recipe.")
     end
     add(" ")
+    -- Keep the confirmed dungeon drop visible on the first details page for
+    -- this schematic, instead of repeating it after the custom instructions.
+    local promote_jumper_drops = entry.name == "Goblin Jumper Cables XL" and entry.profession == "Engineering"
+    if promote_jumper_drops and entry.skill.items then
+        for _, item_id in pairs(entry.skill.items) do
+            local item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(item_id, entry.profession)
+            if item and item.drops and item.drops.sources then
+                add("KNOWN MOB DROPS (all recorded zones):")
+                npc_list(item.drops.sources, "Mob")
+            end
+        end
+    end
     local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
     local tome = tomes and tomes[entry.name]
     if tome and entry.profession == "Blacksmithing" then
@@ -572,8 +584,10 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         add("  Potential zone based on zone level overlap only")
                         add("  Individual mob drop table is not verified")
                     else
-                        add("KNOWN MOB DROPS (all recorded zones):")
-                        npc_list(item.drops.sources, "Mob")
+                        if not promote_jumper_drops then
+                            add("KNOWN MOB DROPS (all recorded zones):")
+                            npc_list(item.drops.sources, "Mob")
+                        end
                     end
                 end
             end
