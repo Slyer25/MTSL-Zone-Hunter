@@ -473,7 +473,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local dungeon_guide = dungeon_guides and dungeon_guides[entry.name]
     if dungeon_guide and dungeon_guide.profession == entry.profession then
         add("DUNGEON SCHEMATIC: " .. dungeon_guide.item)
-        add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)
+        if not promote_jumper_drops then
+            add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)
+        end
         for n, step in ipairs(dungeon_guide.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
@@ -597,7 +599,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add(" ")
         local workflow = self:WorkflowLines(spec)
         if workflow then
-            for _, line in ipairs(workflow) do add(line) end
+            for _, line in ipairs(workflow) do
+                -- The quest log reminder is generic and adds a nearly empty
+                -- third details page for Goblin Jumper Cables XL.
+                if not (promote_jumper_drops and string.find(line, "Progress is not automatically verified", 1, true)) then
+                    add(line)
+                end
+            end
         else
             add("SPECIALISATION UNLOCK: Relevant specialization trainer or quest.")
             add("  Workflow not verified; prerequisite steps may exist.")
