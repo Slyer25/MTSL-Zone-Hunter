@@ -445,6 +445,15 @@ if not all(part in ui for part in (
 if 'Loot and use the schematic item to learn the recipe; defeating Plugger' in data:
     errors.append("Jumper Cables XL redundant fourth instruction must stay removed")
 
+# Goblin Jumper Cables XL must not repeat the mob source or leave a
+# standalone generic progress reminder after the specialization workflow.
+if not all(fragment in ui for fragment in (
+    'if not promote_jumper_drops then',
+    'add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)',
+    'promote_jumper_drops and string.find(line, "Progress is not automatically verified", 1, true)',
+)):
+    errors.append("Goblin Jumper Cables XL source deduplication or orphan-page fix missing")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
