@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.29 — 2026-11-04
+- Verified Goblin Jumper Cables XL's known mob drop is now visible on details page one.
+- Removed its duplicate custom Source: Plugger Spazzring line, since KNOWN MOB DROPS already shows the same NPC.
+- Suppressed the generic unverified-progress reminder for this one recipe only, eliminating the otherwise nearly empty third details page.
+- Added targeted regression checks; no other acquisition records, dungeon source labels or UI layout were changed.
+
 ## V5.8.28 — 2026-11-02
 - Removed the redundant fourth Goblin Jumper Cables XL acquisition instruction.
 - Promoted the underlying MTSL known mob drop list above the schematic-specific instructions so Plugger Spazzring's BRD source appears on details page one.
