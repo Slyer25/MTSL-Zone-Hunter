@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.31 — 2026-11-05
+- Hotfix: corrected an undefined `entry` reference accidentally inserted in `GetSources` during V5.8.30; restored Zone Hunter zone/recipe rendering.
+- Moved Dirge's Kickin' Chimaerok Chops acquisition workflow to the right-panel `DetailLines` function, where it belongs.
+- Added exact-name spellbook fallback for already-known specializations (including Goblin Engineer), when MTSL's saved specialization spell IDs are incomplete. Known specialization requirements remain labeled on the left, but their unlock walkthrough is omitted from the right.
+- Added static function-scope and specialization checks to prevent recurrence. In-game verification pending.
+
 ## V5.8.30 — 2026-11-05
 - Specialization requirements stay visible on the left for recipes requiring a specialization, including when the character already knows it; the label distinguishes met requirements from locked ones.
 - The right-side specialization unlock workflow remains conditional on the current character not knowing that specialization.
