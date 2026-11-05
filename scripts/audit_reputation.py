@@ -518,6 +518,15 @@ if not all(part in ui for part in (
 )):
     errors.append("Known specialization spellbook fallback or conditional details missing")
 
+# The fully documented Dirge quest must not inherit the generic
+# unknown-prerequisites warning, while unrelated quests retain it.
+if not all(x in ui for x in (
+    'entry.profession == "Cooking"',
+    'entry.name == "Dirge\'s Kickin\' Chimaerok Chops" and tonumber(id) == 8586',
+    'Quest prerequisites not verified; earlier steps may be required',
+)):
+    errors.append("Dirge quest 8586 must suppress only its generic prerequisite warning")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
