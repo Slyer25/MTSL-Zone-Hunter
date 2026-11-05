@@ -454,8 +454,37 @@ if not all(fragment in ui for fragment in (
 )):
     errors.append("Goblin Jumper Cables XL source deduplication or orphan-page fix missing")
 
+# Specialization lock stays visible in the list when unknown, and the
+# requirement stays visible when known; only unknown specs get walkthroughs.
+if not all(part in ui for part in (
+    '[Requires: " .. spec .. "]',
+    '[Locked: " .. spec .. "]',
+    'if spec and not known then',
+)):
+    errors.append("Specialization requirement/guide visibility must depend on character specialization")
+
+# Original Classic Dirge recipe: quest reward in Gadgetzan, with full chain.
+epic = re.search(r"epic_quest_recipes\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not epic or not all(term in epic.group(1) for term in (
+    """["Dirge's Kickin' Chimaerok Chops"]""",
+    'profession = "Cooking"', 'zone = "Tanaris"',
+    'quest_id = 8586', 'Narain Soothfancy',
+    'The Isle of Dread!', 'Lord Lakmaeran',
+    '20 Chimaerok Tenderloins', '20 Goblin Rocket Fuel',
+    '20 Deeprock Salt', 'recipe ITEM (not direct learning)',
+    'tradeable',
+)):
+    errors.append("Dirge recipe must record complete Scepter chain and item reward")
+if not all(term in ui for term in (
+    'MTSL_ZONE_WORKFLOWS.epic_quest_recipes',
+    'self:AddSource(sources, "Quest", epic.giver .. " (Gadgetzan)")',
+    'QUEST REWARD: " .. epic.item',
+    'epic.steps',
+)):
+    errors.append("Dirge's Cooking quest must be indexed in Tanaris and explained in details")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 123 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop); no missing keys, mismatches or duplicates")
+print("PASS: 124 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest); no missing keys, mismatches or duplicates")
