@@ -156,6 +156,14 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- Full quest/trainer details are retained in DetailLines().
         return sources
     end
+    local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
+    local epic = epic_recipes and epic_recipes[self:Name(skill)]
+    if epic and epic.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == epic.zone then
+        self:AddSource(sources, "Quest", epic.giver .. " (Gadgetzan)")
+        -- One reviewed source: avoid long duplicate upstream quest labels.
+        return sources
+    end
     local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
     local tome = tomes and tomes[self:Name(skill)]
     if profession == "Blacksmithing" and tome
@@ -173,6 +181,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     if object_flow and object_flow.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
         self:AddSource(sources, "Object", object_flow.object .. " (BRD)")
+    end
+    local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
+    local epic = epic_recipes and epic_recipes[entry.name]
+    if epic and epic.profession == entry.profession then
+        add("QUEST REWARD: " .. epic.item .. " [ID " .. epic.quest_id .. "]")
+        for n, step in ipairs(epic.steps) do add("  " .. n .. ". " .. step) end
     end
     local tribute_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tribute_recipes
     local tribute = tribute_db and tribute_db[self:Name(skill)]
