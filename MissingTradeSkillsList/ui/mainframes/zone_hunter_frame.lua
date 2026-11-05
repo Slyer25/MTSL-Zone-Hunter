@@ -744,7 +744,15 @@ function MTSLUI_ZONE_HUNTER:Refresh()
             local current, needed, spec, known = self:Requirements(entry.profession, entry.skill)
             local flags = ""
             if entry.trained and current and current < needed then flags = flags .. " |cffff9955[Skill " .. current .. "/" .. needed .. "]|r" end
-            if spec and not known then flags = flags .. " |cffff9955[Locked: " .. spec .. "]|r" end
+            -- Always identify specialization-gated recipes on the left.
+            -- Use the unlocked label when the character already knows it.
+            if spec then
+                if known then
+                    flags = flags .. " |cff66cc66[Requires: " .. spec .. "]|r"
+                else
+                    flags = flags .. " |cffff9955[Locked: " .. spec .. "]|r"
+                end
+            end
             row.source_label:SetText("|cffdddddd" .. self:ShortSource(entry) .. "|r" .. flags)
             row.entry = entry
             row:Show()
