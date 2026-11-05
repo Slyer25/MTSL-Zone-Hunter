@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.32 — 2026-11-06
+- In-game screenshots confirm V5.8.31 repaired the zone browser crash, displays Dirge's Scepter cooking acquisition route and detects Goblin Engineer as already learned.
+- Removed the contradictory generic 'Quest prerequisites not verified' warning only from Dirge's Kickin' Chimaerok Chops [quest 8586], since its documented prerequisite chain is shown directly above.
+- Added a targeted audit guard; left-panel specialization requirements, dungeon abbreviations, other quest warnings and interface remain unchanged.
+
 ## V5.8.31 — 2026-11-05
 - Hotfix: corrected an undefined `entry` reference accidentally inserted in `GetSources` during V5.8.30; restored Zone Hunter zone/recipe rendering.
 - Moved Dirge's Kickin' Chimaerok Chops acquisition workflow to the right-panel `DetailLines` function, where it belongs.
