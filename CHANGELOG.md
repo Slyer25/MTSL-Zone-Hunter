@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.33 — 2026-11-06
+- Integrated Silithus Cooking quest Smoked Desert Dumplings (Cooking 285) under Sharing the Knowledge, quest 8313, taught directly by Calandrath at Cenarion Hold.
+- Described Desert Recipe, Sandy Cookbook and Torn Recipe Page as the acquisition path; Kitchen Assistance is a follow-up, not a learning prerequisite.
+- Kept this distinct from inventory recipe-item rewards and prevented duplicate upstream quest source labels; suppressed the generic unverified-prerequisite warning only for this documented quest.
+- Extended the acquisition audit to 125 records with a function-scope check; preserved the tested UI, specialization behavior and source abbreviations. In-game verification pending.
+
 ## V5.8.32 — 2026-11-06
 - In-game screenshots confirm V5.8.31 repaired the zone browser crash, displays Dirge's Scepter cooking acquisition route and detects Goblin Engineer as already learned.
 - Removed the contradictory generic 'Quest prerequisites not verified' warning only from Dirge's Kickin' Chimaerok Chops [quest 8586], since its documented prerequisite chain is shown directly above.
