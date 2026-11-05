@@ -398,6 +398,26 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "warcraft.wiki.gg/wiki/Schematic:Major_Recombobulator"
         }
     },
+    -- The original Cooking 300 recipe is an item reward from the Scepter
+    -- of the Shifting Sands (Blue Shard) business fork, not a trainer skill.
+    epic_quest_recipes = {
+        ["Dirge's Kickin' Chimaerok Chops"] = {
+            profession = "Cooking",
+            zone = "Tanaris",
+            giver = "Dirge Quikcleave",
+            item = "Recipe: Dirge's Kickin' Chimaerok Chops",
+            quest_id = 8586,
+            steps = {
+                "Unlock the Blue Scepter Shard questline; finish Azuregos's Magical Ledger and Translating the Ledger with Narain Soothfancy.",
+                "In Gadgetzan, talk to Dirge Quikcleave for Never Ask Me About My Business.",
+                "Complete The Isle of Dread! in Feralas: defeat Lord Lakmaeran and gather 20 Chimaerok Tenderloins.",
+                "Return to Dirge in Gadgetzan and complete Dirge's Kickin' Chimaerok Chops with 20 Goblin Rocket Fuel and 20 Deeprock Salt.",
+                "The quest awards the recipe ITEM (not direct learning); use it with Cooking 300.",
+                "The recipe item is tradeable, so acquiring it from another player may be an alternative."
+            },
+            reference = "wowhead.com/classic/quest=8586/dirges-kickin-chimaerok-chops"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
