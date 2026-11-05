@@ -182,12 +182,6 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Blackrock Mountain" then
         self:AddSource(sources, "Object", object_flow.object .. " (BRD)")
     end
-    local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
-    local epic = epic_recipes and epic_recipes[entry.name]
-    if epic and epic.profession == entry.profession then
-        add("QUEST REWARD: " .. epic.item .. " [ID " .. epic.quest_id .. "]")
-        for n, step in ipairs(epic.steps) do add("  " .. n .. ". " .. step) end
-    end
     local tribute_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tribute_recipes
     local tribute = tribute_db and tribute_db[self:Name(skill)]
     if tribute and tribute.profession == profession
@@ -476,6 +470,12 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     if object_flow and object_flow.profession == entry.profession then
         add("OBJECT SCHEMATIC: " .. object_flow.object .. " - Blackrock Depths")
         for n, step in ipairs(object_flow.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
+    local epic = epic_recipes and epic_recipes[entry.name]
+    if epic and epic.profession == entry.profession then
+        add("QUEST REWARD: " .. epic.item .. " [ID " .. epic.quest_id .. "]")
+        for n, step in ipairs(epic.steps) do add("  " .. n .. ". " .. step) end
     end
     local tribute_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tribute_recipes
     local tribute = tribute_db and tribute_db[entry.name]
