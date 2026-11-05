@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.30 — 2026-11-05
+- Specialization requirements stay visible on the left for recipes requiring a specialization, including when the character already knows it; the label distinguishes met requirements from locked ones.
+- The right-side specialization unlock workflow remains conditional on the current character not knowing that specialization.
+- Integrated Dirge's Kickin' Chimaerok Chops as a Tanaris quest-reward Cooking recipe, including the Scepter of the Shifting Sands prerequisite, Isle of Dread objectives, Dirge's materials, tradeable recipe-item reward and Cooking 300.
+- Added static checks for specialization display and the new epic quest workflow; 124 audited acquisition records.
+- Existing source abbreviation, frost-recipe compact labels, pagination and learned-state logic are unchanged. New quest integration awaits in-game verification.
+
 ## V5.8.29 — 2026-11-04
 - Verified Goblin Jumper Cables XL's known mob drop is now visible on details page one.
 - Removed its duplicate custom Source: Plugger Spazzring line, since KNOWN MOB DROPS already shows the same NPC.
