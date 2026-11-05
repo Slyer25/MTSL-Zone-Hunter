@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.34 — 2026-11-06
+- Documented original Vanilla Razorfen Downs trainer Henry Stern in the Murder Pens for Goldthorn Tea (Cooking 175) and Mighty Troll's Blood Potion (Alchemy 180).
+- Indexed Henry Stern (RFD) under The Barrens as the dungeon's outdoor parent zone; retained other MTSL item-drop sources for the Alchemy recipe.
+- Added direct-teaching instructions: reach the Murder Pens, free Henry Stern, and use the appropriate profession dialogue; no extra item or quest chain is claimed for Goldthorn Tea.
+- Extended static acquisition audit to 127 reviewed records, including source/detail function scope guards.
+- No changes to tested UI layout, learned status, specialization handling, dungeon abbreviations or unrelated recipe records. In-game verification pending.
+
 ## V5.8.33 — 2026-11-06
 - Integrated Silithus Cooking quest Smoked Desert Dumplings (Cooking 285) under Sharing the Knowledge, quest 8313, taught directly by Calandrath at Cenarion Hold.
 - Described Desert Recipe, Sandy Cookbook and Torn Recipe Page as the acquisition path; Kitchen Assistance is a follow-up, not a learning prerequisite.

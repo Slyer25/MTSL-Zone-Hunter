@@ -436,6 +436,37 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "wowhead.com/classic/quest=8313/sharing-the-knowledge"
         }
     },
+    -- Vanilla 1.12: dialogue-only Cooking lesson in Razorfen Downs.
+    dungeon_npc_lessons = {
+        ["Goldthorn Tea"] = {
+            profession = "Cooking",
+            zone = "The Barrens",
+            dungeon = "Razorfen Downs",
+            npc = "Henry Stern",
+            skill = 175,
+            steps = {
+                "Enter Razorfen Downs from the southern Barrens and follow the left-hand route toward the Murder Pens.",
+                "Open the wooden barriers in the holding pens and speak with Henry Stern.",
+                "With Cooking 175, ask Henry for his cooking recipe; he teaches Goldthorn Tea directly for free.",
+                "No recipe item, vendor purchase, or unrelated quest chain is needed."
+            },
+            reference = "wowhead.com/classic/spell=13028/goldthorn-tea"
+        },
+        ["Mighty Troll's Blood Potion"] = {
+            profession = "Alchemy",
+            zone = "The Barrens",
+            dungeon = "Razorfen Downs",
+            npc = "Henry Stern",
+            skill = 180,
+            steps = {
+                "Enter Razorfen Downs from the southern Barrens and locate the Murder Pens.",
+                "Open Henry Stern's holding pen and speak with him.",
+                "At Alchemy 180, use Henry's alchemy dialogue to learn the potion directly for free.",
+                "Recipe-item drops can be alternative acquisition routes; preserve other recorded MTSL sources."
+            },
+            reference = "wowhead.com/classic/npc=8696/henry-stern"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {

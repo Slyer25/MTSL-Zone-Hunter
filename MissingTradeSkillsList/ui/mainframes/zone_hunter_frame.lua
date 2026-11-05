@@ -173,6 +173,15 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
+    local lesson_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons
+    local lesson = lesson_db and lesson_db[self:Name(skill)]
+    if lesson and lesson.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == lesson.zone then
+        self:AddSource(sources, "Trainer", lesson.npc .. " (RFD)")
+        -- Goldthorn Tea has this direct teaching route; Alchemy also has
+        -- recipe-item sources and must retain all standard MTSL sources.
+        if profession == "Cooking" then return sources end
+    end
     local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
     local tome = tomes and tomes[self:Name(skill)]
     if profession == "Blacksmithing" and tome
@@ -509,6 +518,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("QUEST LEARNING: Sharing the Knowledge [ID " .. direct.quest_id .. "]")
         add("  Taught directly by " .. direct.npc .. " in " .. direct.zone .. ".")
         for n, step in ipairs(direct.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local lesson_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons
+    local lesson = lesson_db and lesson_db[entry.name]
+    if lesson and lesson.profession == entry.profession then
+        add("DUNGEON TRAINER: " .. lesson.npc .. " - " .. lesson.dungeon)
+        add("  Minimum profession skill: " .. tostring(lesson.skill))
+        for n, step in ipairs(lesson.steps) do add("  " .. n .. ". " .. step) end
     end
     local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
     local epic = epic_recipes and epic_recipes[entry.name]

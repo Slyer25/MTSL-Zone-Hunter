@@ -551,8 +551,31 @@ if source_scope and "direct_db and direct_db[entry.name]" in source_scope.group(
 if detail_scope and 'direct_db and direct_db[entry.name]' not in detail_scope.group(1):
     errors.append("Smoked Desert Dumplings instructions must be in DetailLines")
 
+# Razorfen Downs: original Classic training is direct, with the separate
+# Alchemy item-drop record preserved rather than replaced.
+lessons = re.search(r"dungeon_npc_lessons\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not lessons or not all(term in lessons.group(1) for term in (
+    '["Goldthorn Tea"]', 'profession = "Cooking"', 'skill = 175',
+    '["Mighty Troll\'s Blood Potion"]', 'profession = "Alchemy"',
+    'skill = 180', 'Henry Stern', 'Razorfen Downs', 'Murder Pens',
+    'directly for free', 'alternative acquisition routes',
+)):
+    errors.append("Razorfen Downs Henry Stern direct lessons missing or inaccurate")
+if not all(term in ui for term in (
+    'MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons',
+    'self:AddSource(sources, "Trainer", lesson.npc .. " (RFD)")',
+    'if profession == "Cooking" then return sources end',
+    'add("DUNGEON TRAINER: " .. lesson.npc',
+    'for n, step in ipairs(lesson.steps)',
+)):
+    errors.append("Henry Stern source indexing or detail rendering missing")
+if source_scope and ("lesson_db and lesson_db[entry.name]" in source_scope.group(1)):
+    errors.append("Henry Stern details must not use entry in GetSources")
+if detail_scope and "lesson_db and lesson_db[entry.name]" not in detail_scope.group(1):
+    errors.append("Henry Stern lessons must render in DetailLines")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 125 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest); no missing keys, mismatches or duplicates")
+print("PASS: 127 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes); no missing keys, mismatches or duplicates")
