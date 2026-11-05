@@ -242,6 +242,26 @@ function MTSLUI_ZONE_HUNTER:Requirements(profession, skill)
                 if tonumber(id) == tonumber(spec_id) then spec_known = true; break end
             end
         end
+        -- Some clients retain the known specialization spell in the spellbook
+        -- without storing its ID in MTSL's character data (e.g. Goblin Engineer).
+        -- Check exact spell names only; no substring matching or quest guessing.
+        if not spec_known and GetNumSpellTabs and GetSpellTabInfo and GetSpellName then
+            local aliases = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.aliases
+            local alternate = aliases and aliases[spec_name]
+            for tab = 1, GetNumSpellTabs() do
+                local _, _, offset, num_spells = GetSpellTabInfo(tab)
+                if offset and num_spells then
+                    for slot = offset + 1, offset + num_spells do
+                        local spell_name = GetSpellName(slot, BOOKTYPE_SPELL or "spell")
+                        if spell_name == spec_name or spell_name == alternate then
+                            spec_known = true
+                            break
+                        end
+                    end
+                end
+                if spec_known then break end
+            end
+        end
     end
     return current, needed, spec_name, spec_known
 end
