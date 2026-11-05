@@ -483,6 +483,41 @@ if not all(term in ui for term in (
 )):
     errors.append("Dirge's Cooking quest must be indexed in Tanaris and explained in details")
 
+# Scope-check acquisition blocks: a previous release accidentally inserted
+# a DetailLines-only block into GetSources, crashing on undefined 'entry'.
+source_scope = re.search(
+    r"function MTSLUI_ZONE_HUNTER:GetSources\(skill, profession, zone_id\)(.*?)\nend",
+    ui, re.S
+)
+detail_scope = re.search(
+    r"function MTSLUI_ZONE_HUNTER:DetailLines\(entry\)(.*?)\nend",
+    ui, re.S
+)
+if not source_scope or not detail_scope:
+    errors.append("GetSources or DetailLines not found for scope audit")
+else:
+    if "entry.name" in source_scope.group(1) or "entry.profession" in source_scope.group(1):
+        errors.append("GetSources must not reference the DetailLines-only entry variable")
+    if 'add("QUEST REWARD: " .. epic.item' in source_scope.group(1):
+        errors.append("Dirge's detail display must not be in GetSources")
+    if not all(part in detail_scope.group(1) for part in (
+        'local epic = epic_recipes and epic_recipes[entry.name]',
+        'add("QUEST REWARD: " .. epic.item',
+        'for n, step in ipairs(epic.steps)',
+    )):
+        errors.append("Dirge's reviewed acquisition workflow missing from DetailLines")
+
+# MTSL's stored specialization IDs can be incomplete; use only exact known
+# spellbook names (with an alias), not approximate name matching.
+if not all(part in ui for part in (
+    'if not spec_known and GetNumSpellTabs and GetSpellTabInfo and GetSpellName then',
+    'GetSpellTabInfo(tab)',
+    'GetSpellName(slot, BOOKTYPE_SPELL or "spell")',
+    'spell_name == spec_name or spell_name == alternate',
+    'if spec and not known then',
+)):
+    errors.append("Known specialization spellbook fallback or conditional details missing")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
