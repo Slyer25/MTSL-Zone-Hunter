@@ -527,8 +527,32 @@ if not all(x in ui for x in (
 )):
     errors.append("Dirge quest 8586 must suppress only its generic prerequisite warning")
 
+# Silithus quest: Sharing the Knowledge teaches the recipe directly.
+# The later Kitchen Assistance quest must not be asserted as a prerequisite.
+direct = re.search(r"direct_quest_recipes\s*=\s*\{(.*?)\n    \},", data, re.S)
+if not direct or not all(part in direct.group(1) for part in (
+    '["Smoked Desert Dumplings"]', 'profession = "Cooking"',
+    'zone = "Silithus"', 'quest_id = 8313', 'Cooking 285',
+    'Desert Recipe', 'Sandy Cookbook', 'Torn Recipe Page',
+    'Calandrath', 'Completion teaches Smoked Desert Dumplings directly',
+    'Kitchen Assistance is a follow-up quest, not a prerequisite',
+)):
+    errors.append("Smoked Desert Dumplings direct learning workflow missing or incomplete")
+if not all(part in ui for part in (
+    'MTSL_ZONE_WORKFLOWS.direct_quest_recipes',
+    'self:AddSource(sources, "Quest", "Sharing the Knowledge: Calandrath")',
+    'add("QUEST LEARNING: Sharing the Knowledge [ID " .. direct.quest_id',
+    'direct.steps',
+    'entry.name == "Smoked Desert Dumplings" and tonumber(id) == 8313',
+)):
+    errors.append("Silithus Cooking quest source/details or targeted warning exemption missing")
+if source_scope and "direct_db and direct_db[entry.name]" in source_scope.group(1):
+    errors.append("Direct quest detail lookup must never reference entry inside GetSources")
+if detail_scope and 'direct_db and direct_db[entry.name]' not in detail_scope.group(1):
+    errors.append("Smoked Desert Dumplings instructions must be in DetailLines")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 124 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest); no missing keys, mismatches or duplicates")
+print("PASS: 125 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest); no missing keys, mismatches or duplicates")
