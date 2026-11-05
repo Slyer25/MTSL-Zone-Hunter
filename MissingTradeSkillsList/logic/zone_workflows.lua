@@ -418,6 +418,24 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "wowhead.com/classic/quest=8586/dirges-kickin-chimaerok-chops"
         }
     },
+    -- Silithus quest-granted Cooking skill; no inventory recipe item exists.
+    direct_quest_recipes = {
+        ["Smoked Desert Dumplings"] = {
+            profession = "Cooking",
+            zone = "Silithus",
+            npc = "Calandrath",
+            quest_id = 8313,
+            steps = {
+                "Requires Cooking 285 to learn the recipe; both factions follow the same quest route.",
+                "At Cenarion Hold, accept Desert Recipe from Calandrath.",
+                "Find the Sandy Cookbook at the Twilight's Hammer camp in Silithus and accept Sharing the Knowledge.",
+                "Return the Torn Recipe Page to Calandrath at Cenarion Hold to complete Sharing the Knowledge.",
+                "Completion teaches Smoked Desert Dumplings directly; there is no recipe item to use.",
+                "Kitchen Assistance is a follow-up quest, not a prerequisite for learning the recipe."
+            },
+            reference = "wowhead.com/classic/quest=8313/sharing-the-knowledge"
+        }
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {
