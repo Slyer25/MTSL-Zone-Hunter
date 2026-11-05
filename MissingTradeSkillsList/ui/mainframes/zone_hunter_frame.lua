@@ -420,7 +420,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             or (entry.profession == "Mining" and entry.name == "Smelt Dark Iron" and tonumber(id) == 4083)
                             or (entry.profession == "Blacksmithing" and entry.name == "Sulfuron Hammer" and tonumber(id) == 7604)
                             -- The documented Scepter chain is already shown in full above.
-                            or (entry.profession == "Cooking" and entry.name == "Dirge\'s Kickin\' Chimaerok Chops" and tonumber(id) == 8586)) then
+                            or (entry.profession == "Cooking" and entry.name == "Dirge's Kickin' Chimaerok Chops" and tonumber(id) == 8586)) then
                             add("  Quest prerequisites not verified; earlier steps may be required")
                         end
                     end
