@@ -164,6 +164,15 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- One reviewed source: avoid long duplicate upstream quest labels.
         return sources
     end
+    local direct_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.direct_quest_recipes
+    local direct = direct_db and direct_db[self:Name(skill)]
+    if direct and direct.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == direct.zone then
+        self:AddSource(sources, "Quest", "Sharing the Knowledge: Calandrath")
+        -- Avoid replacing this precise direct-learning source with an upstream
+        -- quest/item description; the full route is in DetailLines.
+        return sources
+    end
     local tomes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.enchanted_thorium_quests
     local tome = tomes and tomes[self:Name(skill)]
     if profession == "Blacksmithing" and tome
@@ -420,7 +429,8 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             or (entry.profession == "Mining" and entry.name == "Smelt Dark Iron" and tonumber(id) == 4083)
                             or (entry.profession == "Blacksmithing" and entry.name == "Sulfuron Hammer" and tonumber(id) == 7604)
                             -- The documented Scepter chain is already shown in full above.
-                            or (entry.profession == "Cooking" and entry.name == "Dirge's Kickin' Chimaerok Chops" and tonumber(id) == 8586)) then
+                            or (entry.profession == "Cooking" and entry.name == "Dirge's Kickin' Chimaerok Chops" and tonumber(id) == 8586)
+                            or (entry.profession == "Cooking" and entry.name == "Smoked Desert Dumplings" and tonumber(id) == 8313)) then
                             add("  Quest prerequisites not verified; earlier steps may be required")
                         end
                     end
@@ -492,6 +502,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     if object_flow and object_flow.profession == entry.profession then
         add("OBJECT SCHEMATIC: " .. object_flow.object .. " - Blackrock Depths")
         for n, step in ipairs(object_flow.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local direct_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.direct_quest_recipes
+    local direct = direct_db and direct_db[entry.name]
+    if direct and direct.profession == entry.profession then
+        add("QUEST LEARNING: Sharing the Knowledge [ID " .. direct.quest_id .. "]")
+        add("  Taught directly by " .. direct.npc .. " in " .. direct.zone .. ".")
+        for n, step in ipairs(direct.steps) do add("  " .. n .. ". " .. step) end
     end
     local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
     local epic = epic_recipes and epic_recipes[entry.name]
