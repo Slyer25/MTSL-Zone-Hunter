@@ -588,8 +588,38 @@ if 'preserve other recorded MTSL sources' in data:
 if "that route is not specific to Razorfen Downs" not in data:
     errors.append("Mighty Troll's Blood Potion alternative drop note missing")
 
+# Goldthorn Tea: keep Henry's precise location inside the main acquisition
+# instructions and avoid a detached, single-line trainer page.
+if not all(term in data for term in (
+    'location = "Razorfen Downs (79.86, 10.74)"',
+    'With Cooking 175, speak to him to learn Goldthorn Tea directly for free.',
+)):
+    errors.append("Goldthorn Tea compact route or Henry Stern location missing")
+if not all(term in ui for term in (
+    'entry.name == "Goldthorn Tea" then',
+    'lesson.npc .. " - " .. lesson.location',
+    'entry.name ~= "Goldthorn Tea" then',
+)):
+    errors.append("Goldthorn Tea must inline the Henry Stern location and hide duplicate trainer footer")
+if not all(term in data for term in (
+    '["Runn Tum Tuber Surprise"]', 'profession = "Cooking"',
+    'kind = "recipe"', 'source = "Pusillin"',
+    'dungeon = "Dire Maul East"', 'Cooking 275',
+    'Crescent Key', 'Warpwood Pods', 'Bind-on-Pickup',
+)):
+    errors.append("Runn Tum Tuber Surprise acquisition data incomplete")
+if not all(term in ui for term in (
+    'self:Name(skill) == "Runn Tum Tuber Surprise"',
+    'self:AddSource(sources, "Mob drop", "Pusillin (DM)")',
+    'dungeon_guide.kind == "recipe"',
+    'DUNGEON RECIPE: ',
+)):
+    errors.append("Runn Tum Tuber Surprise source or recipe-specific detail header missing")
+if source_scope and "entry.name" in source_scope.group(1):
+    errors.append("GetSources must never reference entry (undefined in its scope)")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 127 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes); no missing keys, mismatches or duplicates")
+print("PASS: 128 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop); no missing keys, mismatches or duplicates")

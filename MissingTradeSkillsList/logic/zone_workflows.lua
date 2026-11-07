@@ -370,6 +370,21 @@ MTSL_ZONE_WORKFLOWS = {
     -- Additional dungeon loot instructions. The base MTSL drop remains the
     -- source of truth for zone placement and the left-panel drop label.
     dungeon_drop_guidance = {
+        ["Runn Tum Tuber Surprise"] = {
+            profession = "Cooking",
+            kind = "recipe",
+            source = "Pusillin",
+            dungeon = "Dire Maul East",
+            item = "Recipe: Runn Tum Tuber Surprise",
+            steps = {
+                "Enter Dire Maul East in Feralas; the eastern entrance does not require the Crescent Key.",
+                "Speak to Pusillin near the entrance. Follow him and speak again whenever he stops.",
+                "After the final conversation, defeat the now-hostile Pusillin and loot the recipe item.",
+                "Use the Bind-on-Pickup recipe with Cooking 275 to learn Runn Tum Tuber Surprise.",
+                "Runn Tum Tubers for cooking can be found in Warpwood Pods within Dire Maul East."
+            },
+            reference = "wowhead.com/classic/spell=22761/runn-tum-tuber-surprise"
+        },
         ["Goblin Jumper Cables XL"] = {
             profession = "Engineering",
             source = "Plugger Spazzring",
@@ -444,11 +459,11 @@ MTSL_ZONE_WORKFLOWS = {
             dungeon = "Razorfen Downs",
             npc = "Henry Stern",
             skill = 175,
+            location = "Razorfen Downs (79.86, 10.74)",
             steps = {
-                "Enter Razorfen Downs from the southern Barrens and follow the left-hand route toward the Murder Pens.",
-                "Open the wooden barriers in the holding pens and speak with Henry Stern.",
-                "With Cooking 175, ask Henry for his cooking recipe; he teaches Goldthorn Tea directly for free.",
-                "No recipe item, vendor purchase, or unrelated quest chain is needed."
+                "Enter Razorfen Downs in the southern Barrens and head to the Murder Pens.",
+                "Open the wooden barriers to free Henry Stern.",
+                "With Cooking 175, speak to him to learn Goldthorn Tea directly for free."
             },
             reference = "wowhead.com/classic/spell=13028/goldthorn-tea"
         },

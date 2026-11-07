@@ -173,6 +173,13 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
+    -- Pusillin is a dungeon-specific recipe drop; index explicitly under
+    -- Feralas even if the upstream NPC's zone association is absent.
+    if profession == "Cooking" and self:Name(skill) == "Runn Tum Tuber Surprise"
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == "Feralas" then
+        self:AddSource(sources, "Mob drop", "Pusillin (DM)")
+        return sources
+    end
     local lesson_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons
     local lesson = lesson_db and lesson_db[self:Name(skill)]
     if lesson and lesson.profession == profession
@@ -528,8 +535,14 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local lesson_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons
     local lesson = lesson_db and lesson_db[entry.name]
     if lesson and lesson.profession == entry.profession then
-        add("DUNGEON TRAINER: " .. lesson.npc .. " - " .. lesson.dungeon)
-        add("  Minimum profession skill: " .. tostring(lesson.skill))
+        if entry.name == "Goldthorn Tea" then
+            -- Goldthorn already reports Cooking 175 above. Include the NPC
+            -- location here instead of creating a one-line TRAINERS page.
+            add("DUNGEON TRAINER: " .. lesson.npc .. " - " .. lesson.location)
+        else
+            add("DUNGEON TRAINER: " .. lesson.npc .. " - " .. lesson.dungeon)
+            add("  Minimum profession skill: " .. tostring(lesson.skill))
+        end
         for n, step in ipairs(lesson.steps) do add("  " .. n .. ". " .. step) end
     end
     local epic_recipes = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.epic_quest_recipes
@@ -547,14 +560,17 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local dungeon_guides = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_drop_guidance
     local dungeon_guide = dungeon_guides and dungeon_guides[entry.name]
     if dungeon_guide and dungeon_guide.profession == entry.profession then
-        add("DUNGEON SCHEMATIC: " .. dungeon_guide.item)
+        add((dungeon_guide.kind == "recipe" and "DUNGEON RECIPE: " or "DUNGEON SCHEMATIC: ") .. dungeon_guide.item)
         if not promote_jumper_drops then
             add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)
         end
         for n, step in ipairs(dungeon_guide.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
-    if skill.trainers and not frost then add("TRAINERS:"); npc_list(skill.trainers.sources, "Trainer") end
+    if skill.trainers and not frost and entry.name ~= "Goldthorn Tea" then
+        add("TRAINERS:")
+        npc_list(skill.trainers.sources, "Trainer")
+    end
     if not frost then quests(skill.quests) end
     object_list(skill.objects)
     if skill.items then

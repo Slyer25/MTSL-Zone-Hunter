@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.36 — 2026-11-07
+- Goldthorn Tea: moved Henry Stern's Razorfen Downs location into the main acquisition instructions, shortened repetitive steps, and suppressed the duplicate TRAINERS footer for this recipe only, targeting a single details page.
+- Integrated Runn Tum Tuber Surprise (Cooking 275): indexed Pusillin (DM) under Feralas and documented the Dire Maul East chase, recipe-item drop, learning requirement and Warpwood Pod ingredients.
+- The dungeon detail header now distinguishes Cooking recipe items from Engineering schematics without changing existing schematic descriptions.
+- Added narrow regression checks, bringing the static acquisition audit to 128 records. The existing UI, other source records, specialization handling and learned-recipe tracking remain unchanged.
+- In-game verification pending.
+
 ## V5.8.35 — 2026-11-07
 - In-game screenshots confirm Henry Stern (RFD) and the direct-teaching workflows for Goldthorn Tea and Mighty Troll's Blood Potion under The Barrens.
 - Corrected Zone Hunter's Goldthorn Tea Cooking requirement to 175, matching original Henry Stern teaching, instead of the upstream 125 value; header, requirements and skill-lock checks now agree, without changing global MTSL data.
