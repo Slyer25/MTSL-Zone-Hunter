@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.35 — 2026-11-07
+- In-game screenshots confirm Henry Stern (RFD) and the direct-teaching workflows for Goldthorn Tea and Mighty Troll's Blood Potion under The Barrens.
+- Corrected Zone Hunter's Goldthorn Tea Cooking requirement to 175, matching original Henry Stern teaching, instead of the upstream 125 value; header, requirements and skill-lock checks now agree, without changing global MTSL data.
+- Reworded Mighty Troll's Blood Potion's alternate world-drop note to remove internal developer-facing language.
+- Extended static checks for Goldthorn Tea threshold consistency and clear player-facing acquisition text. UI layout, learned tracking and other source behavior unchanged.
+- The updated Goldthorn skill display and wording await in-game verification.
+
 ## V5.8.34 — 2026-11-06
 - Documented original Vanilla Razorfen Downs trainer Henry Stern in the Murder Pens for Goldthorn Tea (Cooking 175) and Mighty Troll's Blood Potion (Alchemy 180).
 - Indexed Henry Stern (RFD) under The Barrens as the dungeon's outdoor parent zone; retained other MTSL item-drop sources for the Alchemy recipe.

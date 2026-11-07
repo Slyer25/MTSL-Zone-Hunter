@@ -574,6 +574,20 @@ if source_scope and ("lesson_db and lesson_db[entry.name]" in source_scope.group
 if detail_scope and "lesson_db and lesson_db[entry.name]" not in detail_scope.group(1):
     errors.append("Henry Stern lessons must render in DetailLines")
 
+# Henry Stern's original Goldthorn Tea training threshold is 175; an
+# upstream recipe record may instead list 125. The UI and lock status must
+# agree without globally modifying MTSL's source data.
+if not all(term in ui for term in (
+    'if profession == "Cooking" and self:Name(skill) == "Goldthorn Tea" then',
+    'needed = 175',
+    '(profession == "Cooking" and self:Name(skill) == "Goldthorn Tea") and 175',
+)):
+    errors.append("Goldthorn Tea's required Cooking 175 must match header and skill checks")
+if 'preserve other recorded MTSL sources' in data:
+    errors.append("Henry Stern source notes must not expose internal MTSL instructions")
+if "that route is not specific to Razorfen Downs" not in data:
+    errors.append("Mighty Troll's Blood Potion alternative drop note missing")
+
 if errors:
     for error in errors:
         print("FAIL:", error)

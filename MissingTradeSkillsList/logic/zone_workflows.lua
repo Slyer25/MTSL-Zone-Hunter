@@ -462,7 +462,7 @@ MTSL_ZONE_WORKFLOWS = {
                 "Enter Razorfen Downs from the southern Barrens and locate the Murder Pens.",
                 "Open Henry Stern's holding pen and speak with him.",
                 "At Alchemy 180, use Henry's alchemy dialogue to learn the potion directly for free.",
-                "Recipe-item drops can be alternative acquisition routes; preserve other recorded MTSL sources."
+                "Alternatively, Recipe: Mighty Troll\'s Blood Potion can drop from level-appropriate enemies; that route is not specific to Razorfen Downs."
             },
             reference = "wowhead.com/classic/npc=8696/henry-stern"
         }

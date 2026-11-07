@@ -250,6 +250,12 @@ function MTSLUI_ZONE_HUNTER:Requirements(profession, skill)
     local trade = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.TRADESKILLS and MTSL_CURRENT_PLAYER.TRADESKILLS[profession]
     local current = trade and tonumber(trade.SKILL_LEVEL)
     local needed = tonumber(skill.min_skill) or 0
+    -- Upstream data lists Goldthorn Tea at 125 on some builds, but Henry
+    -- Stern's original Classic dialogue requires Cooking 175. Keep this
+    -- correction local to Zone Hunter rather than editing the MTSL database.
+    if profession == "Cooking" and self:Name(skill) == "Goldthorn Tea" then
+        needed = 175
+    end
     local spec_id = skill.specialisation
     local spec_name, spec_known = nil, false
     if spec_id then
@@ -309,7 +315,7 @@ function MTSLUI_ZONE_HUNTER:BuildRows()
                     table.insert(self.rows, {
                         name = self:Name(skill), profession = profession, skill = skill, identity = profession .. ":" .. tostring(skill.id),
                         sources = sources, learned = learned, trained = trained,
-                        min_skill = skill.min_skill or 0
+                        min_skill = (profession == "Cooking" and self:Name(skill) == "Goldthorn Tea") and 175 or (skill.min_skill or 0)
                     })
                 end
             end
