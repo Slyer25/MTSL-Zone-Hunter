@@ -558,7 +558,7 @@ if not lessons or not all(term in lessons.group(1) for term in (
     '["Goldthorn Tea"]', 'profession = "Cooking"', 'skill = 175',
     '["Mighty Troll\'s Blood Potion"]', 'profession = "Alchemy"',
     'skill = 180', 'Henry Stern', 'Razorfen Downs', 'Murder Pens',
-    'directly for free', 'alternative acquisition routes',
+    'directly for free', 'not specific to Razorfen Downs',
 )):
     errors.append("Razorfen Downs Henry Stern direct lessons missing or inaccurate")
 if not all(term in ui for term in (
