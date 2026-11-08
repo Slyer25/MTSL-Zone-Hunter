@@ -743,7 +743,7 @@ zone_drop = re.search(r'zone_drop_recipes\s*=\s*\{(.*?)\n    \},', data, re.S)
 if not zone_drop or not all(x in zone_drop.group(1) for x in (
     '["Savory Deviate Delight"]', 'profession = "Cooking"',
     'zone = "The Barrens"', 'skill = 85', 'Rare zone drop',
-    'not a guaranteed drop', 'Recipe: Savory Deviate Delight',
+    'no named mob is guaranteed', 'Recipe: Savory Deviate Delight',
 )):
     errors.append("Savory Deviate Delight zone drop record incomplete")
 if not all(x in ui for x in (
