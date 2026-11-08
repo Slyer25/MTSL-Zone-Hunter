@@ -618,8 +618,48 @@ if not all(term in ui for term in (
 if source_scope and "entry.name" in source_scope.group(1):
     errors.append("GetSources must never reference entry (undefined in its scope)")
 
+# Pusillin: move the already-recorded mob into the first details section,
+# and do not repeat its location or recipe item later in the same panel.
+if not all(part in ui for part in (
+    'local promote_pusillin_drops = entry.name == "Runn Tum Tuber Surprise"',
+    'promote_jumper_drops or promote_pusillin_drops',
+    'not promote_jumper_drops and not promote_pusillin_drops',
+    'if not promote_pusillin_drops then',
+)):
+    errors.append("Pusillin mob-drop promotion or duplicate suppression missing")
+pusillin = re.search(r'\["Runn Tum Tuber Surprise"\]\s*=\s*\{(.*?)\n        \},', data, re.S)
+if not pusillin or not all(k in pusillin.group(1) for k in (
+    'no Crescent Key', 'Bind-on-Pickup', 'Cooking 275', 'Warpwood Pods',
+)):
+    errors.append("Pusillin concise quest guidance missing")
+if pusillin and pusillin.group(1).count('".') > 3:
+    errors.append("Pusillin instructions should stay concise")
+
+# Knot's Vanilla Dire Maul suit teaches Tailoring and Leatherworking directly,
+# and the suit quest must be finished before freeing Knot with the shackle key.
+craft = re.search(r'dungeon_crafting_unlocks\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not craft or not all(part in craft.group(1) for part in (
+    '["Gordok Ogre Suit"]', 'professions = { Tailoring = true, Leatherworking = true }',
+    'quest_id = 5518', 'skill = 275', 'Gordok Shackle Key',
+    '8 Rugged Leather', '4 Bolts of Runecloth', '2 Rune Thread',
+    '1 Ogre Tannin', 'Gordok Bushwacker', 'no pattern item',
+)):
+    errors.append("Gordok Ogre Suit dungeon crafting unlock incomplete")
+if not all(part in ui for part in (
+    'MTSL_ZONE_WORKFLOWS.dungeon_crafting_unlocks',
+    'self:AddSource(sources, "Quest / trainer", "Knot Thimblejack (DM)")',
+    'local crafting = crafting_db and crafting_db[entry.name]',
+    'crafting.professions[entry.profession]',
+    'DUNGEON CRAFTING UNLOCK:',
+)):
+    errors.append("Gordok Ogre Suit source or acquisition details not integrated")
+if source_scope and ("crafting_db and crafting_db[entry.name]" in source_scope.group(1)):
+    errors.append("Knot recipe detail code must not be inserted into GetSources")
+if detail_scope and "crafting_db and crafting_db[entry.name]" not in detail_scope.group(1):
+    errors.append("Knot crafting unlock not in DetailLines")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 128 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop); no missing keys, mismatches or duplicates")
+print("PASS: 129 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop, 1 Dire Maul North two-profession crafting unlock); no missing keys, mismatches or duplicates")

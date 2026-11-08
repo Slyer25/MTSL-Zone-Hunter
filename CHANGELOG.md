@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.37 — 2026-11-08
+- Runn Tum Tuber Surprise: promoted Pusillin's recorded mob drop and coordinates to the top of the acquisition details; removed the duplicate source and recipe item lines; shortened the chase/loot/ingredient instructions to avoid a nearly empty second details page.
+- Integrated the original Vanilla Gordok Ogre Suit crafting unlock at Knot Thimblejack in Dire Maul North under Feralas for Tailoring 275 and Leatherworking 275.
+- Documented the prerequisite The Gordok Ogre Suit quest (5518), its original full material requirements, the Ogre Tannin basket, and the important order: finish the suit quest and learn from Knot before freeing him with the Gordok Shackle Key.
+- Documented the half-material crafting recipe learned directly through Knot's dialogue (no recipe item).
+- Expanded audit to 129 reviewed acquisition workflows. Existing UI layout, specialization logic, other recipe source records and character learned status unchanged. New display awaits in-game verification.
+
 ## V5.8.36 — 2026-11-07
 - Goldthorn Tea: moved Henry Stern's Razorfen Downs location into the main acquisition instructions, shortened repetitive steps, and suppressed the duplicate TRAINERS footer for this recipe only, targeting a single details page.
 - Integrated Runn Tum Tuber Surprise (Cooking 275): indexed Pusillin (DM) under Feralas and documented the Dire Maul East chase, recipe-item drop, learning requirement and Warpwood Pod ingredients.

@@ -180,6 +180,14 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         self:AddSource(sources, "Mob drop", "Pusillin (DM)")
         return sources
     end
+    local crafting_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_crafting_unlocks
+    local crafting = crafting_db and crafting_db[self:Name(skill)]
+    if crafting and crafting.professions[profession]
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == crafting.zone then
+        self:AddSource(sources, "Quest / trainer", "Knot Thimblejack (DM)")
+        -- One reviewed acquisition route; avoid duplicate upstream quest text.
+        return sources
+    end
     local lesson_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_npc_lessons
     local lesson = lesson_db and lesson_db[self:Name(skill)]
     if lesson and lesson.profession == profession
@@ -452,7 +460,8 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             or (entry.profession == "Blacksmithing" and entry.name == "Sulfuron Hammer" and tonumber(id) == 7604)
                             -- The documented Scepter chain is already shown in full above.
                             or (entry.profession == "Cooking" and entry.name == "Dirge's Kickin' Chimaerok Chops" and tonumber(id) == 8586)
-                            or (entry.profession == "Cooking" and entry.name == "Smoked Desert Dumplings" and tonumber(id) == 8313)) then
+                            or (entry.profession == "Cooking" and entry.name == "Smoked Desert Dumplings" and tonumber(id) == 8313)
+                            or (entry.name == "Gordok Ogre Suit" and (entry.profession == "Tailoring" or entry.profession == "Leatherworking") and tonumber(id) == 5518)) then
                             add("  Quest prerequisites not verified; earlier steps may be required")
                         end
                     end
@@ -492,7 +501,8 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     -- Keep the confirmed dungeon drop visible on the first details page for
     -- this schematic, instead of repeating it after the custom instructions.
     local promote_jumper_drops = entry.name == "Goblin Jumper Cables XL" and entry.profession == "Engineering"
-    if promote_jumper_drops and entry.skill.items then
+    local promote_pusillin_drops = entry.name == "Runn Tum Tuber Surprise" and entry.profession == "Cooking"
+    if (promote_jumper_drops or promote_pusillin_drops) and entry.skill.items then
         for _, item_id in pairs(entry.skill.items) do
             local item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(item_id, entry.profession)
             if item and item.drops and item.drops.sources then
@@ -561,10 +571,17 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local dungeon_guide = dungeon_guides and dungeon_guides[entry.name]
     if dungeon_guide and dungeon_guide.profession == entry.profession then
         add((dungeon_guide.kind == "recipe" and "DUNGEON RECIPE: " or "DUNGEON SCHEMATIC: ") .. dungeon_guide.item)
-        if not promote_jumper_drops then
+        if not promote_jumper_drops and not promote_pusillin_drops then
             add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)
         end
         for n, step in ipairs(dungeon_guide.steps) do add("  " .. n .. ". " .. step) end
+    end
+    local crafting_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.dungeon_crafting_unlocks
+    local crafting = crafting_db and crafting_db[entry.name]
+    if crafting and crafting.professions[entry.profession] then
+        add("DUNGEON CRAFTING UNLOCK: " .. crafting.npc .. " - " .. crafting.dungeon)
+        add("  Requirement: " .. entry.profession .. " " .. tostring(crafting.skill))
+        for n, step in ipairs(crafting.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
     if skill.trainers and not frost and entry.name ~= "Goldthorn Tea" then
@@ -577,7 +594,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         for _, item_id in pairs(skill.items) do
             local item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(item_id, entry.profession)
             if item then
-                add("RECIPE ITEM: " .. self:Name(item))
+                if not promote_pusillin_drops then
+                    add("RECIPE ITEM: " .. self:Name(item))
+                end
                 local item_reputation = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.thorium_item_reputation
                 local item_rank = item_reputation and item_reputation[self:Name(item)]
                 if item_rank then
@@ -677,7 +696,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         add("  Potential zone based on zone level overlap only")
                         add("  Individual mob drop table is not verified")
                     else
-                        if not promote_jumper_drops then
+                        if not promote_jumper_drops and not promote_pusillin_drops then
                             add("KNOWN MOB DROPS (all recorded zones):")
                             npc_list(item.drops.sources, "Mob")
                         end

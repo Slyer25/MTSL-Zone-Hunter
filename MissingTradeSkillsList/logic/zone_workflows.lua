@@ -377,11 +377,9 @@ MTSL_ZONE_WORKFLOWS = {
             dungeon = "Dire Maul East",
             item = "Recipe: Runn Tum Tuber Surprise",
             steps = {
-                "Enter Dire Maul East in Feralas; the eastern entrance does not require the Crescent Key.",
-                "Speak to Pusillin near the entrance. Follow him and speak again whenever he stops.",
-                "After the final conversation, defeat the now-hostile Pusillin and loot the recipe item.",
-                "Use the Bind-on-Pickup recipe with Cooking 275 to learn Runn Tum Tuber Surprise.",
-                "Runn Tum Tubers for cooking can be found in Warpwood Pods within Dire Maul East."
+                "Enter Dire Maul East; no Crescent Key is needed. Talk to Pusillin and follow him.",
+                "Speak at each stop; defeat him when he turns hostile to loot the Bind-on-Pickup recipe.",
+                "Learn it with Cooking 275. Find Runn Tum Tubers in Warpwood Pods in Dire Maul East."
             },
             reference = "wowhead.com/classic/spell=22761/runn-tum-tuber-surprise"
         },
@@ -480,6 +478,28 @@ MTSL_ZONE_WORKFLOWS = {
                 "Alternatively, Recipe: Mighty Troll\'s Blood Potion can drop from level-appropriate enemies; that route is not specific to Razorfen Downs."
             },
             reference = "wowhead.com/classic/npc=8696/henry-stern"
+        }
+    },
+    -- Original Vanilla Dire Maul North crafting training, available to two
+    -- different professions after Knot Thimblejack's Ogre Suit quest.
+    dungeon_crafting_unlocks = {
+        ["Gordok Ogre Suit"] = {
+            zone = "Feralas",
+            dungeon = "Dire Maul North",
+            npc = "Knot Thimblejack",
+            skill = 275,
+            professions = { Tailoring = true, Leatherworking = true },
+            quest_id = 5518,
+            steps = {
+                "Find Knot Thimblejack captive in Dire Maul North, Gordok Commons.",
+                "Before using a Gordok Shackle Key to free him, complete The Gordok Ogre Suit quest.",
+                "Bring him 8 Rugged Leather, 4 Bolts of Runecloth, 2 Rune Thread and 1 Ogre Tannin.",
+                "Find Ogre Tannin in a basket upstairs; looting it summons a Gordok Bushwacker.",
+                "After turning in the suit quest, speak to Knot again with Tailoring or Leatherworking 275.",
+                "Select his profession dialogue to learn the suit directly; no pattern item is required.",
+                "The learned recipe uses half the leather, cloth and thread: 4 Leather, 2 Bolts, 1 Thread and 1 Tannin."
+            },
+            reference = "warcraft.wiki.gg/wiki/Gordok_Ogre_Suit"
         }
     },
     -- Access notes describe reaching the source, not learning prerequisites.
