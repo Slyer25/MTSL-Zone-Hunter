@@ -658,8 +658,49 @@ if source_scope and ("crafting_db and crafting_db[entry.name]" in source_scope.g
 if detail_scope and "crafting_db and crafting_db[entry.name]" not in detail_scope.group(1):
     errors.append("Knot crafting unlock not in DetailLines")
 
+# Gordok has two distinct thresholds: 275 for Knot's dialogue and the
+# upstream MTSL crafting skill displayed for each profession (e.g. 285).
+if not all(x in ui for x in (
+    'local is_gordok = entry.name == "Gordok Ogre Suit"',
+    'is_gordok and "  |  Crafting skill: "',
+    'local skill_label = is_gordok and "CRAFTING SKILL" or "SKILL"',
+    'LEARNING FROM KNOT: ',
+    'CRAFTING REQUIREMENT (MTSL): ',
+    'tostring(crafting.skill)', 'tostring(entry.min_skill)',
+)):
+    errors.append("Gordok learning-versus-crafting skill distinction missing")
+
+# Original Classic Knot Thimblejack's Cache: NOT the tribute chest, and
+# no specific pattern is guaranteed. Only reviewed pattern names are matched.
+cache_map = re.search(r'knot_cache_recipes\s*=\s*\{(.*?)\n    \},', data, re.S)
+cache_flow = re.search(r'knot_cache_access\s*=\s*\{(.*?)\n    \},', data, re.S)
+cache_expected = (
+    'Chromatic Cloak', 'Hide of the Wild', 'Shifting Cloak',
+    'Girdle of Insight', 'Mongoose Boots', 'Swift Flight Bracers',
+    'Belt of the Archmage', 'Cloak of Warding', 'Inferno Gloves',
+    'Felcloth Gloves', 'Mooncloth Gloves',
+)
+if not cache_map or not all('["' + name + '"]' in cache_map.group(1) for name in cache_expected):
+    errors.append("Knot cache's 11 classic pattern mappings missing")
+if not cache_flow or not all(x in cache_flow.group(1) for x in (
+    'Dire Maul North', 'Gordok Shackle Key', 'Free Knot!',
+    'BEFORE freeing Knot', 'CHANCE', 'NOT the separate Gordok Tribute chest',
+)):
+    errors.append("Knot cache unlock instructions or chance distinction missing")
+if not all(x in ui for x in (
+    'MTSL_ZONE_WORKFLOWS.knot_cache_recipes',
+    'MTSL_ZONE_WORKFLOWS.knot_cache_access',
+    'cache_map[entry.name] == entry.profession',
+    'DUNGEON CACHE: ',
+)):
+    errors.append("Knot cache recipe detail matching missing")
+if source_scope and ('cache_map[entry.name]' in source_scope.group(1)):
+    errors.append("Knot cache acquisition details must not be inserted into GetSources")
+if detail_scope and ('cache_map[entry.name]' not in detail_scope.group(1)):
+    errors.append("Knot cache acquisition details missing from DetailLines")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 129 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop, 1 Dire Maul North two-profession crafting unlock); no missing keys, mismatches or duplicates")
+print("PASS: 140 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop, 1 Dire Maul North two-profession crafting unlock, 11 Knot cache patterns); no missing keys, mismatches or duplicates")

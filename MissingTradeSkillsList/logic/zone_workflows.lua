@@ -502,6 +502,35 @@ MTSL_ZONE_WORKFLOWS = {
             reference = "warcraft.wiki.gg/wiki/Gordok_Ogre_Suit"
         }
     },
+    -- Knot Thimblejack's Cache is the optional loot from Free Knot!
+    -- after supplying a Gordok Shackle Key. It is not Gordok Tribute.
+    knot_cache_recipes = {
+        ["Chromatic Cloak"] = "Leatherworking",
+        ["Hide of the Wild"] = "Leatherworking",
+        ["Shifting Cloak"] = "Leatherworking",
+        ["Girdle of Insight"] = "Leatherworking",
+        ["Mongoose Boots"] = "Leatherworking",
+        ["Swift Flight Bracers"] = "Leatherworking",
+        ["Belt of the Archmage"] = "Tailoring",
+        ["Cloak of Warding"] = "Tailoring",
+        ["Inferno Gloves"] = "Tailoring",
+        ["Felcloth Gloves"] = "Tailoring",
+        ["Mooncloth Gloves"] = "Tailoring"
+    },
+    knot_cache_access = {
+        zone = "Feralas",
+        dungeon = "Dire Maul North",
+        source = "Knot Thimblejack's Cache",
+        steps = {
+            "Enter Dire Maul North and find Knot Thimblejack held captive by the Gordok ogres.",
+            "Obtain a Gordok Shackle Key from the ogres in the instance.",
+            "If you also want the Gordok Ogre Suit quest or crafting lesson, finish those BEFORE freeing Knot.",
+            "Turn in Free Knot! with the key; Knot leaves his cache behind.",
+            "Open Knot Thimblejack's Cache for a CHANCE at a Tailoring or Leatherworking pattern; no particular pattern is guaranteed.",
+            "This is Knot's cache, NOT the separate Gordok Tribute chest."
+        },
+        reference = "warcraft.wiki.gg/wiki/Knot_Thimblejack's_Cache"
+    },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {
         ["Annora"] = {

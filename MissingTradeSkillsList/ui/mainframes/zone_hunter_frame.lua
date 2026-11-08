@@ -470,17 +470,20 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         end
     end
     add("SELECTED ZONE: " .. self:Name(self.zones[self.zone_index]))
-    add("PROFESSION: " .. entry.profession .. "  |  Skill: " .. tostring(entry.min_skill))
+    local is_gordok = entry.name == "Gordok Ogre Suit"
+        and (entry.profession == "Tailoring" or entry.profession == "Leatherworking")
+    add("PROFESSION: " .. entry.profession .. (is_gordok and "  |  Crafting skill: " or "  |  Skill: ") .. tostring(entry.min_skill))
     add(entry.learned and "STATUS: Learned" or (entry.trained and "STATUS: Missing" or "STATUS: Profession not learned"))
     local current, needed, spec, known = self:Requirements(entry.profession, entry.skill)
+    local skill_label = is_gordok and "CRAFTING SKILL" or "SKILL"
     if not entry.trained then
         add("REQUIREMENT: Learn the profession first")
     elseif current and current < needed then
-        add("LOCKED - SKILL: " .. tostring(current) .. "/" .. tostring(needed))
+        add("LOCKED - " .. skill_label .. ": " .. tostring(current) .. "/" .. tostring(needed))
     elseif current then
-        add("SKILL: " .. tostring(current) .. "/" .. tostring(needed) .. " (requirement met)")
+        add(skill_label .. ": " .. tostring(current) .. "/" .. tostring(needed) .. " (requirement met)")
     else
-        add("SKILL: current level unavailable; required " .. tostring(needed))
+        add(skill_label .. ": current level unavailable; required " .. tostring(needed))
     end
     if spec then
         if known then
@@ -580,8 +583,18 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local crafting = crafting_db and crafting_db[entry.name]
     if crafting and crafting.professions[entry.profession] then
         add("DUNGEON CRAFTING UNLOCK: " .. crafting.npc .. " - " .. crafting.dungeon)
-        add("  Requirement: " .. entry.profession .. " " .. tostring(crafting.skill))
+        add("  LEARNING FROM KNOT: " .. entry.profession .. " " .. tostring(crafting.skill))
+        add("  CRAFTING REQUIREMENT (MTSL): " .. entry.profession .. " " .. tostring(entry.min_skill))
         for n, step in ipairs(crafting.steps) do add("  " .. n .. ". " .. step) end
+    end
+    -- Exact recorded cache recipes only: source is Free Knot!, not tribute.
+    local cache_map = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.knot_cache_recipes
+    local cache = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.knot_cache_access
+    local selected_zone = self.zones[self.zone_index]
+    if cache and cache_map and cache_map[entry.name] == entry.profession
+        and selected_zone and self:Name(selected_zone) == cache.zone then
+        add("DUNGEON CACHE: " .. cache.source .. " - " .. cache.dungeon)
+        for n, step in ipairs(cache.steps) do add("  " .. n .. ". " .. step) end
     end
     local skill = entry.skill
     if skill.trainers and not frost and entry.name ~= "Goldthorn Tea" then

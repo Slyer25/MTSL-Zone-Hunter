@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.38 — 2026-11-08
+- Gordok Ogre Suit: distinguish Tailoring/Leatherworking skill 275 to learn directly from Knot from the profession-specific crafting-skill requirement recorded by MTSL (e.g., 285 for Tailoring). The skill status is explicitly labeled as crafting skill for this recipe; other recipes are unchanged.
+- Added documented Knot Thimblejack's Cache acquisition route for 11 Classic Tailoring and Leatherworking patterns in Dire Maul North under Feralas.
+- Explain obtaining a Gordok Shackle Key, completing Free Knot!, looting the cache, and the chance-based nature of its recipe rewards. Warn to finish the Gordok Ogre Suit crafting lesson before freeing Knot.
+- Distinguish Knot's Cache from the separate Gordok Tribute chest. Source objects, learned-state tracking and tested UI layout remain unchanged.
+- Static audit expanded to 140 mapped acquisition records. New wording awaits in-game verification.
+
 ## V5.8.37 — 2026-11-08
 - Runn Tum Tuber Surprise: promoted Pusillin's recorded mob drop and coordinates to the top of the acquisition details; removed the duplicate source and recipe item lines; shortened the chase/loot/ingredient instructions to avoid a nearly empty second details page.
 - Integrated the original Vanilla Gordok Ogre Suit crafting unlock at Knot Thimblejack in Dire Maul North under Feralas for Tailoring 275 and Leatherworking 275.
