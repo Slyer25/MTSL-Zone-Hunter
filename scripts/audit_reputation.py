@@ -438,8 +438,8 @@ if not all(part in ui for part in (
 # workflow, and avoid duplicating the drop on a subsequent details page.
 if not all(part in ui for part in (
     'local promote_jumper_drops = entry.name == "Goblin Jumper Cables XL"',
-    'if promote_jumper_drops and entry.skill.items then',
-    'if not promote_jumper_drops then',
+    'if (promote_jumper_drops or promote_pusillin_drops) and entry.skill.items then',
+    'if not promote_jumper_drops and not promote_pusillin_drops then',
 )):
     errors.append("Jumper Cables XL known mob drop must be promoted without duplication")
 if 'Loot and use the schematic item to learn the recipe; defeating Plugger' in data:
@@ -448,7 +448,7 @@ if 'Loot and use the schematic item to learn the recipe; defeating Plugger' in d
 # Goblin Jumper Cables XL must not repeat the mob source or leave a
 # standalone generic progress reminder after the specialization workflow.
 if not all(fragment in ui for fragment in (
-    'if not promote_jumper_drops then',
+    'if not promote_jumper_drops and not promote_pusillin_drops then',
     'add("  Source: " .. dungeon_guide.source .. " - " .. dungeon_guide.dungeon)',
     'promote_jumper_drops and string.find(line, "Progress is not automatically verified", 1, true)',
 )):
