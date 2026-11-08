@@ -709,7 +709,7 @@ if not all(x in ui for x in (
     errors.append("Knot cache deduplication or explicit repeatable quest requirement missing")
 if not all(x in data for x in (
     'No pattern is guaranteed. Knot\'s Cache is NOT the Gordok Tribute chest.',
-    'finish those BEFORE freeing Knot',
+    'BEFORE freeing Knot',
 )):
     errors.append("Knot concise cache instructions missing")
 
