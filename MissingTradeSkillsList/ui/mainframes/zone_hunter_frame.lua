@@ -415,7 +415,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         end
     end
     local visited = {}
+    local is_thistle = entry.name == "Thistle Tea" and entry.profession == "Cooking"
     local function quests(ids)
+        -- Both original Rogue quest rewards are described in the zone-specific
+        -- workflow below. Avoid duplicate upstream quest labels and warnings.
+        if is_thistle then return end
         if not ids and entry.name ~= "Restorative Potion" then return end
         local qdb = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.quest_conditions
         local player_faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
@@ -735,7 +739,13 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         end
                     end
                     if not found_requirement and not item_rank then
-                        add("VENDOR AVAILABILITY: unlocks/stock not verified; quest or reputation may be required")
+                        if is_thistle then
+                            -- Keep the vendor as an alternative, but do not suggest
+                            -- unrelated reputation gating for a Rogue quest recipe.
+                            add("  Rogue vendor stock may require the class quest.")
+                        else
+                            add("VENDOR AVAILABILITY: unlocks/stock not verified; quest or reputation may be required")
+                        end
                     end
                 end
                 quests(item.quests)

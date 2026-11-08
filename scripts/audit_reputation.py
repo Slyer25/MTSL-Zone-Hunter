@@ -737,6 +737,16 @@ if source_scope and ('entry.name == "Thistle Tea"' in source_scope.group(1)):
     errors.append("Thistle Tea details must not reference entry in GetSources")
 if detail_scope and 'ROGUE QUEST REWARD:' not in detail_scope.group(1):
     errors.append("Thistle Tea quest workflow missing from DetailLines")
+# The source DB restricts Rogue-only Cooking acquisition. Do not bypass
+# ClassAllows: instead remove duplicate quest warnings inside details only.
+if not all(x in ui for x in (
+    'if self:ClassAllows(profession, skill) and (self.show_all or not learned) then',
+    'local is_thistle = entry.name == "Thistle Tea" and entry.profession == "Cooking"',
+    'if is_thistle then return end',
+    'if is_thistle then',
+    'Rogue vendor stock may require the class quest.',
+)):
+    errors.append("Thistle Tea class restriction, duplicate quest cleanup or vendor note missing")
 
 if errors:
     for error in errors:

@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.40 — 2026-11-08
+- Thistle Tea: preserve Rogue-only filtering in the standard Vanilla 1.12 dataset; non-Rogue visibility is intentionally excluded by the recipe class restriction, independent of the learned/unknown Cooking state.
+- Suppress duplicated generic quest listings and unverified-prerequisite warnings for the two fully documented Rogue acquisition routes, retaining the correct local faction walkthrough and the other-faction reference.
+- Preserve Smudge Thunderwood as an alternate recipe vendor without showing the unrelated generic quest-or-reputation stock warning; note the potential Rogue class-quest dependency pending in-game verification.
+- Add targeted static regression checks. No changes to saved recipe tracking, unrelated class filters or other acquisition data; in-game verification pending.
+
 ## V5.8.39 — 2026-11-08
 - Gordok Ogre Suit: replace the unhelpful generic 5519 prerequisite warning with the precise repeatable-quest requirement to first finish original quest 5518; the learning/crafting skill distinction stays intact.
 - Knot Thimblejack's Cache: reduce 6 verbose instructions to 4 compact steps, explicitly retain the chance-based cache reward and the Gordok Tribute distinction; avoid repeating the source's generic object location while retaining the actual recipe item and any specialization unlock steps.
