@@ -2,6 +2,22 @@
 -- Only record a source-specific unlock as verified when documented or tested.
 -- Comments are notes for researchers, not proof of universal game behavior.
 MTSL_ZONE_WORKFLOWS = {
+    -- Reviewed Vanilla Cooking vendors: preserve any additional MTSL sources.
+    tanaris_cooking_vendors = {
+        ["Undermine Clam Chowder"] = {profession = "Cooking", skill = 225, zone = "Tanaris",
+            sellers = {"Jabbey"}, location = "Steamwheedle Port", limited = true},
+        ["Spotted Yellowtail"] = {profession = "Cooking", skill = 225, zone = "Tanaris",
+            sellers = {"Gikkix"}, location = "Steamwheedle Port"},
+        ["Grilled Squid"] = {profession = "Cooking", skill = 240, zone = "Tanaris",
+            sellers = {"Gikkix"}, location = "Steamwheedle Port"},
+        ["Nightfin Soup"] = {profession = "Cooking", skill = 250, zone = "Tanaris",
+            sellers = {"Gikkix"}, location = "Steamwheedle Port"},
+        ["Poached Sunscale Salmon"] = {profession = "Cooking", skill = 250, zone = "Tanaris",
+            sellers = {"Gikkix"}, location = "Steamwheedle Port"},
+        ["Tender Wolf Steak"] = {profession = "Cooking", skill = 225, zone = "Tanaris",
+            sellers = {"Dirge Quikcleave", "Innkeeper Fizzgrimble"}, location = "Gadgetzan"}
+    },
+    -- Vendor records sourced from wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
     -- Original Vanilla zone-specific recipe drop. This is not a confirmed
     -- individual NPC loot table, and no modern post-Cataclysm rate is used.
     zone_drop_recipes = {
@@ -9,9 +25,9 @@ MTSL_ZONE_WORKFLOWS = {
             profession = "Cooking", zone = "The Barrens", skill = 85,
             source = "Rare zone drop",
             steps = {
-                "Defeat eligible creatures outdoors in The Barrens for a rare chance at Recipe: Savory Deviate Delight.",
-                "This is a zone-wide random drop, not a guaranteed drop from a named creature.",
-                "Use the recipe item with Cooking 85 to learn it; it may also be traded or obtained from the Auction House."
+                "Rare random drop from creatures outdoors in The Barrens; no named mob is guaranteed.",
+                "Alternatively, trade for Recipe: Savory Deviate Delight or check the Auction House.",
+                "Use the recipe item with Cooking 85 to learn it."
             },
             reference = "wowclassicdatabase.com/item/recipe-savory-deviate-delight"
         }

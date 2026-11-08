@@ -173,6 +173,12 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
+    local cooking_vendors = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors
+    local cooking_vendor = cooking_vendors and cooking_vendors[self:Name(skill)]
+    if cooking_vendor and cooking_vendor.profession == profession
+        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == cooking_vendor.zone then
+        for _, seller in ipairs(cooking_vendor.sellers) do self:AddSource(sources, "Vendor", seller) end
+    end
     local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
     local zone_drop = zone_drop_db and zone_drop_db[self:Name(skill)]
     if zone_drop and zone_drop.profession == profession then
@@ -428,6 +434,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
     local zone_drop = zone_drop_db and zone_drop_db[entry.name]
     local is_zone_drop = zone_drop and zone_drop.profession == entry.profession
+    local cooking_vendors = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors
+    local cooking_vendor = cooking_vendors and cooking_vendors[entry.name]
+    local selected_zone_name = self.zones[self.zone_index] and self:Name(self.zones[self.zone_index])
+    local has_cooking_vendor = cooking_vendor and cooking_vendor.profession == entry.profession
+        and selected_zone_name == cooking_vendor.zone
     local is_thistle = entry.name == "Thistle Tea" and entry.profession == "Cooking"
     local function quests(ids)
         -- Both original Rogue quest rewards are described in the zone-specific
@@ -651,6 +662,16 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             end
         end
     end
+    if has_cooking_vendor then
+        add("DOCUMENTED TANARIS VENDOR:")
+        for _, seller in ipairs(cooking_vendor.sellers) do
+            add("  " .. seller .. " - " .. cooking_vendor.location)
+        end
+        if cooking_vendor.limited then
+            add("  LIMITED STOCK: If sold out, check again after vendor restock.")
+        end
+        add("  Buy and use the recipe item with Cooking " .. tostring(cooking_vendor.skill) .. ".")
+    end
     if is_zone_drop then
         add("ZONE DROP: " .. zone_drop.zone .. " (" .. zone_drop.source .. ")")
         for n, step in ipairs(zone_drop.steps) do add("  " .. n .. ". " .. step) end
@@ -687,6 +708,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         local vendor = MTSL_LOGIC_PLAYER_NPC:GetNpcById(vid)
                         if vendor then
                             local vendor_name = self:Name(vendor)
+                            if has_cooking_vendor then
+                                for _, seller in ipairs(cooking_vendor.sellers) do
+                                    if vendor_name == seller then found_requirement = true; break end
+                                end
+                            end
                             local cond = by_item and by_item[vendor_name]
                             local item_access = workflows and workflows.item_vendor_access
                             local access_by_vendor = item_access and item_access[self:Name(item)]
@@ -755,7 +781,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             end
                         end
                     end
-                    if not found_requirement and not item_rank then
+                    if not found_requirement and not item_rank and not has_cooking_vendor then
                         if is_thistle then
                             -- Keep the vendor as an alternative, but do not suggest
                             -- unrelated reputation gating for a Rogue quest recipe.

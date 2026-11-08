@@ -713,6 +713,30 @@ if not all(x in data for x in (
 )):
     errors.append("Knot concise cache instructions missing")
 
+# Tanaris Cooking vendors: six zone-indexed recipes, no generic unknown stock
+# warnings for reviewed sellers; Jabbey has limited stock.
+tanaris = re.search(r'tanaris_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not tanaris or not all(x in tanaris.group(1) for x in (
+    'Undermine Clam Chowder', 'Jabbey', 'limited = true',
+    'Spotted Yellowtail', 'Grilled Squid', 'Nightfin Soup',
+    'Poached Sunscale Salmon', 'Tender Wolf Steak',
+    'Gikkix', 'Dirge Quikcleave', 'Innkeeper Fizzgrimble',
+)):
+    errors.append("Tanaris Cooking vendor integration incomplete")
+if not all(x in ui for x in (
+    'MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors',
+    'self:AddSource(sources, "Vendor", seller)',
+    'if has_cooking_vendor then',
+    'LIMITED STOCK: If sold out',
+    'and not has_cooking_vendor then',
+)):
+    errors.append("Tanaris Cooking vendor indexing/details/fallback missing")
+if not all(x in data for x in (
+    'Rare random drop from creatures outdoors in The Barrens',
+    'Alternatively, trade for Recipe: Savory Deviate Delight',
+)):
+    errors.append("Savory Deviate Delight concise instructions missing")
+
 # Savory Deviate Delight is a rare Barrens zone drop, not a generic level
 # overlap in every zone. The full route is added without touching other drops.
 zone_drop = re.search(r'zone_drop_recipes\s*=\s*\{(.*?)\n    \},', data, re.S)

@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.42 — 2026-11-08
+- Savory Deviate Delight: shorten the Barrens rare-drop acquisition description; distinguish rare zone-level loot from guaranteed individual NPC drops while preserving trading and Cooking 85 guidance.
+- Integrate six Tanaris Cooking recipes with reviewed vendor records: Jabbey's limited-stock Undermine Clam Chowder, Gikkix's Spotted Yellowtail, Grilled Squid, Nightfin Soup and Poached Sunscale Salmon, plus Tender Wolf Steak from Dirge Quikcleave and Innkeeper Fizzgrimble.
+- Keep the vendor source geographical and retain upstream additional sellers; remove unverified generic vendor-stock warnings for these six reviewed Tanaris recipes.
+- Add regression checks; unchanged global class filtering, learned-state tracking and original profession data. Awaiting in-game verification.
+
 ## V5.8.41 — 2026-11-08
 - Savory Deviate Delight (Cooking 85): replace the generic level-overlap estimate with a researched rare zone-drop source specifically in The Barrens; do not claim an individual mob is a guaranteed source.
 - Add concise acquisition guidance for obtaining and using Recipe: Savory Deviate Delight, including trading as an alternative. Preserve the original recipe item and learned/untrained handling.
