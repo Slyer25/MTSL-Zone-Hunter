@@ -713,6 +713,23 @@ if not all(x in data for x in (
 )):
     errors.append("Knot concise cache instructions missing")
 
+# Savory Deviate Delight is a rare Barrens zone drop, not a generic level
+# overlap in every zone. The full route is added without touching other drops.
+zone_drop = re.search(r'zone_drop_recipes\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not zone_drop or not all(x in zone_drop.group(1) for x in (
+    '["Savory Deviate Delight"]', 'profession = "Cooking"',
+    'zone = "The Barrens"', 'skill = 85', 'Rare zone drop',
+    'not a guaranteed drop', 'Recipe: Savory Deviate Delight',
+)):
+    errors.append("Savory Deviate Delight zone drop record incomplete")
+if not all(x in ui for x in (
+    'MTSL_ZONE_WORKFLOWS.zone_drop_recipes',
+    'self:AddSource(sources, zone_drop.source, zone_drop.zone)',
+    'if is_zone_drop then',
+    'if item.drops and not is_zone_drop then',
+)):
+    errors.append("Savory Deviate Delight zone indexing or generic drop suppression missing")
+
 # Both Vanilla faction quest rewards produce Recipe: Thistle Tea, rather
 # than granting the Cooking skill directly; source zones are quest objectives.
 thistle = re.search(r'rogue_thistle_tea\s*=\s*\{(.*?)\n    \},', data, re.S)

@@ -2,6 +2,20 @@
 -- Only record a source-specific unlock as verified when documented or tested.
 -- Comments are notes for researchers, not proof of universal game behavior.
 MTSL_ZONE_WORKFLOWS = {
+    -- Original Vanilla zone-specific recipe drop. This is not a confirmed
+    -- individual NPC loot table, and no modern post-Cataclysm rate is used.
+    zone_drop_recipes = {
+        ["Savory Deviate Delight"] = {
+            profession = "Cooking", zone = "The Barrens", skill = 85,
+            source = "Rare zone drop",
+            steps = {
+                "Defeat eligible creatures outdoors in The Barrens for a rare chance at Recipe: Savory Deviate Delight.",
+                "This is a zone-wide random drop, not a guaranteed drop from a named creature.",
+                "Use the recipe item with Cooking 85 to learn it; it may also be traded or obtained from the Auction House."
+            },
+            reference = "wowclassicdatabase.com/item/recipe-savory-deviate-delight"
+        }
+    },
     specialisations = {
         ["Tribal Leatherworking"] = {
             confidence = "DOCUMENTED (Classic guides; not yet tested in this addon)",

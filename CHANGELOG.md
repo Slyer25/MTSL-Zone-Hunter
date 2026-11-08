@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.41 — 2026-11-08
+- Savory Deviate Delight (Cooking 85): replace the generic level-overlap estimate with a researched rare zone-drop source specifically in The Barrens; do not claim an individual mob is a guaranteed source.
+- Add concise acquisition guidance for obtaining and using Recipe: Savory Deviate Delight, including trading as an alternative. Preserve the original recipe item and learned/untrained handling.
+- Suppress the duplicate generic world-drop detail for this exact recipe only. Add static regression checks; no unrelated class, profession, zone or saved-data changes. In-game verification pending.
+
 ## V5.8.40 — 2026-11-08
 - Thistle Tea: preserve Rogue-only filtering in the standard Vanilla 1.12 dataset; non-Rogue visibility is intentionally excluded by the recipe class restriction, independent of the learned/unknown Cooking state.
 - Suppress duplicated generic quest listings and unverified-prerequisite warnings for the two fully documented Rogue acquisition routes, retaining the correct local faction walkthrough and the other-faction reference.

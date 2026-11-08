@@ -173,6 +173,16 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
+    local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
+    local zone_drop = zone_drop_db and zone_drop_db[self:Name(skill)]
+    if zone_drop and zone_drop.profession == profession then
+        if MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == zone_drop.zone then
+            self:AddSource(sources, zone_drop.source, zone_drop.zone)
+        end
+        -- Avoid treating this documented zone-specific item as a generic
+        -- mob-level-overlap drop in unrelated geographical zones.
+        return sources
+    end
     local thistle = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.rogue_thistle_tea
     if thistle and profession == thistle.profession and self:Name(skill) == "Thistle Tea" then
         local zone_name = MTSL_LOGIC_WORLD:GetZoneNameById(zone_id)
@@ -415,6 +425,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         end
     end
     local visited = {}
+    local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
+    local zone_drop = zone_drop_db and zone_drop_db[entry.name]
+    local is_zone_drop = zone_drop and zone_drop.profession == entry.profession
     local is_thistle = entry.name == "Thistle Tea" and entry.profession == "Cooking"
     local function quests(ids)
         -- Both original Rogue quest rewards are described in the zone-specific
@@ -638,6 +651,10 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             end
         end
     end
+    if is_zone_drop then
+        add("ZONE DROP: " .. zone_drop.zone .. " (" .. zone_drop.source .. ")")
+        for n, step in ipairs(zone_drop.steps) do add("  " .. n .. ". " .. step) end
+    end
     local skill = entry.skill
     if skill.trainers and not frost and entry.name ~= "Goldthorn Tea" then
         add("TRAINERS:")
@@ -750,7 +767,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                 end
                 quests(item.quests)
                 object_list(item.objects)
-                if item.drops then
+                if item.drops and not is_zone_drop then
                     if item.drops.range then
                         local r = item.drops.range
                         add("WORLD DROP: mob levels " .. tostring(r.min_xp_level or "?") .. "-" .. tostring(r.max_xp_level or "?"))
