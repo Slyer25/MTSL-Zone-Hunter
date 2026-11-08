@@ -173,6 +173,16 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
+    local thistle = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.rogue_thistle_tea
+    if thistle and profession == thistle.profession and self:Name(skill) == "Thistle Tea" then
+        local zone_name = MTSL_LOGIC_WORLD:GetZoneNameById(zone_id)
+        for faction, route in pairs(thistle.routes) do
+            if zone_name == route.zone then
+                self:AddSource(sources, "Rogue quest", route.title .. " (" .. faction .. ")")
+                return sources
+            end
+        end
+    end
     -- Pusillin is a dungeon-specific recipe drop; index explicitly under
     -- Feralas even if the upstream NPC's zone association is absent.
     if profession == "Cooking" and self:Name(skill) == "Runn Tum Tuber Surprise"
@@ -445,6 +455,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                         faction_note = faction_note .. "]"
                     end
                     add("QUEST: " .. self:Name(q) .. " [ID " .. tostring(id) .. "]" .. faction_note)
+                    if entry.name == "Gordok Ogre Suit" and tonumber(id) == 5519 then
+                        add("  REPEATABLE QUEST: First complete The Gordok Ogre Suit [ID 5518].")
+                    end
                     if q.min_xp_level then add("  Minimum character level: " .. tostring(q.min_xp_level)) end
                     npc_list(q.npcs, "Quest NPC")
                     object_list(q.objects)
@@ -461,7 +474,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                             -- The documented Scepter chain is already shown in full above.
                             or (entry.profession == "Cooking" and entry.name == "Dirge's Kickin' Chimaerok Chops" and tonumber(id) == 8586)
                             or (entry.profession == "Cooking" and entry.name == "Smoked Desert Dumplings" and tonumber(id) == 8313)
-                            or (entry.name == "Gordok Ogre Suit" and (entry.profession == "Tailoring" or entry.profession == "Leatherworking") and tonumber(id) == 5518)) then
+                            or (entry.name == "Gordok Ogre Suit" and (entry.profession == "Tailoring" or entry.profession == "Leatherworking") and (tonumber(id) == 5518 or tonumber(id) == 5519))) then
                             add("  Quest prerequisites not verified; earlier steps may be required")
                         end
                     end
@@ -591,10 +604,35 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local cache_map = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.knot_cache_recipes
     local cache = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.knot_cache_access
     local selected_zone = self.zones[self.zone_index]
-    if cache and cache_map and cache_map[entry.name] == entry.profession
-        and selected_zone and self:Name(selected_zone) == cache.zone then
+    local is_knot_cache = cache and cache_map and cache_map[entry.name] == entry.profession
+        and selected_zone and self:Name(selected_zone) == cache.zone
+    if is_knot_cache then
         add("DUNGEON CACHE: " .. cache.source .. " - " .. cache.dungeon)
         for n, step in ipairs(cache.steps) do add("  " .. n .. ". " .. step) end
+    end
+    -- A cache recipe already identifies the precise source and its dungeon.
+    -- Preserve the recipe item but omit the duplicate generic object listing.
+    local thistle_flow = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.rogue_thistle_tea
+    if thistle_flow and entry.name == "Thistle Tea" and entry.profession == thistle_flow.profession then
+        local faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
+        local active_zone = selected_zone and self:Name(selected_zone)
+        local order = { "Alliance", "Horde" }
+        table.sort(order, function(a, b)
+            if (a == faction) ~= (b == faction) then return a == faction end
+            return a < b
+        end)
+        for _, side in ipairs(order) do
+            local route = thistle_flow.routes[side]
+            if route and active_zone == route.zone then
+                local label = " [" .. side
+                if side == faction then label = label .. " - YOUR FACTION"
+                elseif faction then label = label .. " - OTHER FACTION" end
+                add("ROGUE QUEST REWARD: " .. route.title .. " [ID " .. route.quest_id .. "]" .. label .. "]")
+                for n, step in ipairs(route.steps) do add("  " .. n .. ". " .. step) end
+                local other = thistle_flow.routes[side == "Alliance" and "Horde" or "Alliance"]
+                add("  Other faction: " .. other.title .. " (" .. other.zone .. ").")
+            end
+        end
     end
     local skill = entry.skill
     if skill.trainers and not frost and entry.name ~= "Goldthorn Tea" then
@@ -602,7 +640,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         npc_list(skill.trainers.sources, "Trainer")
     end
     if not frost then quests(skill.quests) end
-    object_list(skill.objects)
+    if not is_knot_cache then object_list(skill.objects) end
     if skill.items then
         for _, item_id in pairs(skill.items) do
             local item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(item_id, entry.profession)

@@ -684,7 +684,7 @@ if not cache_map or not all('["' + name + '"]' in cache_map.group(1) for name in
     errors.append("Knot cache's 11 classic pattern mappings missing")
 if not cache_flow or not all(x in cache_flow.group(1) for x in (
     'Dire Maul North', 'Gordok Shackle Key', 'Free Knot!',
-    'BEFORE freeing Knot', 'CHANCE', 'NOT the separate Gordok Tribute chest',
+    'BEFORE freeing Knot', 'chance at this pattern', 'NOT the Gordok Tribute chest',
 )):
     errors.append("Knot cache unlock instructions or chance distinction missing")
 if not all(x in ui for x in (
@@ -699,8 +699,47 @@ if source_scope and ('cache_map[entry.name]' in source_scope.group(1)):
 if detail_scope and ('cache_map[entry.name]' not in detail_scope.group(1)):
     errors.append("Knot cache acquisition details missing from DetailLines")
 
+# Knot's cache-specific cleanup: avoid the duplicate object entry, keep
+# recipe item, and show the documented 5518 -> 5519 repeatable requirement.
+if not all(x in ui for x in (
+    'if not is_knot_cache then object_list(skill.objects) end',
+    'REPEATABLE QUEST: First complete The Gordok Ogre Suit [ID 5518].',
+    'tonumber(id) == 5518 or tonumber(id) == 5519',
+)):
+    errors.append("Knot cache deduplication or explicit repeatable quest requirement missing")
+if not all(x in data for x in (
+    'No pattern is guaranteed. Knot\'s Cache is NOT the Gordok Tribute chest.',
+    'finish those BEFORE freeing Knot',
+)):
+    errors.append("Knot concise cache instructions missing")
+
+# Both Vanilla faction quest rewards produce Recipe: Thistle Tea, rather
+# than granting the Cooking skill directly; source zones are quest objectives.
+thistle = re.search(r'rogue_thistle_tea\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not thistle or not all(x in thistle.group(1) for x in (
+    'profession = "Cooking"', 'skill = 60', 'Recipe: Thistle Tea',
+    'Alliance = {', 'zone = "Duskwood"', 'quest_id = 2359',
+    'Klaven\'s Tower', 'Defias Tower Key', 'Klaven Mortwake\'s Journal',
+    'Horde = {', 'zone = "The Barrens"', 'quest_id = 2478',
+    'Mission: Possible But Not Probable', 'Shenthul', 'Gallywix\'s Head',
+)):
+    errors.append("Thistle Tea faction-specific Rogue quest routes incomplete")
+if not all(x in ui for x in (
+    'MTSL_ZONE_WORKFLOWS.rogue_thistle_tea',
+    'self:AddSource(sources, "Rogue quest", route.title',
+    'entry.name == "Thistle Tea"',
+    'ROGUE QUEST REWARD:',
+    'MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION',
+    'Other faction: ',
+)):
+    errors.append("Thistle Tea source indexing, faction ordering or acquisition details missing")
+if source_scope and ('entry.name == "Thistle Tea"' in source_scope.group(1)):
+    errors.append("Thistle Tea details must not reference entry in GetSources")
+if detail_scope and 'ROGUE QUEST REWARD:' not in detail_scope.group(1):
+    errors.append("Thistle Tea quest workflow missing from DetailLines")
+
 if errors:
     for error in errors:
         print("FAIL:", error)
     sys.exit(1)
-print("PASS: 140 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop, 1 Dire Maul North two-profession crafting unlock, 11 Knot cache patterns); no missing keys, mismatches or duplicates")
+print("PASS: 142 acquisition records audited (107 reputation-based, 6 Magnus quest-gated, 2 Restorative Potion quest variants, 3 Enchanted Thorium quests, 2 Blackrock quest acquisitions, 1 BRD object schematic, 1 Dire Maul tribute schematic, 1 BRD schematic drop, 1 Tanaris epic Cooking quest, 1 Silithus direct-learning Cooking quest, 2 RFD NPC-taught recipes, 1 Dire Maul East recipe drop, 1 Dire Maul North two-profession crafting unlock, 11 Knot cache patterns, 2 Rogue faction quest routes); no missing keys, mismatches or duplicates")

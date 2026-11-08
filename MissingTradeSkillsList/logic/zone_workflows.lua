@@ -522,14 +522,46 @@ MTSL_ZONE_WORKFLOWS = {
         dungeon = "Dire Maul North",
         source = "Knot Thimblejack's Cache",
         steps = {
-            "Enter Dire Maul North and find Knot Thimblejack held captive by the Gordok ogres.",
-            "Obtain a Gordok Shackle Key from the ogres in the instance.",
-            "If you also want the Gordok Ogre Suit quest or crafting lesson, finish those BEFORE freeing Knot.",
-            "Turn in Free Knot! with the key; Knot leaves his cache behind.",
-            "Open Knot Thimblejack's Cache for a CHANCE at a Tailoring or Leatherworking pattern; no particular pattern is guaranteed.",
-            "This is Knot's cache, NOT the separate Gordok Tribute chest."
+            "In Dire Maul North, find captive Knot and obtain a Gordok Shackle Key from an ogre.",
+            "Finish any Gordok Ogre Suit quest and crafting lesson BEFORE freeing Knot.",
+            "Turn in Free Knot! with the key, then open Knot's Cache for a chance at this pattern.",
+            "No pattern is guaranteed. Knot's Cache is NOT the Gordok Tribute chest."
         },
         reference = "warcraft.wiki.gg/wiki/Knot_Thimblejack's_Cache"
+    },
+    -- Original Vanilla Rogue-only Thistle Tea quest rewards. These routes
+    -- are intentionally indexed in the objective zones, with the other
+    -- faction's route kept visible as an alternative in acquisition details.
+    rogue_thistle_tea = {
+        profession = "Cooking",
+        skill = 60,
+        item = "Recipe: Thistle Tea",
+        routes = {
+            Alliance = {
+                zone = "Duskwood",
+                quest_id = 2359,
+                title = "Klaven's Tower",
+                steps = {
+                    "Rogue level 20+: take Mathias and the Defias from Mathias Shaw in Stormwind.",
+                    "Speak to Agent Kearnen in Westfall and accept Klaven's Tower.",
+                    "Pick Pocket the Defias Tower Key from a Malformed Defias Drone.",
+                    "Retrieve Klaven Mortwake's Journal from the Duskwood Chest in the tower.",
+                    "Return to Mathias Shaw in Stormwind for Recipe: Thistle Tea; use it with Cooking 60."
+                }
+            },
+            Horde = {
+                zone = "The Barrens",
+                quest_id = 2478,
+                title = "Mission: Possible But Not Probable",
+                steps = {
+                    "Rogue level 20+: complete the Rogue poison quest introductions, including Deep Cover.",
+                    "In the Sludge Fen, complete Mission: Possible But Not Probable for Taskmaster Fizzule.",
+                    "Obtain Silixiz's Tower Key, Gallywix's Head and the cache of altered mixture.",
+                    "Return to Shenthul in Orgrimmar for Recipe: Thistle Tea; use it with Cooking 60."
+                }
+            }
+        },
+        reference = "wowhead.com/classic/guide/rogue-class-quests-classic-wow"
     },
     -- Access notes describe reaching the source, not learning prerequisites.
     source_access = {

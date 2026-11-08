@@ -2,6 +2,13 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.39 — 2026-11-08
+- Gordok Ogre Suit: replace the unhelpful generic 5519 prerequisite warning with the precise repeatable-quest requirement to first finish original quest 5518; the learning/crafting skill distinction stays intact.
+- Knot Thimblejack's Cache: reduce 6 verbose instructions to 4 compact steps, explicitly retain the chance-based cache reward and the Gordok Tribute distinction; avoid repeating the source's generic object location while retaining the actual recipe item and any specialization unlock steps.
+- Thistle Tea (Cooking 60): integrate the original Rogue-only faction quest-item rewards. Alliance Klaven's Tower (2359) is indexed under Duskwood and Horde Mission: Possible But Not Probable (2478) under The Barrens; retain the other faction's route in the acquisition explanation.
+- Quest instructions distinguish the Rogue item reward from direct profession training, and avoid changing other Thistle Tea vendor/drop sources.
+- Automated regression audit expanded to 142 mapped records; tested interface and global source behavior unchanged. New content requires in-game verification.
+
 ## V5.8.38 — 2026-11-08
 - Gordok Ogre Suit: distinguish Tailoring/Leatherworking skill 275 to learn directly from Knot from the profession-specific crafting-skill requirement recorded by MTSL (e.g., 285 for Tailoring). The skill status is explicitly labeled as crafting skill for this recipe; other recipes are unchanged.
 - Added documented Knot Thimblejack's Cache acquisition route for 11 Classic Tailoring and Leatherworking patterns in Dire Maul North under Feralas.
