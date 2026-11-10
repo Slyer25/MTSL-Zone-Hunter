@@ -177,9 +177,11 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     local tanaris_vendors = db and db.tanaris_cooking_vendors
     local booty_bay_vendors = db and db.booty_bay_cooking_vendors
     local stranglethorn_vendors = db and db.stranglethorn_cooking_vendors
+    local feralas_vendors = db and db.feralas_cooking_vendors
     local cooking_vendor = (tanaris_vendors and tanaris_vendors[self:Name(skill)])
         or (booty_bay_vendors and booty_bay_vendors[self:Name(skill)])
         or (stranglethorn_vendors and stranglethorn_vendors[self:Name(skill)])
+        or (feralas_vendors and feralas_vendors[self:Name(skill)])
     if cooking_vendor and cooking_vendor.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == cooking_vendor.zone then
         for _, seller in ipairs(cooking_vendor.sellers) do self:AddSource(sources, "Vendor", seller) end
@@ -443,9 +445,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local tanaris_vendors = vendor_db and vendor_db.tanaris_cooking_vendors
     local booty_bay_vendors = vendor_db and vendor_db.booty_bay_cooking_vendors
     local stranglethorn_vendors = vendor_db and vendor_db.stranglethorn_cooking_vendors
+    local feralas_vendors = vendor_db and vendor_db.feralas_cooking_vendors
     local cooking_vendor = (tanaris_vendors and tanaris_vendors[entry.name])
         or (booty_bay_vendors and booty_bay_vendors[entry.name])
         or (stranglethorn_vendors and stranglethorn_vendors[entry.name])
+        or (feralas_vendors and feralas_vendors[entry.name])
     local selected_zone_name = self.zones[self.zone_index] and self:Name(self.zones[self.zone_index])
     local has_cooking_vendor = cooking_vendor and cooking_vendor.profession == entry.profession
         and selected_zone_name == cooking_vendor.zone
@@ -677,8 +681,27 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         add("LOCAL VENDORS:")
         -- Show reviewed sellers once, with original MTSL coordinates if present.
         -- The generic list below will retain sellers outside this reviewed zone.
-        for _, seller in ipairs(cooking_vendor.sellers) do
+        local current_faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
+        local ordered_sellers = {}
+        for _, seller in ipairs(cooking_vendor.sellers) do table.insert(ordered_sellers, seller) end
+        table.sort(ordered_sellers, function(a, b)
+            local factions = cooking_vendor.factions or {}
+            local fa, fb = factions[a], factions[b]
+            local pa = fa == current_faction and 0 or (fa == nil and 1 or 2)
+            local pb = fb == current_faction and 0 or (fb == nil and 1 or 2)
+            if pa ~= pb then return pa < pb end
+            return a < b
+        end)
+        for _, seller in ipairs(ordered_sellers) do
             reviewed_sellers[seller] = true
+            local vendor_faction = cooking_vendor.factions and cooking_vendor.factions[seller]
+            local faction_label = ""
+            if vendor_faction then
+                faction_label = " [" .. vendor_faction
+                if current_faction == vendor_faction then faction_label = faction_label .. " - YOUR FACTION"
+                elseif current_faction then faction_label = faction_label .. " - OTHER FACTION" end
+                faction_label = faction_label .. "]"
+            end
             local found_npc = nil
             for _, recipe_id in pairs(entry.skill.items or {}) do
                 local recipe_item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(recipe_id, entry.profession)
@@ -695,9 +718,9 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                 if found_npc then break end
             end
             if found_npc then
-                add("  " .. seller .. " - " .. self:Location(found_npc))
+                add("  " .. seller .. faction_label .. " - " .. self:Location(found_npc))
             else
-                add("  " .. seller .. " - " .. cooking_vendor.location .. ", " .. cooking_vendor.zone)
+                add("  " .. seller .. faction_label .. " - " .. cooking_vendor.location .. ", " .. cooking_vendor.zone)
             end
         end
         if cooking_vendor.limited then

@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.46 — 2026-11-10
+- Four Feralas Cooking vendor routes: Hot Wolf Ribs (175), Baked Salmon (275), Lobster Stew (275), Mightfish Steak (275). Document Vivianna (Alliance, Feathermoon Stronghold) and Sheendra Tallgrass (Horde, Camp Mojache).
+- Mark the reviewed Stranglethorn Vale and Feralas faction-specific local vendors with Alliance/Horde and current/other-faction labels. Put accessible faction first, without removing opposite-faction or other-zone options.
+- Keep compact local vendor coordinates, exact skill names, saved learned status and unrelated source behavior unchanged. Add regression audits. In-game verification pending.
+
 ## V5.8.45 — 2026-11-10
 - Correct exact MTSL spell-name indexing for Mithril Headed Trout (Cooking 175) in Booty Bay; keep the original recipe item name, Recipe: Mithril Head Trout, unchanged.
 - Integrate three additional Stranglethorn Vale Cooking vendor routes: Jungle Stew (175) and Roast Raptor (175) from Corporal Bluth (Alliance Rebel Camp) or Nerrist (Horde Grom'gol); Spiced Chili Crab (225) from Uthok (Horde Grom'gol).

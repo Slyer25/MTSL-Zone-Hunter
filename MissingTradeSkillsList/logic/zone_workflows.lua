@@ -42,15 +42,36 @@ MTSL_ZONE_WORKFLOWS = {
     stranglethorn_cooking_vendors = {
         ["Jungle Stew"] = {profession = "Cooking", skill = 175,
             zone = "Stranglethorn Vale", sellers = {"Corporal Bluth", "Nerrist"},
+            factions = {["Corporal Bluth"] = "Alliance", ["Nerrist"] = "Horde"},
             location = "Rebel Camp / Grom'gol Base Camp"},
         ["Roast Raptor"] = {profession = "Cooking", skill = 175,
             zone = "Stranglethorn Vale", sellers = {"Corporal Bluth", "Nerrist"},
+            factions = {["Corporal Bluth"] = "Alliance", ["Nerrist"] = "Horde"},
             location = "Rebel Camp / Grom'gol Base Camp"},
         ["Spiced Chili Crab"] = {profession = "Cooking", skill = 225,
-            zone = "Stranglethorn Vale", sellers = {"Uthok"},
+            zone = "Stranglethorn Vale", sellers = {"Uthok"}, factions = {["Uthok"] = "Horde"},
             location = "Grom'gol Base Camp"}
     },
     -- Source: wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
+    -- Original Vanilla Feralas camp vendors; preserve outside-zone alternatives.
+    feralas_cooking_vendors = {
+        ["Hot Wolf Ribs"] = {profession = "Cooking", skill = 175, zone = "Feralas",
+            sellers = {"Vivianna", "Sheendra Tallgrass"},
+            factions = {["Vivianna"] = "Alliance", ["Sheendra Tallgrass"] = "Horde"},
+            location = "Feathermoon Stronghold / Camp Mojache"},
+        ["Baked Salmon"] = {profession = "Cooking", skill = 275, zone = "Feralas",
+            sellers = {"Vivianna", "Sheendra Tallgrass"},
+            factions = {["Vivianna"] = "Alliance", ["Sheendra Tallgrass"] = "Horde"},
+            location = "Feathermoon Stronghold / Camp Mojache"},
+        ["Lobster Stew"] = {profession = "Cooking", skill = 275, zone = "Feralas",
+            sellers = {"Vivianna", "Sheendra Tallgrass"},
+            factions = {["Vivianna"] = "Alliance", ["Sheendra Tallgrass"] = "Horde"},
+            location = "Feathermoon Stronghold / Camp Mojache"},
+        ["Mightfish Steak"] = {profession = "Cooking", skill = 275, zone = "Feralas",
+            sellers = {"Vivianna", "Sheendra Tallgrass"},
+            factions = {["Vivianna"] = "Alliance", ["Sheendra Tallgrass"] = "Horde"},
+            location = "Feathermoon Stronghold / Camp Mojache"}
+    },
     -- Sources: wowhead.com/classic/npc=2664/kelsey-yance
     --          wow-professions.com/classic/npc/kelsey-yance
     -- Vendor records sourced from wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic

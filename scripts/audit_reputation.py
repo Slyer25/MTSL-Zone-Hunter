@@ -720,6 +720,28 @@ if not re.search(r'\["Mithril Headed Trout"\]\s*=\s*\{profession\s*=\s*"Cooking"
 if '["Mithril Head Trout"] = {profession = "Cooking"' in data:
     errors.append("Obsolete Mithril Head Trout spell key could bypass custom route")
 
+# Feralas Cooking acquisition and faction-specific vendor labels.
+feralas = re.search(r'feralas_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not feralas or not all(x in feralas.group(1) for x in (
+    'Hot Wolf Ribs', 'Baked Salmon', 'Lobster Stew', 'Mightfish Steak',
+    'Vivianna', 'Sheendra Tallgrass', 'skill = 175', 'skill = 275',
+    '["Vivianna"] = "Alliance"', '["Sheendra Tallgrass"] = "Horde"',
+)):
+    errors.append("Feralas Cooking vendor data/faction records incomplete")
+stv_faction = re.search(r'stranglethorn_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not stv_faction or not all(x in stv_faction.group(1) for x in (
+    '["Corporal Bluth"] = "Alliance"', '["Nerrist"] = "Horde"',
+    '["Uthok"] = "Horde"',
+)):
+    errors.append("Stranglethorn vendor faction labels incomplete")
+if not all(x in ui for x in (
+    'db.feralas_cooking_vendors', 'vendor_db.feralas_cooking_vendors',
+    'feralas_vendors[self:Name(skill)]', 'feralas_vendors[entry.name]',
+    'table.sort(ordered_sellers', 'cooking_vendor.factions[seller]',
+    'YOUR FACTION', 'OTHER FACTION',
+)):
+    errors.append("Feralas local source indexing or faction-sensitive details missing")
+
 # Three reviewed recipes at the Stranglethorn Vale faction vendors.
 stv = re.search(r'stranglethorn_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
 if not stv or not all(x in stv.group(1) for x in (
