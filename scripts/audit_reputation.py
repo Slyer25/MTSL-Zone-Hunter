@@ -740,7 +740,7 @@ if not tanaris or not all(x in tanaris.group(1) for x in (
 )):
     errors.append("Tanaris Cooking vendor integration incomplete")
 if not all(x in ui for x in (
-    'MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors',
+    'db.tanaris_cooking_vendors', 'vendor_db.tanaris_cooking_vendors',
     'self:AddSource(sources, "Vendor", seller)',
     'if has_cooking_vendor then',
     'LIMITED STOCK: If sold out',
