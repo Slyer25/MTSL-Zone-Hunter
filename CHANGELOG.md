@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.44 — 2026-11-10
+- Add five more Kelsey Yance (Booty Bay, Stranglethorn Vale) Cooking vendor records: Smoked Sagefish (80), Giant Clam Scorcho (175), Mithril Head Trout (175), Rockscale Cod (175), Sagefish Delight (175). The Kelsey Yance group now covers all eight documented original Vanilla recipe offers.
+- Rename the compact details heading from LOCAL COOKING VENDORS to LOCAL VENDORS for reuse outside Cooking. Preserve MTSL location coordinates and vendors from other zones.
+- Do not alter specialization, class/faction filters, learned status, vendor stock or other acquisition workflows. Update static regression checks; in-game verification pending.
+
 ## V5.8.43 — 2026-11-10
 - Integrate three neutral Booty Bay Cooking vendor recipes from Kelsey Yance in Stranglethorn Vale: Cooked Glossy Mightfish (225), Filet of Redgill (225), and Hot Smoked Bass (240). Preserve original MTSL alternative sellers and other zone sources.
 - Compact local vendor information for the six reviewed Tanaris recipes and three new Booty Bay recipes. Show the local vendor only once, include MTSL coordinates when present, preserve sellers outside the selected zone, and retain Jabbey's limited-stock warning.

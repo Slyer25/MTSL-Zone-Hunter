@@ -670,7 +670,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     end
     local reviewed_sellers = {}
     if has_cooking_vendor then
-        add("LOCAL COOKING VENDORS:")
+        add("LOCAL VENDORS:")
         -- Show reviewed sellers once, with original MTSL coordinates if present.
         -- The generic list below will retain sellers outside this reviewed zone.
         for _, seller in ipairs(cooking_vendor.sellers) do

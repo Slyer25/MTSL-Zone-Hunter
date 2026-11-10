@@ -20,6 +20,16 @@ MTSL_ZONE_WORKFLOWS = {
     -- Reviewed neutral Cooking vendor in Booty Bay, Stranglethorn Vale.
     -- Preserve other sellers from the original MTSL recipe-item records.
     booty_bay_cooking_vendors = {
+        ["Smoked Sagefish"] = {profession = "Cooking", skill = 80,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Giant Clam Scorcho"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Mithril Head Trout"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Rockscale Cod"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Sagefish Delight"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
         ["Cooked Glossy Mightfish"] = {profession = "Cooking", skill = 225,
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
         ["Filet of Redgill"] = {profession = "Cooking", skill = 225,
