@@ -182,8 +182,18 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         or (booty_bay_vendors and booty_bay_vendors[self:Name(skill)])
         or (stranglethorn_vendors and stranglethorn_vendors[self:Name(skill)])
         or (feralas_vendors and feralas_vendors[self:Name(skill)])
+    -- Resolve repeated recipe names by selected zone, not lookup order.
+    local zone_name = MTSL_LOGIC_WORLD:GetZoneNameById(zone_id)
+    local dustwallow = db and db.dustwallow_cooking_vendors
+    local swamp = db and db.swamp_cooking_vendors
+    if dustwallow and dustwallow[self:Name(skill)] and zone_name == "Dustwallow Marsh" then
+        cooking_vendor = dustwallow[self:Name(skill)]
+    end
+    if swamp and swamp[self:Name(skill)] and zone_name == "Swamp of Sorrows" then
+        cooking_vendor = swamp[self:Name(skill)]
+    end
     if cooking_vendor and cooking_vendor.profession == profession
-        and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == cooking_vendor.zone then
+        and zone_name == cooking_vendor.zone then
         for _, seller in ipairs(cooking_vendor.sellers) do self:AddSource(sources, "Vendor", seller) end
     end
     local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
@@ -474,6 +484,14 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
         or (stranglethorn_vendors and stranglethorn_vendors[entry.name])
         or (feralas_vendors and feralas_vendors[entry.name])
     local selected_zone_name = self.zones[self.zone_index] and self:Name(self.zones[self.zone_index])
+    local dustwallow = vendor_db and vendor_db.dustwallow_cooking_vendors
+    local swamp = vendor_db and vendor_db.swamp_cooking_vendors
+    if dustwallow and dustwallow[entry.name] and selected_zone_name == "Dustwallow Marsh" then
+        cooking_vendor = dustwallow[entry.name]
+    end
+    if swamp and swamp[entry.name] and selected_zone_name == "Swamp of Sorrows" then
+        cooking_vendor = swamp[entry.name]
+    end
     local has_cooking_vendor = cooking_vendor and cooking_vendor.profession == entry.profession
         and selected_zone_name == cooking_vendor.zone
     local is_thistle = entry.name == "Thistle Tea" and entry.profession == "Cooking"
@@ -1017,6 +1035,14 @@ function MTSLUI_ZONE_HUNTER:ShortSource(entry)
         or (db.feralas_cooking_vendors and db.feralas_cooking_vendors[name]))
     local zone = self.zones[self.zone_index]
     local zone_name = zone and self:Name(zone)
+    local dustwallow = db and db.dustwallow_cooking_vendors
+    local swamp = db and db.swamp_cooking_vendors
+    if dustwallow and dustwallow[name] and zone_name == "Dustwallow Marsh" then
+        reviewed = dustwallow[name]
+    end
+    if swamp and swamp[name] and zone_name == "Swamp of Sorrows" then
+        reviewed = swamp[name]
+    end
     local faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
     if reviewed and reviewed.profession == entry.profession
         and reviewed.zone == zone_name and reviewed.factions and faction then

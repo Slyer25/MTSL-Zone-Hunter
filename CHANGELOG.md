@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.48 — 2026-11-10
+- Add four Dustwallow Marsh Cooking vendor routes: Heavy Crocolisk Stew (150), Carrion Surprise (175), Roast Raptor (175), Dragonbreath Chili (200). Mark Horde Ogg'marr at Brackenwall Village and Alliance Helenia Olden at Theramore.
+- Add two Swamp of Sorrows Horde Banalash routes in Stonard: Carrion Surprise (175) and Spiced Chili Crab (225).
+- Select repeated names by geographical zone, preserving the previously integrated Stranglethorn Vale Roast Raptor and Spiced Chili Crab entries alongside the new routes.
+- Keep faction-aware source ordering, compact alternative vendor display, coordinates, and learned-state behavior. Audit expanded; in-game verification pending.
+
 ## V5.8.47 — 2026-11-10
 - For reviewed local recipes with faction-tagged sellers, prefer an available vendor of the player's faction in the left-panel short source. Keep underlying source records, tooltip, and alternative-faction details unchanged.
 - In the acquisition details of reviewed vendor recipes only, group alternative vendors outside the selected zone by geographical zone, retaining each vendor name and zone. Precise coordinates remain shown for reviewed local vendors; unrelated vendor recipes retain the full original coordinate listing.

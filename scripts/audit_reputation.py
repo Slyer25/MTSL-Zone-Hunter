@@ -737,6 +737,29 @@ if not all(x in ui for x in (
 )):
     errors.append("Faction-aware short source or compact alternative vendors missing")
 
+# Six zone-specific reviewed Cooking vendor routes.
+dust = re.search(r'dustwallow_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+swamp = re.search(r'swamp_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not dust or not all(x in dust.group(1) for x in (
+    'Heavy Crocolisk Stew', 'Carrion Surprise', 'Roast Raptor',
+    'Dragonbreath Chili', "Ogg'marr", 'Helenia Olden',
+    'Dustwallow Marsh', 'skill = 150', 'skill = 175', 'skill = 200',
+)):
+    errors.append("Dustwallow Cooking vendor records incomplete")
+if not swamp or not all(x in swamp.group(1) for x in (
+    'Carrion Surprise', 'Spiced Chili Crab', 'Banalash', 'Swamp of Sorrows',
+    'skill = 175', 'skill = 225',
+)):
+    errors.append("Swamp of Sorrows Cooking vendor records incomplete")
+if not all(x in ui for x in (
+    'db.dustwallow_cooking_vendors', 'db.swamp_cooking_vendors',
+    'vendor_db.dustwallow_cooking_vendors', 'vendor_db.swamp_cooking_vendors',
+    'zone_name == "Dustwallow Marsh"', 'zone_name == "Swamp of Sorrows"',
+    'selected_zone_name == "Dustwallow Marsh"',
+    'selected_zone_name == "Swamp of Sorrows"',
+)):
+    errors.append("Repeated-recipe zone-aware local vendor resolution missing")
+
 # Feralas Cooking acquisition and faction-specific vendor labels.
 feralas = re.search(r'feralas_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
 if not feralas or not all(x in feralas.group(1) for x in (

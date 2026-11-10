@@ -75,6 +75,26 @@ MTSL_ZONE_WORKFLOWS = {
     -- Sources: wowhead.com/classic/npc=2664/kelsey-yance
     --          wow-professions.com/classic/npc/kelsey-yance
     -- Vendor records sourced from wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
+    -- Additional Vanilla zone-specific Cooking vendors. Other MTSL sources remain.
+    dustwallow_cooking_vendors = {
+        ["Heavy Crocolisk Stew"] = {profession = "Cooking", skill = 150, zone = "Dustwallow Marsh",
+            sellers = {"Ogg'marr"}, factions = {["Ogg'marr"] = "Horde"}, location = "Brackenwall Village"},
+        ["Carrion Surprise"] = {profession = "Cooking", skill = 175, zone = "Dustwallow Marsh",
+            sellers = {"Ogg'marr"}, factions = {["Ogg'marr"] = "Horde"}, location = "Brackenwall Village"},
+        ["Roast Raptor"] = {profession = "Cooking", skill = 175, zone = "Dustwallow Marsh",
+            sellers = {"Ogg'marr"}, factions = {["Ogg'marr"] = "Horde"}, location = "Brackenwall Village"},
+        ["Dragonbreath Chili"] = {profession = "Cooking", skill = 200, zone = "Dustwallow Marsh",
+            sellers = {"Helenia Olden", "Ogg'marr"},
+            factions = {["Helenia Olden"] = "Alliance", ["Ogg'marr"] = "Horde"},
+            location = "Theramore / Brackenwall Village"}
+    },
+    swamp_cooking_vendors = {
+        ["Carrion Surprise"] = {profession = "Cooking", skill = 175, zone = "Swamp of Sorrows",
+            sellers = {"Banalash"}, factions = {["Banalash"] = "Horde"}, location = "Stonard"},
+        ["Spiced Chili Crab"] = {profession = "Cooking", skill = 225, zone = "Swamp of Sorrows",
+            sellers = {"Banalash"}, factions = {["Banalash"] = "Horde"}, location = "Stonard"}
+    },
+    -- References: classicdb.ch/?npc=4879; wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
     -- Original Vanilla zone-specific recipe drop. This is not a confirmed
     -- individual NPC loot table, and no modern post-Cataclysm rate is used.
     zone_drop_recipes = {
