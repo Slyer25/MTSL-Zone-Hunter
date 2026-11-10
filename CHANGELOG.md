@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.47 — 2026-11-10
+- For reviewed local recipes with faction-tagged sellers, prefer an available vendor of the player's faction in the left-panel short source. Keep underlying source records, tooltip, and alternative-faction details unchanged.
+- In the acquisition details of reviewed vendor recipes only, group alternative vendors outside the selected zone by geographical zone, retaining each vendor name and zone. Precise coordinates remain shown for reviewed local vendors; unrelated vendor recipes retain the full original coordinate listing.
+- Reduce near-empty detail pages caused by lengthy alternative-vendor listings without changing detail pagination globally. Expand static regression checks; in-game verification pending.
+
 ## V5.8.46 — 2026-11-10
 - Four Feralas Cooking vendor routes: Hot Wolf Ribs (175), Baked Salmon (275), Lobster Stew (275), Mightfish Steak (275). Document Vivianna (Alliance, Feathermoon Stronghold) and Sheendra Tallgrass (Horde, Camp Mojache).
 - Mark the reviewed Stranglethorn Vale and Feralas faction-specific local vendors with Alliance/Horde and current/other-faction labels. Put accessible faction first, without removing opposite-faction or other-zone options.

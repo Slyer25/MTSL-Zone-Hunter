@@ -428,7 +428,30 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             end
         end
         for _, npc in ipairs(local_npcs) do show_npc(npc, true) end
-        for _, npc in ipairs(other_npcs) do show_npc(npc, false) end
+        if heading == "Vendor" and omit_names then
+            -- Compact only reviewed recipes' alternative vendors. Group by
+            -- zone, preserving every NPC name and its geographical location.
+            -- Local reviewed sellers above retain precise coordinates.
+            local grouped, zone_names = {}, {}
+            for _, npc in ipairs(other_npcs) do
+                local zone_name = MTSL_LOGIC_WORLD:GetZoneNameById(self:NPCZone(npc)) or "Unknown zone"
+                if not grouped[zone_name] then
+                    grouped[zone_name] = {}
+                    table.insert(zone_names, zone_name)
+                end
+                table.insert(grouped[zone_name], self:Name(npc))
+            end
+            table.sort(zone_names)
+            for _, zone_name in ipairs(zone_names) do
+                local names = grouped[zone_name]
+                table.sort(names)
+                -- Avoid a misleading single vendor/location claim when a
+                -- recipe can be bought from several sellers in this zone.
+                add("  Other vendors - " .. zone_name .. ": " .. table.concat(names, ", "))
+            end
+        else
+            for _, npc in ipairs(other_npcs) do show_npc(npc, false) end
+        end
     end
     local function object_list(ids)
         if not ids then return end
@@ -982,6 +1005,30 @@ end
 -- Keep a glanceable local acquisition source on the left; full sources remain in details/tooltip.
 -- Prefer definite local sources over approximate world-drop level overlaps.
 function MTSLUI_ZONE_HUNTER:ShortSource(entry)
+    -- Prefer the current faction's reviewed local vendor only when that
+    -- vendor is genuinely listed among this entry's sources. Leave all
+    -- underlying sources and the standard sorting/tooltip intact.
+    local db = MTSL_ZONE_WORKFLOWS
+    local name = entry.name
+    local reviewed = db and (
+        (db.tanaris_cooking_vendors and db.tanaris_cooking_vendors[name])
+        or (db.booty_bay_cooking_vendors and db.booty_bay_cooking_vendors[name])
+        or (db.stranglethorn_cooking_vendors and db.stranglethorn_cooking_vendors[name])
+        or (db.feralas_cooking_vendors and db.feralas_cooking_vendors[name]))
+    local zone = self.zones[self.zone_index]
+    local zone_name = zone and self:Name(zone)
+    local faction = MTSL_CURRENT_PLAYER and MTSL_CURRENT_PLAYER.FACTION
+    if reviewed and reviewed.profession == entry.profession
+        and reviewed.zone == zone_name and reviewed.factions and faction then
+        for _, seller in ipairs(reviewed.sellers) do
+            if reviewed.factions[seller] == faction then
+                local expected = "Vendor: " .. seller
+                for _, source in ipairs(entry.sources) do
+                    if source == expected then return source end
+                end
+            end
+        end
+    end
     local priority = {"Vendor:", "Quest ", "Mob drop:", "Trainer:", "Object:", "Possible world drop:"}
     for _, prefix in ipairs(priority) do
         for _, source in ipairs(entry.sources) do

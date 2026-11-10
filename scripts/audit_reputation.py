@@ -720,6 +720,23 @@ if not re.search(r'\["Mithril Headed Trout"\]\s*=\s*\{profession\s*=\s*"Cooking"
 if '["Mithril Head Trout"] = {profession = "Cooking"' in data:
     errors.append("Obsolete Mithril Head Trout spell key could bypass custom route")
 
+# Reviewed local vendor short-source priority must follow the player's
+# faction, using only actual sources. Compact alternative vendors by zone
+# without changing unrelated acquisition output.
+if not all(x in ui for x in (
+    'reviewed.factions[seller] == faction',
+    'local expected = "Vendor: " .. seller',
+    'if source == expected then return source end',
+    'reviewed.zone == zone_name',
+    'if heading == "Vendor" and omit_names then',
+    'table.sort(zone_names)',
+    'table.sort(names)',
+    'Other vendors - ',
+    'table.concat(names, ", ")',
+    'for _, npc in ipairs(other_npcs) do show_npc(npc, false) end',
+)):
+    errors.append("Faction-aware short source or compact alternative vendors missing")
+
 # Feralas Cooking acquisition and faction-specific vendor labels.
 feralas = re.search(r'feralas_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
 if not feralas or not all(x in feralas.group(1) for x in (
