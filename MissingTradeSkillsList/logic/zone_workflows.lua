@@ -17,6 +17,18 @@ MTSL_ZONE_WORKFLOWS = {
         ["Tender Wolf Steak"] = {profession = "Cooking", skill = 225, zone = "Tanaris",
             sellers = {"Dirge Quikcleave", "Innkeeper Fizzgrimble"}, location = "Gadgetzan"}
     },
+    -- Reviewed neutral Cooking vendor in Booty Bay, Stranglethorn Vale.
+    -- Preserve other sellers from the original MTSL recipe-item records.
+    booty_bay_cooking_vendors = {
+        ["Cooked Glossy Mightfish"] = {profession = "Cooking", skill = 225,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Filet of Redgill"] = {profession = "Cooking", skill = 225,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
+        ["Hot Smoked Bass"] = {profession = "Cooking", skill = 240,
+            zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"}
+    },
+    -- Sources: wowhead.com/classic/npc=2664/kelsey-yance
+    --          wow-professions.com/classic/npc/kelsey-yance
     -- Vendor records sourced from wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
     -- Original Vanilla zone-specific recipe drop. This is not a confirmed
     -- individual NPC loot table, and no modern post-Cataclysm rate is used.

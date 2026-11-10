@@ -173,8 +173,11 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
         -- quest/item description; the full route is in DetailLines.
         return sources
     end
-    local cooking_vendors = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors
-    local cooking_vendor = cooking_vendors and cooking_vendors[self:Name(skill)]
+    local db = MTSL_ZONE_WORKFLOWS
+    local tanaris_vendors = db and db.tanaris_cooking_vendors
+    local booty_bay_vendors = db and db.booty_bay_cooking_vendors
+    local cooking_vendor = (tanaris_vendors and tanaris_vendors[self:Name(skill)])
+        or (booty_bay_vendors and booty_bay_vendors[self:Name(skill)])
     if cooking_vendor and cooking_vendor.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == cooking_vendor.zone then
         for _, seller in ipairs(cooking_vendor.sellers) do self:AddSource(sources, "Vendor", seller) end
@@ -398,13 +401,13 @@ end
 function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local out = {}
     local function add(s) table.insert(out, s) end
-    local function npc_list(ids, heading)
+    local function npc_list(ids, heading, omit_names)
         if not ids then return end
         local local_npcs, other_npcs = {}, {}
         local zone = self.zones[self.zone_index]
         for _, id in pairs(ids) do
             local npc = MTSL_LOGIC_PLAYER_NPC:GetNpcById(id)
-            if npc then
+            if npc and not (omit_names and omit_names[self:Name(npc)]) then
                 if zone and self:SourceInZone(self:NPCZone(npc), zone.id) then table.insert(local_npcs, npc)
                 else table.insert(other_npcs, npc) end
             end
@@ -434,8 +437,11 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local zone_drop_db = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.zone_drop_recipes
     local zone_drop = zone_drop_db and zone_drop_db[entry.name]
     local is_zone_drop = zone_drop and zone_drop.profession == entry.profession
-    local cooking_vendors = MTSL_ZONE_WORKFLOWS and MTSL_ZONE_WORKFLOWS.tanaris_cooking_vendors
-    local cooking_vendor = cooking_vendors and cooking_vendors[entry.name]
+    local vendor_db = MTSL_ZONE_WORKFLOWS
+    local tanaris_vendors = vendor_db and vendor_db.tanaris_cooking_vendors
+    local booty_bay_vendors = vendor_db and vendor_db.booty_bay_cooking_vendors
+    local cooking_vendor = (tanaris_vendors and tanaris_vendors[entry.name])
+        or (booty_bay_vendors and booty_bay_vendors[entry.name])
     local selected_zone_name = self.zones[self.zone_index] and self:Name(self.zones[self.zone_index])
     local has_cooking_vendor = cooking_vendor and cooking_vendor.profession == entry.profession
         and selected_zone_name == cooking_vendor.zone
@@ -662,10 +668,33 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
             end
         end
     end
+    local reviewed_sellers = {}
     if has_cooking_vendor then
-        add("DOCUMENTED TANARIS VENDOR:")
+        add("LOCAL COOKING VENDORS:")
+        -- Show reviewed sellers once, with original MTSL coordinates if present.
+        -- The generic list below will retain sellers outside this reviewed zone.
         for _, seller in ipairs(cooking_vendor.sellers) do
-            add("  " .. seller .. " - " .. cooking_vendor.location)
+            reviewed_sellers[seller] = true
+            local found_npc = nil
+            for _, recipe_id in pairs(entry.skill.items or {}) do
+                local recipe_item = MTSL_LOGIC_ITEM_OBJECT:GetItemForProfessionById(recipe_id, entry.profession)
+                if recipe_item and recipe_item.vendors then
+                    for _, vendor_id in pairs(recipe_item.vendors.sources or {}) do
+                        local npc = MTSL_LOGIC_PLAYER_NPC:GetNpcById(vendor_id)
+                        if npc and self:Name(npc) == seller
+                            and self:SourceInZone(self:NPCZone(npc), self.zones[self.zone_index].id) then
+                            found_npc = npc
+                            break
+                        end
+                    end
+                end
+                if found_npc then break end
+            end
+            if found_npc then
+                add("  " .. seller .. " - " .. self:Location(found_npc))
+            else
+                add("  " .. seller .. " - " .. cooking_vendor.location .. ", " .. cooking_vendor.zone)
+            end
         end
         if cooking_vendor.limited then
             add("  LIMITED STOCK: If sold out, check again after vendor restock.")
@@ -696,7 +725,7 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
                     add("RECIPE ITEM REQUIREMENT: Thorium Brotherhood - " .. item_rank .. " reputation")
                 end
                 if item.vendors then
-                    npc_list(item.vendors.sources, "Vendor")
+                    npc_list(item.vendors.sources, "Vendor", has_cooking_vendor and reviewed_sellers or nil)
                     local workflows = MTSL_ZONE_WORKFLOWS
                     local conditions = workflows and workflows.vendor_conditions
                     local by_item = conditions and conditions[self:Name(item)]

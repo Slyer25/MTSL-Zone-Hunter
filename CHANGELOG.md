@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.43 — 2026-11-10
+- Integrate three neutral Booty Bay Cooking vendor recipes from Kelsey Yance in Stranglethorn Vale: Cooked Glossy Mightfish (225), Filet of Redgill (225), and Hot Smoked Bass (240). Preserve original MTSL alternative sellers and other zone sources.
+- Compact local vendor information for the six reviewed Tanaris recipes and three new Booty Bay recipes. Show the local vendor only once, include MTSL coordinates when present, preserve sellers outside the selected zone, and retain Jabbey's limited-stock warning.
+- Avoid blanket changes to other vendor, reputation, class, skill or learned-state logic. Extend static regression audits; in-game behavior awaits user verification.
+
 ## V5.8.42 — 2026-11-08
 - Savory Deviate Delight: shorten the Barrens rare-drop acquisition description; distinguish rare zone-level loot from guaranteed individual NPC drops while preserving trading and Cooking 85 guidance.
 - Integrate six Tanaris Cooking recipes with reviewed vendor records: Jabbey's limited-stock Undermine Clam Chowder, Gikkix's Spotted Yellowtail, Grilled Squid, Nightfin Soup and Poached Sunscale Salmon, plus Tender Wolf Steak from Dirge Quikcleave and Innkeeper Fizzgrimble.

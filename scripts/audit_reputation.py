@@ -713,6 +713,22 @@ if not all(x in data for x in (
 )):
     errors.append("Knot concise cache instructions missing")
 
+# Booty Bay Cooking: three documented Kelsey Yance vendor recipes.
+booty = re.search(r'booty_bay_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not booty or not all(x in booty.group(1) for x in (
+    'Cooked Glossy Mightfish', 'Filet of Redgill', 'Hot Smoked Bass',
+    'Kelsey Yance', 'Stranglethorn Vale', 'skill = 225', 'skill = 240',
+)):
+    errors.append("Booty Bay Kelsey Yance cooking vendor data incomplete")
+if not all(x in ui for x in (
+    'MTSL_ZONE_WORKFLOWS', 'db.booty_bay_cooking_vendors',
+    'vendor_db.booty_bay_cooking_vendors',
+    'LOCAL COOKING VENDORS:', 'reviewed_sellers[seller] = true',
+    'has_cooking_vendor and reviewed_sellers or nil',
+    'self:Location(found_npc)',
+)):
+    errors.append("Booty Bay vendor indexing or compact local-vendor display missing")
+
 # Tanaris Cooking vendors: six zone-indexed recipes, no generic unknown stock
 # warnings for reviewed sellers; Jabbey has limited stock.
 tanaris = re.search(r'tanaris_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
