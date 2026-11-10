@@ -713,10 +713,33 @@ if not all(x in data for x in (
 )):
     errors.append("Knot concise cache instructions missing")
 
+# Preserve the original item-name spelling (Recipe: Mithril Head Trout)
+# separately from MTSL's spell-name spelling (Mithril Headed Trout).
+if not re.search(r'\["Mithril Headed Trout"\]\s*=\s*\{profession\s*=\s*"Cooking"', data):
+    errors.append("Mithril Headed Trout exact MTSL skill key missing")
+if '["Mithril Head Trout"] = {profession = "Cooking"' in data:
+    errors.append("Obsolete Mithril Head Trout spell key could bypass custom route")
+
+# Three reviewed recipes at the Stranglethorn Vale faction vendors.
+stv = re.search(r'stranglethorn_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
+if not stv or not all(x in stv.group(1) for x in (
+    '["Jungle Stew"]', '["Roast Raptor"]', '["Spiced Chili Crab"]',
+    'Corporal Bluth', 'Nerrist', 'Uthok', 'Stranglethorn Vale',
+    'skill = 175', 'skill = 225',
+)):
+    errors.append("Stranglethorn Vale faction Cooking vendor records incomplete")
+if not all(x in ui for x in (
+    'db.stranglethorn_cooking_vendors',
+    'vendor_db.stranglethorn_cooking_vendors',
+    'stranglethorn_vendors[self:Name(skill)]',
+    'stranglethorn_vendors[entry.name]',
+)):
+    errors.append("Stranglethorn Vale faction vendor indexing/details missing")
+
 # Booty Bay Cooking: all eight documented Kelsey Yance vendor recipes.
 booty = re.search(r'booty_bay_cooking_vendors\s*=\s*\{(.*?)\n    \},', data, re.S)
 if not booty or not all(x in booty.group(1) for x in (
-    'Smoked Sagefish', 'Giant Clam Scorcho', 'Mithril Head Trout',
+    'Smoked Sagefish', 'Giant Clam Scorcho', 'Mithril Headed Trout',
     'Rockscale Cod', 'Sagefish Delight', 'Cooked Glossy Mightfish',
     'Filet of Redgill', 'Hot Smoked Bass', 'Kelsey Yance',
     'Stranglethorn Vale', 'skill = 80', 'skill = 175',

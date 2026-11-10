@@ -2,6 +2,12 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.45 — 2026-11-10
+- Correct exact MTSL spell-name indexing for Mithril Headed Trout (Cooking 175) in Booty Bay; keep the original recipe item name, Recipe: Mithril Head Trout, unchanged.
+- Integrate three additional Stranglethorn Vale Cooking vendor routes: Jungle Stew (175) and Roast Raptor (175) from Corporal Bluth (Alliance Rebel Camp) or Nerrist (Horde Grom'gol); Spiced Chili Crab (225) from Uthok (Horde Grom'gol).
+- Reuse the compact LOCAL VENDORS display and existing coordinates; preserve other MTSL vendors and faction-specific access rather than hiding alternative sources.
+- Add narrowly scoped regression checks without altering the saved recipe status, global class/faction filters or other profession records. In-game verification pending.
+
 ## V5.8.44 — 2026-11-10
 - Add five more Kelsey Yance (Booty Bay, Stranglethorn Vale) Cooking vendor records: Smoked Sagefish (80), Giant Clam Scorcho (175), Mithril Head Trout (175), Rockscale Cod (175), Sagefish Delight (175). The Kelsey Yance group now covers all eight documented original Vanilla recipe offers.
 - Rename the compact details heading from LOCAL COOKING VENDORS to LOCAL VENDORS for reuse outside Cooking. Preserve MTSL location coordinates and vendors from other zones.

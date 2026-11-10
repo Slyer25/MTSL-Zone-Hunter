@@ -176,8 +176,10 @@ function MTSLUI_ZONE_HUNTER:GetSources(skill, profession, zone_id)
     local db = MTSL_ZONE_WORKFLOWS
     local tanaris_vendors = db and db.tanaris_cooking_vendors
     local booty_bay_vendors = db and db.booty_bay_cooking_vendors
+    local stranglethorn_vendors = db and db.stranglethorn_cooking_vendors
     local cooking_vendor = (tanaris_vendors and tanaris_vendors[self:Name(skill)])
         or (booty_bay_vendors and booty_bay_vendors[self:Name(skill)])
+        or (stranglethorn_vendors and stranglethorn_vendors[self:Name(skill)])
     if cooking_vendor and cooking_vendor.profession == profession
         and MTSL_LOGIC_WORLD:GetZoneNameById(zone_id) == cooking_vendor.zone then
         for _, seller in ipairs(cooking_vendor.sellers) do self:AddSource(sources, "Vendor", seller) end
@@ -440,8 +442,10 @@ function MTSLUI_ZONE_HUNTER:DetailLines(entry)
     local vendor_db = MTSL_ZONE_WORKFLOWS
     local tanaris_vendors = vendor_db and vendor_db.tanaris_cooking_vendors
     local booty_bay_vendors = vendor_db and vendor_db.booty_bay_cooking_vendors
+    local stranglethorn_vendors = vendor_db and vendor_db.stranglethorn_cooking_vendors
     local cooking_vendor = (tanaris_vendors and tanaris_vendors[entry.name])
         or (booty_bay_vendors and booty_bay_vendors[entry.name])
+        or (stranglethorn_vendors and stranglethorn_vendors[entry.name])
     local selected_zone_name = self.zones[self.zone_index] and self:Name(self.zones[self.zone_index])
     local has_cooking_vendor = cooking_vendor and cooking_vendor.profession == entry.profession
         and selected_zone_name == cooking_vendor.zone

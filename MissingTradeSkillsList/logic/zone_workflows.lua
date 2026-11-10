@@ -24,7 +24,7 @@ MTSL_ZONE_WORKFLOWS = {
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
         ["Giant Clam Scorcho"] = {profession = "Cooking", skill = 175,
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
-        ["Mithril Head Trout"] = {profession = "Cooking", skill = 175,
+        ["Mithril Headed Trout"] = {profession = "Cooking", skill = 175,
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
         ["Rockscale Cod"] = {profession = "Cooking", skill = 175,
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"},
@@ -37,6 +37,20 @@ MTSL_ZONE_WORKFLOWS = {
         ["Hot Smoked Bass"] = {profession = "Cooking", skill = 240,
             zone = "Stranglethorn Vale", sellers = {"Kelsey Yance"}, location = "Booty Bay"}
     },
+    -- Additional Classic Stranglethorn Vale recipes sold at the Rebel Camp
+    -- and Grom'gol. Vendor faction determines who can purchase locally.
+    stranglethorn_cooking_vendors = {
+        ["Jungle Stew"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Corporal Bluth", "Nerrist"},
+            location = "Rebel Camp / Grom'gol Base Camp"},
+        ["Roast Raptor"] = {profession = "Cooking", skill = 175,
+            zone = "Stranglethorn Vale", sellers = {"Corporal Bluth", "Nerrist"},
+            location = "Rebel Camp / Grom'gol Base Camp"},
+        ["Spiced Chili Crab"] = {profession = "Cooking", skill = 225,
+            zone = "Stranglethorn Vale", sellers = {"Uthok"},
+            location = "Grom'gol Base Camp"}
+    },
+    -- Source: wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
     -- Sources: wowhead.com/classic/npc=2664/kelsey-yance
     --          wow-professions.com/classic/npc/kelsey-yance
     -- Vendor records sourced from wowhead.com/classic/guide/cooking-vendor-recipes-wow-classic
