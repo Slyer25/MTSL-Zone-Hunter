@@ -893,6 +893,19 @@ if not all(x in ui for x in (
 )):
     errors.append("Thistle Tea class restriction, duplicate quest cleanup or vendor note missing")
 
+# Lua 5.0 compatibility: WoW 1.12 has string.find, not string.match.
+# Audit the whole addon source to catch future accidental 5.1-only calls.
+lua_dir = Path(__file__).resolve().parents[1] / "MissingTradeSkillsList"
+for lua_path in lua_dir.rglob("*.lua"):
+    lua_text = lua_path.read_text(encoding="utf-8-sig")
+    if re.search(r'\bstring\.match\s*\(', lua_text):
+        errors.append("Lua 5.1-only string.match in " + str(lua_path.relative_to(lua_dir)))
+if not all(x in ui for x in (
+    'local _, indent_end = string.find(original, "^%s*")',
+    'local indent = string.sub(original, 1, indent_end or 0)',
+)):
+    errors.append("Lua 5.0-compatible detail indentation extraction missing")
+
 if errors:
     for error in errors:
         print("FAIL:", error)

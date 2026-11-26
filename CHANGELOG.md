@@ -2,6 +2,11 @@
 
 Zone Hunter versions are separate from the base MissingTradeSkillsList 1.17.4 release. These are retrospective feature summaries; intermediate version snapshots are not part of the V5.1 source archive.
 
+## V5.8.49 — 2026-11-27
+- Fix WoW Vanilla 1.12 Lua 5.0 runtime error when selecting a recipe: replace unsupported string.match in WrapDetailLines with string.find/string.sub for whitespace indentation.
+- Add a static audit against Lua 5.1-only string.match calls in addon Lua files, and verify the replacement wrapping code is present.
+- Preserve all acquisition workflows and sources, current UI, pagination, learned status, and existing SavedVariables. In-game verification pending.
+
 ## V5.8.48 — 2026-11-10
 - Add four Dustwallow Marsh Cooking vendor routes: Heavy Crocolisk Stew (150), Carrion Surprise (175), Roast Raptor (175), Dragonbreath Chili (200). Mark Horde Ogg'marr at Brackenwall Village and Alliance Helenia Olden at Theramore.
 - Add two Swamp of Sorrows Horde Banalash routes in Stonard: Carrion Surprise (175) and Spiced Chili Crab (225).

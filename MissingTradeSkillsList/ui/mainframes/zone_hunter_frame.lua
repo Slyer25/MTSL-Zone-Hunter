@@ -944,7 +944,9 @@ function MTSLUI_ZONE_HUNTER:WrapDetailLines(lines)
             table.insert(wrapped, " ")
         else
             -- Preserve indentation and a readable hanging indent for long steps.
-            local indent = string.match(original, "^(%s*)") or ""
+            -- Original WoW 1.12 uses Lua 5.0; string.match is unavailable.
+            local _, indent_end = string.find(original, "^%s*")
+            local indent = string.sub(original, 1, indent_end or 0)
             local continuation = indent .. "    "
             local current = indent
             local words = {}
